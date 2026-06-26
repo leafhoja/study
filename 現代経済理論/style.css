@@ -55,11 +55,7 @@ body {
 }
 .navbar-links a:hover { background: rgba(255,255,255,.14); color: #fff; }
 .navbar-links a.active { background: rgba(255,255,255,.22); color: #fff; }
-.navbar-links a.nav-back {
-  color: rgba(255,255,255,.6); font-size: .78rem;
-  margin-right: 4px; padding-right: 13px;
-  border-right: 1px solid rgba(255,255,255,.2);
-}
+
 
 /* ===== HERO ===== */
 .hero {

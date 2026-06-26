@@ -84,12 +84,7 @@ code { font-family: var(--mono); font-size: .85em; background: #eee; padding: .1
 .site-header nav a.active {
   border-bottom: 2px solid rgba(255,255,255,.6);
 }
-.site-header nav a.nav-back {
-  opacity: .65;
-  padding-right: 1rem;
-  margin-right: .4rem;
-  border-right: 1px solid rgba(255,255,255,.25);
-}
+
 
 /* ─── インデックスページ ─── */
 .index-hero {

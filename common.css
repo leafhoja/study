@@ -1,0 +1,25 @@
+/* ═══════════════════════════════════════════════
+   共通スタイル — 全科目サイト共通
+   ═══════════════════════════════════════════════ */
+
+/* ── 教科一覧へのback link ── */
+a.nav-back {
+  color: rgba(255,255,255,.62);
+  font-size: .8rem;
+  padding-right: 1rem;
+  margin-right: .4rem;
+  border-right: 1px solid rgba(255,255,255,.22);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: color .15s;
+}
+a.nav-back:hover { color: rgba(255,255,255,.95); text-decoration: none; }
+
+/* ── トップナビ（科目インデックスページ用） ── */
+.top-nav {
+  background: #1a365d;
+  padding: .55rem 1.5rem;
+  display: flex;
+  align-items: center;
+}
