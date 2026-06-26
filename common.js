@@ -1,6 +1,33 @@
 (function () {
   'use strict';
 
+  /* ── PWA: manifest + apple-touch-icon を動的注入 ── */
+  var me = document.currentScript;
+  if (me && me.src) {
+    var base = me.src.replace(/common\.js(\?.*)?$/, '');
+
+    var mLink = document.createElement('link');
+    mLink.rel = 'manifest';
+    mLink.href = base + 'manifest.json';
+    document.head.appendChild(mLink);
+
+    var aLink = document.createElement('link');
+    aLink.rel = 'apple-touch-icon';
+    aLink.href = base + 'icons/apple-touch-icon.png';
+    document.head.appendChild(aLink);
+
+    [
+      ['apple-mobile-web-app-capable', 'yes'],
+      ['apple-mobile-web-app-status-bar-style', 'black-translucent'],
+      ['apple-mobile-web-app-title', '学習ノート']
+    ].forEach(function (pair) {
+      var m = document.createElement('meta');
+      m.name = pair[0];
+      m.content = pair[1];
+      document.head.appendChild(m);
+    });
+  }
+
   /* ── スクロール進捗バー ── */
   var bar = document.createElement('div');
   bar.id = 'reading-progress';
