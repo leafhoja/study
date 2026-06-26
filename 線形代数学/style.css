@@ -34,45 +34,10 @@ body {
   font-size: 15px;
 }
 
-/* ── ナビ ── */
-nav {
-  position: sticky; top: 0; z-index: 100;
-  background: var(--accent2);
-  display: flex; align-items: center;
-  padding: 0 1.2rem;
-  overflow-x: auto; white-space: nowrap;
-  scrollbar-width: none;
-}
-nav::-webkit-scrollbar { display: none; }
-.nav-brand {
-  color: #fff; font-weight: 700; font-size: 14px;
-  padding-right: 1rem; margin-right: 0.4rem;
-  border-right: 1px solid rgba(255,255,255,.25);
-  flex-shrink: 0;
-}
-nav a {
-  color: #bdd0f5; text-decoration: none; font-size: 13px;
-  padding: 0.65rem 0.8rem;
-  border-bottom: 3px solid transparent;
-  transition: color .15s, border-color .15s;
-  flex-shrink: 0;
-}
-nav a:hover, nav a.active { color: #fff; border-bottom-color: #6fa3ef; }
-nav a.nav-back { border-bottom-color: transparent !important; }
-
 /* ── レイアウト ── */
 .container { max-width: 860px; margin: 0 auto; padding: 2rem 1.4rem 5rem; }
 
-/* ── ページヘッダー ── */
-.page-header {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 10px; padding: 2rem 1.5rem 1.5rem;
-  margin-bottom: 2.2rem; text-align: center;
-}
-.page-header h1 { font-size: 1.85rem; color: var(--accent2); }
-.page-header .meta { color: var(--muted); font-size: .88rem; margin-top: .4rem; }
-
-.toc { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; margin-top: 1.2rem; }
+.toc { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; margin-bottom: 2rem; }
 .toc a {
   background: var(--accent-soft); border: 1px solid #c5d3ee;
   border-radius: 6px; padding: .35rem .85rem;

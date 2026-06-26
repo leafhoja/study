@@ -17,7 +17,14 @@
 /* ── リセット ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { -webkit-font-smoothing: antialiased; }
+body {
+  font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+  background: var(--bg);
+  color: #2d3748;
+  line-height: 1.8;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
 
 /* ── ナビバー（全ページ共通） ── */
 .navbar {
@@ -91,6 +98,17 @@ body { -webkit-font-smoothing: antialiased; }
 .hero-sm .subtitle { font-size: .85rem; }
 .hero-calc { background: linear-gradient(135deg, #1e3a8a 0%, #1e4799 60%, #2563eb 100%); }
 .hero-linear { background: linear-gradient(135deg, #14532d 0%, #166534 60%, #16a34a 100%); }
+
+/* ── サイトフッター ── */
+.site-footer {
+  background: var(--primary);
+  color: rgba(255,255,255,.5);
+  text-align: center;
+  padding: .9rem 1rem;
+  font-size: .75rem;
+}
+.site-footer a { color: rgba(255,255,255,.65); text-decoration: none; }
+.site-footer a:hover { color: #fff; }
 
 /* ── 後方互換：top-nav は navbar にリダイレクト ── */
 .top-nav {
