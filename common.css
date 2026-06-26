@@ -2,6 +2,18 @@
    共通スタイル — 全科目サイト共通
    ═══════════════════════════════════════════════ */
 
+/* ── CSS 変数 ── */
+:root {
+  --primary:    #1a365d;
+  --primary-dk: #122f4e;
+  --primary-lt: #2c5282;
+  --bg:         #f0f2f5;
+  --surface:    #ffffff;
+  --shadow-sm:  0 1px 6px rgba(0,0,0,.08);
+  --shadow-md:  0 6px 20px rgba(0,0,0,.13);
+  --radius:     12px;
+}
+
 /* ── リセット ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -23,8 +35,37 @@ a.nav-back:hover { color: rgba(255,255,255,.95); text-decoration: none; }
 
 /* ── トップナビ（科目インデックスページ用） ── */
 .top-nav {
-  background: #1a365d;
+  background: var(--primary);
   padding: .55rem 1.5rem;
   display: flex;
   align-items: center;
 }
+
+/* ── ページ先頭へ戻るボタン ── */
+#back-to-top {
+  position: fixed;
+  bottom: 24px;
+  right: 20px;
+  z-index: 9000;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: var(--primary);
+  color: #fff;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 3px 12px rgba(0,0,0,.28);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity .22s, transform .22s;
+}
+#back-to-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+#back-to-top:hover { background: var(--primary-lt); }
+@media print { #back-to-top { display: none; } }
