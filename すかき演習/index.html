@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>すかき演習 解説集</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .hero {
+    background: linear-gradient(135deg, #1a365d 0%, #2d5a8e 50%, #1a5f3a 100%);
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+  .hero h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .hero p { font-size: 1rem; opacity: 0.85; font-family: var(--font-sans); max-width: 560px; margin: 0 auto; line-height: 1.6; }
+  .hero-badges { display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; }
+  .hero-badge { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); padding: 0.4rem 1rem; border-radius: 20px; font-family: var(--font-sans); font-size: 0.85rem; }
+  .overview-card { background: white; border-radius: var(--radius-lg); box-shadow: var(--shadow); padding: 1.5rem; margin-bottom: 2rem; }
+  .how-to-use { background: #fffbeb; border: 1px solid #fbbf24; border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 2rem; font-family: var(--font-sans); font-size: 0.875rem; line-height: 1.7; }
+  .how-to-use h3 { color: #92400e; margin-bottom: 0.5rem; font-size: 0.9rem; }
+  .lecture-num-badge { font-family: var(--font-sans); font-size: 0.7rem; background: #e2e8f0; color: #4a5568; padding: 0.1rem 0.4rem; border-radius: 4px; margin-right: 0.3rem; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>すかき演習　解説集</h1>
+  <p>微分積分学・線形代数学の演習問題を丁寧に解説します。「なぜそう考えるのか」「εはどう選ぶのか」「自力で解くには」を重視した学習資料です。</p>
+  <div class="hero-badges">
+    <span class="hero-badge">🔢 微分積分学 第1〜5回</span>
+    <span class="hero-badge">🔷 線形代数学 第1〜4回</span>
+    <span class="hero-badge">2026年 Sターム</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="how-to-use">
+    <h3>📖 この解説集の使い方</h3>
+    各回の解説ページでは、<strong>（1）なぜその方針を取るのか、（2）εやδはなぜその値なのか、（3）計算の詳細、（4）思考の出所、（5）必要な知識、（6）自力で解くための練習法、（7）別解</strong>を網羅しています。答えを読む前に、まず自分で考えてみることを強く勧めます。<br>
+    <span style="color:#92400e">★ 解説付きのページは色付きの枠で示されています。現在は微分積分第5回・線形代数第4回までの資料に基づき解説を作成しています。</span>
+  </div>
+
+  <div class="subject-columns">
+
+    <!-- 微分積分学 -->
+    <div class="subject-section">
+      <div class="subject-header calc">📐 微分積分学演習</div>
+      <div class="subject-body">
+        <div class="lecture-grid">
+          <div class="lecture-card available">
+            <a href="calculus/calc_01.html">
+              <div class="lc-num">第1回</div>
+              <div class="lc-title">ε-N論法と数列の収束</div>
+              <div class="lc-status">✓ 解説あり</div>
+            </a>
+          </div>
+          <div class="lecture-card available">
+            <a href="calculus/calc_02.html">
+              <div class="lc-num">第2回</div>
+              <div class="lc-title">上界・下限とWeierstrass定理</div>
+              <div class="lc-status">✓ 解説あり</div>
+            </a>
+          </div>
+          <div class="lecture-card available">
+            <a href="calculus/calc_03.html">
+              <div class="lc-num">第3回</div>
+              <div class="lc-title">微分の定義とCauchy方程式</div>
+              <div class="lc-status">✓ 解説あり</div>
+            </a>
+          </div>
+          <div class="lecture-card available">
+            <a href="calculus/calc_04.html">
+              <div class="lc-num">第4回</div>
+              <div class="lc-title">常微分方程式</div>
+              <div class="lc-status">✓ 解説あり</div>
+            </a>
+          </div>
+          <div class="lecture-card available">
+            <a href="calculus/calc_05.html">
+              <div class="lc-num">第5回</div>
+              <div class="lc-title">凸関数・縮小写像・方程式の根</div>
+              <div class="lc-status">✓ 解説あり</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div><!-- /calculus -->
+
+    <!-- 線形代数学 -->
+    <div class="subject-section">
+      <div class="subject-header linear">🔷 線形代数学演習</div>
+      <div class="subject-body">
+        <div class="lecture-grid">
+          <div class="lecture-card lin-available">
+            <a href="linear/lin_01.html">
+              <div class="lc-num">第1回</div>
+              <div class="lc-title">線形写像と行列表現</div>
+              <div class="lc-status">✓ 解説あり</div>
+            </a>
+          </div>
+          <div class="lecture-card lin-available">
+            <a href="linear/lin_02.html">
+              <div class="lc-num">第2回</div>
+              <div class="lc-title">回転・鏡映・直交行列</div>
+              <div class="lc-status">✓ 解説あり</div>
+            </a>
+          </div>
+          <div class="lecture-card pending">
+            <a href="linear/lin_03.html">
+              <div class="lc-num">第3回</div>
+              <div class="lc-title">行列式と連立方程式</div>
+              <div class="lc-status">資料未提供</div>
+            </a>
+          </div>
+          <div class="lecture-card lin-available">
+            <a href="linear/lin_04.html">
+              <div class="lc-num">第4回</div>
+              <div class="lc-title">核と像・双対空間・内積</div>
+              <div class="lc-status">✓ 解説あり</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div><!-- /linear -->
+
+  </div><!-- /subject-columns -->
+
+</div><!-- /container -->
+
+<div class="page-footer">
+  すかき演習 解説集 &mdash; 2026年 Sターム &nbsp;|&nbsp; 参考資料: 宮本先生・在田晋一 TA 作成解答例
+</div>
+
+</body>
+</html>

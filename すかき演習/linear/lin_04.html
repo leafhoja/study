@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>線形代数 第4回 核と像・双対空間 | すかき演習</title>
+<link rel="stylesheet" href="../style.css">
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>
+.logic-chain { background: #f0fff4; border-left: 3px solid #48bb78; padding: 0.75rem 1rem; margin: 0.75rem 0; border-radius: 0 6px 6px 0; font-family: 'Noto Sans JP', sans-serif; font-size: 0.9rem; }
+.backward-think { background: linear-gradient(135deg, #faf5ff, #ede9fe); border: 1.5px solid #c4b5fd; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+.backward-think .bt-title { color: #5b21b6; font-weight: 700; font-size: 0.85rem; font-family: 'Noto Sans JP', sans-serif; margin-bottom: 0.5rem; }
+.answer-box { background: #fafafa; border: 2px solid #334155; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+.answer-box .answer-title { font-weight: 700; font-size: 0.85rem; color: #334155; font-family: 'Noto Sans JP', sans-serif; margin-bottom: 0.75rem; letter-spacing: 0.05em; }
+.think-box { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 1.5px solid #86efac; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+.think-box .think-title { color: #166534; font-weight: 700; font-size: 0.85rem; font-family: 'Noto Sans JP', sans-serif; margin-bottom: 0.5rem; }
+</style>
+</head>
+<body>
+
+<header class="page-header linear">
+  <div class="header-inner">
+    <div>
+      <div class="header-title">線形代数学演習　第4回（6月9日）</div>
+      <div class="header-subtitle">核と像・双対空間・内積による双対性</div>
+    </div>
+    <nav class="nav-links">
+      <a href="../index.html">↑ 目次</a>
+      <a href="lin_03.html">← 前の回</a>
+      <a href="../index.html">目次 →</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- 概観 -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">📋 この回のテーマ</div>
+  <div class="section-card-body">
+    <p>線形写像 $f: V \to W$ に対して，「どこに移るか」（像）と「どこが $0$ に移るか」（核）を調べる。さらに線形汎関数の空間（双対空間）を導入し，$V$ と $V^*$ の関係を調べる。</p>
+    <div class="def-box">
+      <div class="def-title">核（Kernel）と像（Image）の定義</div>
+      <p><strong>核：</strong>$\ker(f) := \{v \in V \mid f(v) = 0\}$</p>
+      <p><strong>像：</strong>$\mathrm{Im}(f) := \{f(v) \mid v \in V\} = f(V)$</p>
+      <p>どちらも部分空間である（零ベクトルを含む，加法と定数倍で閉じている）。</p>
+    </div>
+    <div class="def-box">
+      <div class="def-title">双対空間（Dual Space）</div>
+      <p>$V^* := \mathrm{Hom}(V, \mathbb{K}) = \{$線形写像 $\phi: V \to \mathbb{K}\}$（線形汎関数の全体）。</p>
+      <p>$V$ が有限次元なら $\dim V^* = \dim V$。基底 $\{e_1, \ldots, e_n\}$ の<strong>双対基底</strong> $\{e_1^*, \ldots, e_n^*\}$ は $e_i^*(e_j) = \delta_{ij}$（Kronecker デルタ）で定義。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 問題1 -->
+<section class="section-card" id="problem1">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">1</span> 核と像が部分空間であることの証明
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$V$，$W$ を $\mathbb{R}$-ベクトル空間とし，線形写像 $f: V \to W$ を考える。</p>
+      <ol>
+        <li>$\mathrm{Ker}(f) := \{v \in V \mid f(v) = 0\}$ とおくと，これは $V$ の部分空間であることを示せ（$f$ の核という）。</li>
+        <li>$f$ が単射であることと $\mathrm{Ker}(f) = \{0\}$ であることが同値であることを示せ。</li>
+        <li>$W = \mathbb{R}$ とする。$V$ の部分集合 $\{v \in V \mid f(v) = 1\}$ は $V$ の部分空間かどうか答えよ。</li>
+        <li>$\mathrm{Im}(f) := \{w \in W \mid \exists v \in V,\, w = f(v)\}$ とおくと，これは $W$ の部分空間であることを示せ（$f$ の像という）。</li>
+        <li>$\mathrm{Ker}(f) = \left\{a\begin{pmatrix}1\\0\\2\end{pmatrix} + b\begin{pmatrix}0\\1\\1\end{pmatrix} \;\middle|\; a, b \in \mathbb{R}\right\}$ となるような線形写像 $f: \mathbb{R}^3 \to \mathbb{R}$ を具体的に構成せよ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p><strong>(1) $\ker(f)$ が部分空間であること：</strong></p>
+      <ul>
+        <li>$f(0) = 0$（線形写像の基本性質）なので $0 \in \ker(f)$。</li>
+        <li>$v_1, v_2 \in \ker(f)$，$c, d \in \mathbb{R}$ とする。$f(cv_1 + dv_2) = cf(v_1) + df(v_2) = c \cdot 0 + d \cdot 0 = 0$。よって $cv_1 + dv_2 \in \ker(f)$。</li>
+      </ul>
+      <p><strong>(2) 単射 $\Leftrightarrow$ $\ker(f) = \{0\}$：</strong>問題2（単射の特徴付け）を参照。</p>
+      <p><strong>(3) $\{v \in V \mid f(v) = 1\}$ は部分空間でない：</strong></p>
+      <p>部分空間ならば $0$ を含む必要があるが，$f(0) = 0 \ne 1$ より $0 \notin \{v \mid f(v)=1\}$。よって部分空間でない。</p>
+      <p><strong>(4) $\mathrm{Im}(f)$ が部分空間であること：</strong></p>
+      <ul>
+        <li>$f(0) = 0 \in \mathrm{Im}(f)$。</li>
+        <li>$w_1 = f(v_1)$，$w_2 = f(v_2) \in \mathrm{Im}(f)$，$c, d \in \mathbb{R}$ とする。$cw_1 + dw_2 = cf(v_1) + df(v_2) = f(cv_1 + dv_2) \in \mathrm{Im}(f)$。</li>
+      </ul>
+      <p><strong>(5) 指定された核を持つ線形写像の構成：</strong></p>
+      <p>$\mathrm{Ker}(f) = \mathrm{span}\{(1,0,2)^T,\, (0,1,1)^T\}$（2次元部分空間）となる $f: \mathbb{R}^3 \to \mathbb{R}$ を構成したい。$f$ が線形写像ならば $f(x,y,z)^T = ax + by + cz$（$a,b,c \in \mathbb{R}$）の形。</p>
+      <p>核の条件より：$f(1,0,2)^T = a + 2c = 0$，$f(0,1,1)^T = b + c = 0$。</p>
+      <p>$c = 1$ とおくと $a = -2$，$b = -1$。よって</p>
+      $$f\begin{pmatrix}x\\y\\z\end{pmatrix} = -2x - y + z$$
+      <p>確認：$f(1,0,2)^T = -2+0+2 = 0$，$f(0,1,1)^T = 0-1+1 = 0$ ✓。$f \ne 0$（例えば $f(1,0,0)^T = -2 \ne 0$）なので次元定理より $\dim\mathrm{Ker}(f) = 3 - 1 = 2$。$\square$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <p><strong>部分空間の確認：3条件を1回にまとめる。</strong>部分集合 $U \subset V$ が部分空間 $\Leftrightarrow$ (i) $0 \in U$，(ii) $u_1, u_2 \in U \Rightarrow u_1 + u_2 \in U$，(iii) $u \in U, c \in \mathbb{R} \Rightarrow cu \in U$。(ii),(iii) を $cu_1 + du_2 \in U$ にまとめると確認が1回で済む。</p>
+      <p><strong>(3) の直感：</strong>部分空間は必ず $0$ を含む（スカラー倍閉じているので $0 = 0 \cdot u \in U$）。$\{v \mid f(v) = 1\}$ はこの条件を満たさないので部分空間になれない。「$c$ 倍すると $f(cv) = cf(v)$，$f(v)=1$ なら $f(cv)=c$ が一般には $1$ でない」ことが本質。</p>
+      <p><strong>(5) の構成法：</strong>$\mathbb{R}^3 \to \mathbb{R}$ の線形写像は $f(x,y,z) = ax+by+cz$（行ベクトルと内積）の形。核の2つの生成元に対して $f=0$ という2条件を立て，未知数 $a,b,c$ のうち1つを自由パラメータとして解く。</p>
+    </div>
+
+    <div class="def-box">
+      <div class="def-title">次元定理（Rank-Nullity Theorem）</div>
+      <p>$V$ が有限次元のとき：$\dim V = \dim\ker(f) + \dim\mathrm{Im}(f)$。</p>
+      <p>$\dim\ker(f)$ を<strong>退化次数 (nullity)</strong>，$\dim\mathrm{Im}(f)$ を<strong>階数 (rank)</strong> という。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問題2 -->
+<section class="section-card" id="problem2">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">2</span> 単射 $\Leftrightarrow$ $\ker(f) = \{0\}$
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>線形写像 $f: V \to W$ が単射 $\Leftrightarrow$ $\ker(f) = \{0\}$ を示せ。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p><strong>（$\Rightarrow$）</strong> $f$ が単射とする。$v \in \ker(f)$ なら $f(v) = 0 = f(0)$。単射より $v = 0$。よって $\ker(f) \subset \{0\}$，$\ker(f) = \{0\}$。</p>
+      <p><strong>（$\Leftarrow$）</strong> $\ker(f) = \{0\}$ とする。$f(v_1) = f(v_2)$ なら $f(v_1 - v_2) = 0$，$v_1 - v_2 \in \ker(f) = \{0\}$，$v_1 = v_2$。よって $f$ は単射。</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <p><strong>一般の写像と線形写像の違い。</strong>一般の写像では「単射」は各点の逆像が高々1点という意味。しかし線形写像は $f(0)=0$ を常に満たすため，「0 以外が 0 に行かない」という条件が単射と同値になる。</p>
+      <p><strong>発見の糸口。</strong>$f(v_1) = f(v_2)$ なら $f(v_1 - v_2) = 0$，つまり $v_1 - v_2 \in \ker(f)$。これが証明の核心：単射の条件「$f(v_1)=f(v_2)\Rightarrow v_1=v_2$」を「$f(v_1-v_2)=0\Rightarrow v_1-v_2=0$」と書き換えると，$\ker(f)=\{0\}$ と直結する。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 逆算思考：なぜ差をとるか</div>
+        <p>「$v_1 = v_2$ を示したい」→「$v_1 - v_2 = 0$ を示せばよい」→「線形性を使って $f(v_1 - v_2) = 0$ に帰着」→「$\ker(f)=\{0\}$ の条件が使える」という逆算で証明の流れが自然に出てくる。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問題3 -->
+<section class="section-card" id="problem3">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">3</span> 双対空間 $V^*$ とその性質
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$V$ を $\mathbb{R}$-ベクトル空間とする。</p>
+      <ol>
+        <li>$V^* := \{f: V \to \mathbb{R} \mid f \text{ は線形写像}\}$ とおく。$V^*$ に加法とスカラー倍を
+          $$(f+g)(v) := f(v) + g(v), \quad (a \cdot f)(v) := a \cdot f(v) \quad (f,g \in V^*,\, a \in \mathbb{R},\, v \in V)$$
+          と定める。これにより $V^*$ は $\mathbb{R}$-ベクトル空間になることを示せ（$V^*$ を $V$ の<strong>双対空間</strong>という）。
+        </li>
+        <li>写像 $\varphi: V \to (V^*)^*$ が $v \mapsto (V^* \to \mathbb{R};\, f \mapsto f(v))$ により定まり，単射な線形写像になることを示せ。</li>
+        <li>$V = \mathbb{R}^n$ とし，ユークリッド内積 $(\cdot, \cdot)$ を考える。このとき，
+          $$V \to V^*;\quad v \mapsto (V \to \mathbb{R};\, w \mapsto (v, w))$$
+          は単射な線形写像であることを示せ。
+        </li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 (1) の模範解答：$V^*$ がベクトル空間であること</div>
+      <p>$V^*$ のベクトル空間の公理を確認する。</p>
+      <p><strong>零元：</strong>零写像 $0: v \mapsto 0$ は線形写像であり，$(f + 0)(v) = f(v) + 0 = f(v)$ より加法の単位元。</p>
+      <p><strong>加法の閉性：</strong>$f, g \in V^*$ とする。$(f+g)(av_1+bv_2) = f(av_1+bv_2)+g(av_1+bv_2) = af(v_1)+bf(v_2)+ag(v_1)+bg(v_2) = a(f+g)(v_1)+b(f+g)(v_2)$。よって $f+g \in V^*$。</p>
+      <p><strong>スカラー倍の閉性：</strong>$(af)(cv_1+dv_2) = af(cv_1+dv_2) = a(cf(v_1)+df(v_2)) = c(af)(v_1)+d(af)(v_2)$。よって $af \in V^*$。</p>
+      <p>その他の公理（結合律，交換律，逆元など）は $\mathbb{R}$ での演算から自動的に成立する。よって $V^*$ は $\mathbb{R}$-ベクトル空間。$\square$</p>
+    </div>
+    <div class="answer-box">
+      <div class="answer-title">📝 (2)(3) の模範解答</div>
+      <p><strong>(2) $\varphi: V \to (V^*)^*$ の線形性：</strong>$v \in V$ に対し $\hat v: V^* \to \mathbb{R}$ を $\hat v(f) = f(v)$ で定義し，$\varphi(v) = \hat v$ とする。</p>
+      <p>$\hat v$ が線形写像であること：$\hat v(af + bg) = (af+bg)(v) = af(v) + bg(v) = a\hat v(f) + b\hat v(g)$。</p>
+      <p>$\varphi$ が線形写像であること：$\widehat{av + bw}(f) = f(av+bw) = af(v)+bf(w) = (a\hat v + b\hat w)(f)$。</p>
+      <p>$\varphi$ の単射性（$\ker\varphi = \{0\}$ の確認）：$\hat v = 0$，すなわち「全ての $f \in V^*$ に対し $\hat v(f) = f(v) = 0$」と仮定する。</p>
+      <p style="margin-left:1rem; color:#374151; font-size:0.93em;">
+        <strong>双対基底の使い方：</strong>$V$ に基底 $\{e_1,\ldots,e_n\}$ をとる。その双対基底 $e_j^* \in V^*$ は $e_j^*(e_i) = \delta_{ij}$（$i = j$ なら 1，それ以外は 0）で定義される。
+        $v = v_1 e_1 + \cdots + v_n e_n$ と展開すると，$e_j^*(v) = v_j$（第 $j$ 成分を取り出す）。
+        $\hat v = 0$ という仮定より，特に $f = e_j^*$ を代入すると $v_j = e_j^*(v) = \hat v(e_j^*) = 0$（各 $j = 1,\ldots,n$）。
+        全成分 $v_j = 0$ なので $v = 0$。
+      </p>
+      <p>よって $\ker\varphi = \{0\}$，$\varphi$ は単射。$\square$</p>
+      <p><strong>(3) $V = \mathbb{R}^n$ における内積写像 $\Psi: v \mapsto (\cdot, v)$ の線形性：</strong>$\Psi(v)(w) := (w, v)$ とおく。</p>
+      <p>線形性：$\Psi(av+bw)(u) = (u, av+bw) = a(u,v)+b(u,w) = (a\Psi(v)+b\Psi(w))(u)$。</p>
+      <p>単射性：$\Psi(v) = 0$ とすると全ての $u$ に対し $(u,v)=0$。$u=v$ とおくと $(v,v)=0$，正定値性より $v=0$。$\square$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <p><strong>双対空間の発想：数値を抽出する写像。</strong>$V^*$ の元は「$V$ の元を受け取り，数を返す線形写像」。たとえば $\mathbb{R}^n$ では，行ベクトル $a = (a_1, \ldots, a_n)$ が $v \mapsto a \cdot v = \sum a_i v_i$ という線形汎関数を定める。</p>
+      <p><strong>$\Phi$ の発見方法。</strong>$V$ の元 $v$ は「$V^*$ の元 $\phi$ を受け取り，$\phi(v)$ を返す」写像 $\hat v: V^* \to \mathbb{K}$ を自然に定める。「$v$ を引数，$\phi$ を関数」から「$\phi$ を引数，$v$ を固定」へ役割を交換するだけで，これが $\Phi(v) = \hat v$ という正準写像になる。</p>
+      <p><strong>単射性の証明戦略。</strong>$\ker\Phi = \{0\}$ を示すには，$\hat v = 0$（全ての $\phi$ に対し $\phi(v)=0$）から $v=0$ を導く。「全ての $\phi$ で 0 になる」という強い条件を使うには，双対基底 $e_j^*$ を代入するのが定石—これで $v$ の各成分 $v_j = e_j^*(v) = 0$ が出る。</p>
+      <div class="insight-box" style="margin-top:0.75rem">
+        <div class="insight-title">💡 「正準的」（canonical）とは</div>
+        <p>$\Phi$ の定義に基底を選ぶ操作が含まれていない（$v$ と $\phi$ だけで決まる）。これが $V \cong V^*$（双対基底を経由した同型）との違い—そちらは基底の選び方に依存する「非正準的な」同型。$V \cong (V^*)^*$ は「正準的」な同型。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問題4 -->
+<section class="section-card" id="problem4">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">4</span> 内積による双対空間への写像
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>内積空間 $V$ に対して，$\tilde{\Phi}: V \to V^*$ を $\tilde\Phi(v) = \langle \cdot, v\rangle$（$\tilde\Phi(v)(u) = \langle u, v\rangle$）で定義する。$\tilde\Phi$ が（実数体上では）線形同型であることを示せ。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p><strong>線形性：</strong>$\tilde\Phi(av + bw)(u) = \langle u, av + bw\rangle = a\langle u, v\rangle + b\langle u, w\rangle = (a\tilde\Phi(v) + b\tilde\Phi(w))(u)$。</p>
+      <p><strong>単射性：</strong>$\tilde\Phi(v) = 0$ なら $\langle u, v\rangle = 0$（全ての $u$ に対し）。特に $u = v$ とすると $\langle v, v\rangle = 0$，内積の正定値性より $v = 0$。</p>
+      <p><strong>全射性：</strong>$V$ が $n$ 次元有限次元のとき $\dim V^* = n = \dim V$。$\tilde\Phi: V \to V^*$ は単射な線形写像だから，次元定理より</p>
+      <p style="margin-left:1rem; color:#374151; font-size:0.93em;">
+        $\dim\mathrm{Im}(\tilde\Phi) = \dim V - \dim\ker(\tilde\Phi) = n - 0 = n = \dim V^*$。
+        $\mathrm{Im}(\tilde\Phi)$ は $V^*$ の部分空間で，その次元が $\dim V^*$ に等しいから $\mathrm{Im}(\tilde\Phi) = V^*$，すなわち $\tilde\Phi$ は全射。
+      </p>
+      <p>よって $\tilde\Phi$ は線形同型。$\square$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <p><strong>Riesz の表現定理の有限次元版。</strong>$V$ 上の線形汎関数 $\phi$ は，ある $v \in V$ を用いて $\phi(u) = \langle u, v\rangle$ の形に書けるという定理（Riesz 表現定理）の有限次元版がこの問題。$\tilde\Phi$ が全単射であることが，その表現が常に存在しかつ一意であることを保証する。</p>
+      <p><strong>単射性の証明の急所。</strong>「全ての $u$ に対して $\langle u, v\rangle = 0$」から $v=0$ を示すには，$u=v$ と特殊化するのがポイント。内積の正定値性 $\langle v,v\rangle \geq 0$，等号 $\Leftrightarrow$ $v=0$ が決定的に使われる。この「$u=v$ と置く」手は多くの内積の議論で登場する定石。</p>
+      <div class="insight-box" style="margin-top:0.75rem">
+        <div class="insight-title">💡 複素数体では「半線形」になる理由</div>
+        <p>複素数体上では $\langle \cdot, cv\rangle = \bar c\langle \cdot, v\rangle$ なので，$\tilde\Phi$ は（通常の意味では）線形でなく<strong>半線形</strong>（共役線形）になる。実数体では共役が恒等写像なのでこの問題は起きない。量子力学など複素内積空間が基本の分野では，この半線形性が本質的な役割を果たす。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- まとめ -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">📌 第4回のまとめ</div>
+  <div class="section-card-body">
+    <ul>
+      <li><strong>核・像：</strong>どちらも部分空間。証明の型は「$0$ を含む・線形結合で閉じる」</li>
+      <li><strong>単射 $\Leftrightarrow$ $\ker = \{0\}$：</strong>線形写像特有の同値。一般の写像には成立しない</li>
+      <li><strong>次元定理：</strong>$\dim V = \dim\ker f + \dim\mathrm{Im} f$</li>
+      <li><strong>双対基底：</strong>$e_i^*(e_j) = \delta_{ij}$ で定義。$\dim V^* = \dim V$（有限次元）</li>
+      <li><strong>正準埋め込み $\Phi$：</strong>$v \mapsto \hat v$（$\hat v(\phi) = \phi(v)$）は正準的な単射（有限次元では同型）</li>
+      <li><strong>内積による $\tilde\Phi$：</strong>$v \mapsto \langle\cdot, v\rangle$ は実数体では線形同型（Riesz表現定理）</li>
+    </ul>
+    <div class="insight-box">
+      <div class="insight-title">💡 自力で解くために：「抽象」を「具体」で検証する習慣</div>
+      <p>双対空間は抽象的に見えるが，$V = \mathbb{R}^n$，基底 $= $ 標準基底で考えると「$e_i^*$ は第 $i$ 成分を取り出す関数」「内積 $\langle u, v\rangle = u^T v$ は行ベクトル $v^T$ が定める線形汎関数」と具体的に理解できる。抽象的な定義を見たら，まず具体例で意味を確認する習慣を持とう。</p>
+    </div>
+  </div>
+</section>
+
+</div>
+<div class="page-footer">
+  すかき演習 解説集 &mdash; 線形代数学 第4回 &nbsp;|&nbsp; <a href="../index.html" style="color:rgba(255,255,255,0.6)">目次に戻る</a>
+</div>
+<script src="../nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>微分積分 第4回 常微分方程式 | すかき演習</title>
+<link rel="stylesheet" href="../style.css">
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>
+.ode-type { background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 0.75rem 1rem; margin: 0.75rem 0; font-family: 'Noto Sans JP', sans-serif; font-size: 0.9rem; }
+.ode-type .ode-label { font-weight: 700; color: #166534; font-size: 0.85rem; }
+.logic-chain { background: #f0fff4; border-left: 3px solid #48bb78; padding: 0.75rem 1rem; margin: 0.75rem 0; border-radius: 0 6px 6px 0; font-family: 'Noto Sans JP', sans-serif; font-size: 0.9rem; }
+.backward-think { background: linear-gradient(135deg, #fdf4ff, #fae8ff); border: 1.5px solid #c084fc; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+.backward-think .bt-title { color: #7e22ce; font-weight: 700; font-size: 0.85rem; font-family: 'Noto Sans JP', sans-serif; margin-bottom: 0.5rem; }
+.answer-box { background: #fafafa; border: 2px solid #334155; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+.answer-box .answer-title { font-weight: 700; font-size: 0.85rem; color: #334155; font-family: 'Noto Sans JP', sans-serif; margin-bottom: 0.75rem; letter-spacing: 0.05em; }
+.think-box { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 1.5px solid #86efac; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+.think-box .think-title { color: #166534; font-weight: 700; font-size: 0.85rem; font-family: 'Noto Sans JP', sans-serif; margin-bottom: 0.5rem; }
+</style>
+</head>
+<body>
+
+<header class="page-header calc">
+  <div class="header-inner">
+    <div>
+      <div class="header-title">微分積分学演習　第4回</div>
+      <div class="header-subtitle">常微分方程式：変数分離・積分因子・同次形・連立ODE</div>
+    </div>
+    <nav class="nav-links">
+      <a href="../index.html">↑ 目次</a>
+      <a href="calc_03.html">← 前の回</a>
+      <a href="../index.html">目次 →</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- 概観 -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">📋 常微分方程式（ODE）の型と解法の地図</div>
+  <div class="section-card-body">
+    <p>常微分方程式（Ordinary Differential Equation, ODE）とは，未知関数 $x(t)$ とその導関数の間の方程式だ。解法は方程式の「型」によって異なる。</p>
+    <div class="ode-type"><div class="ode-label">型1：変数分離形</div> $x' = f(t) g(x)$ → 両辺を変数ごとに分けて積分</div>
+    <div class="ode-type"><div class="ode-label">型2：一次線形微分方程式</div> $x' + p(t)x = q(t)$ → 積分因子 $\mu(t) = e^{\int p(t)\,dt}$ を掛ける</div>
+    <div class="ode-type"><div class="ode-label">型3：同次形</div> $x' = f(x/t)$ → $u = x/t$ と置換して変数分離形に帰着</div>
+    <div class="ode-type"><div class="ode-label">型4：連立線形ODE</div> $y' = y, z' = 2z$ などに因数分解で分解して解く</div>
+    <div class="insight-box">
+      <div class="insight-title">💡 一般解・特殊解・初期値問題</div>
+      <ul>
+        <li><strong>一般解：</strong>パラメータ $C$（積分定数）を含む解の族。$x' = x$ の一般解は $x = Ce^t$</li>
+        <li><strong>特殊解：</strong>初期条件 $x(t_0) = x_0$ で $C$ を決めたもの</li>
+        <li><strong>恒等定数解：</strong>$x' = f(x)$ で $f(x_0) = 0$ ならば $x \equiv x_0$ は解</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 問題1 -->
+<section class="section-card" id="problem1">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">1</span> 4種類のODEの解
+  </div>
+  <div class="section-card-body">
+
+    <h3>(1) $x' = tx$（変数分離形）</h3>
+
+    <div class="problem-box">
+      <h4>問題文</h4>
+      <p>$x' = tx$ を解け。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>$y(t) = x(t)/e^{t^2/2}$ とおく。$y' = (x' \cdot e^{t^2/2} - x \cdot te^{t^2/2})/(e^{t^2/2})^2 = (x' - tx)/e^{t^2/2} = 0$。</p>
+      <p>よって $y$ は定数。$y(t) = y(0) = x(0)/1 = x(0)$。$C = x(0)$ とおくと</p>
+      $$\boxed{x(t) = Ce^{t^2/2}} \quad (C \in \mathbb{R})$$
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <div class="backward-think">
+        <div class="bt-title">🔄 なぜ $y(t) = x(t)/e^{t^2/2}$ とおくのか</div>
+        <p>方程式 $x' = tx$ を変形すると $x' - tx = 0$。一次線形方程式として積分因子 $\mu = e^{-\int t\,dt} = e^{-t^2/2}$ を掛けると左辺が完全微分になる発想。$y = xe^{-t^2/2}$ とおくと $y' = (x' - tx)e^{-t^2/2} = 0$ → $y = $ 定数。よって $x = Ce^{t^2/2}$。</p>
+      </div>
+      <p>変数分離でも解ける：$x \ne 0$ のとき $\dfrac{dx}{x} = t\,dt$，積分して $\ln|x| = \dfrac{t^2}{2} + C_0$，よって $|x| = e^{C_0}e^{t^2/2}$，$C = \pm e^{C_0}$ とおけば $x = Ce^{t^2/2}$。$x = 0$ は $C = 0$ に対応。</p>
+    </div>
+
+    <h3>(2) ロジスティック方程式 $\dot{x} = x(1-x)$</h3>
+
+    <div class="problem-box">
+      <h4>問題文</h4>
+      <p>$\dot{x} = x(1-x)$ を解け。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>恒等定数解 $x \equiv 0$，$x \equiv 1$ を確認（代入すると両辺が 0）。$x \ne 0, 1$ のとき変数分離：</p>
+      $$\frac{dx}{x(1-x)} = dt$$
+      <p>部分分数分解：$\dfrac{1}{x(1-x)} = \dfrac{1}{x} + \dfrac{1}{1-x}$。積分：</p>
+      $$\ln|x| - \ln|1-x| = t + C_0 \Rightarrow \ln\left|\frac{x}{1-x}\right| = t + C_0$$
+      <p>指数化：$\dfrac{x}{1-x} = De^t$（$D = \pm e^{C_0}$）。$x$ について解くと $x = \dfrac{De^t}{1+De^t}$。$D = 0$ は $x \equiv 0$ に対応。</p>
+      $$\boxed{x = \frac{De^t}{1 + De^t}} \quad (D \in \mathbb{R}), \quad \text{または} \quad x \equiv 1$$
+      <p>$D$ が負のとき定義域は $t \ne \log(-1/D)$ に注意。</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <p>自律系 $\dot{x} = F(x)$ では<strong>まず平衡点（$F(x) = 0$ の根）を確認</strong>する。$F(x) = x(1-x)$ の根は $x = 0, 1$。これらが恒等定数解。</p>
+      <p>次に $x \ne 0, 1$ の範囲で変数分離。右辺が $x$ だけの関数・左辺が $t$ だけの関数に分けられる形 $x' = F(x)$ は変数分離形。</p>
+      <div class="insight-box">
+        <div class="insight-title">💡 ロジスティック方程式の背景</div>
+        <p>この方程式は人口動態や生態学で「環境収容力 $K = 1$ に近づく個体数変動」として現れる。$x = 0$ と $x = 1$ が平衡点で，$0 < x < 1$ では個体数が増加，$x > 1$ では減少する。</p>
+      </div>
+    </div>
+
+    <h3>(3) 同次形 $t\tan(x/t) - x + tx' = 0$</h3>
+
+    <div class="problem-box">
+      <h4>問題文</h4>
+      <p>$t\tan(x/t) - x + tx' = 0$ を解け。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>$u = x/t$ とおくと $x = ut$，$x' = u + tu'$。方程式を整理して $x' = (x - t\tan(x/t))/t = x/t - \tan(x/t)$ に代入：</p>
+      $$u + tu' = u - \tan u \Rightarrow tu' = -\tan u$$
+      <p>変数分離：</p>
+      $$\frac{du}{\tan u} = -\frac{dt}{t}$$
+      <p>$\dfrac{du}{\tan u} = \dfrac{\cos u}{\sin u}\,du = d(\ln|\sin u|)$ を積分して</p>
+      $$\ln|\sin u| = -\ln|t| + C \Rightarrow \ln|t \sin u| = C \Rightarrow t\sin u = D$$
+      <p>$u = x/t$ を戻すと</p>
+      $$\boxed{t\sin(x/t) = D} \quad (D \in \mathbb{R})$$
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <div class="backward-think">
+        <div class="bt-title">🔄 同次形の見抜き方と置換の理由</div>
+        <p>$x' = (x - t\tan(x/t))/t = x/t - \tan(x/t)$。右辺は $x/t$ だけの関数（$x$ と $t$ が比の形にしか現れない）→ <strong>同次形</strong>。$u = x/t$ と置換すると $x = ut$，$x' = u + tu'$。代入後に $t$ と $u$ が分離できる変数分離形になる。</p>
+      </div>
+      <p>同次形の判定：方程式を $x' = (\text{右辺})$ の形に整理したとき，右辺が $x/t$ のみの関数で書けるかを確認する。この問題では $\tan$ が含まれているが，引数が $x/t$ のみなので同次形。</p>
+    </div>
+
+    <h3>(4) 積分因子法 $x' + x\cos t = \sin t \cos t$</h3>
+
+    <div class="problem-box">
+      <h4>問題文</h4>
+      <p>$x' + x\cos t = \sin t \cos t$ を解け。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>一次線形 $x' + p(t)x = q(t)$，$p(t) = \cos t$，$q(t) = \sin t\cos t$。積分因子 $\mu(t) = e^{\int \cos t\,dt} = e^{\sin t}$ を両辺に掛ける：</p>
+      $$\frac{d}{dt}(xe^{\sin t}) = e^{\sin t}\sin t\cos t$$
+      <p>右辺を積分：$u = \sin t$ と置換すると $\int e^u u\,du = (u-1)e^u + C$（部分積分）。よって</p>
+      $$xe^{\sin t} = (\sin t - 1)e^{\sin t} + C$$
+      $$\boxed{x = \sin t - 1 + Ce^{-\sin t}} \quad (C \in \mathbb{R})$$
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <div class="insight-box">
+        <div class="insight-title">💡 積分因子のアイデア</div>
+        <p>一次線形 $x' + p(t)x = q(t)$ の形。$p(t) = \cos t$ に対して積分因子 $\mu(t) = e^{\int \cos t\,dt} = e^{\sin t}$ を掛ける。なぜ？ 左辺が $\dfrac{d}{dt}(\mu x)$ の形になるから（積の微分の逆）：</p>
+        $$\frac{d}{dt}(xe^{\sin t}) = x'e^{\sin t} + xe^{\sin t}\cos t = e^{\sin t}(x' + x\cos t) = e^{\sin t}\sin t\cos t$$
+      </div>
+      <p>積分因子の公式：$\mu(t) = e^{\int p(t)\,dt}$。掛けると左辺は必ず $(\mu x)'$ に変換される。右辺の積分で部分積分が必要な場合は $\int ue^u\,du = (u-1)e^u + C$ を活用する。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問題2 -->
+<section class="section-card" id="problem2">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">2</span> 平衡点と変数変換（自律型ODE）
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>Riccati 型の微分方程式</p>
+      $$x' = x^2 - x - 2$$
+      <p>を考える。</p>
+      <ol>
+        <li>この微分方程式の解を一つ見つけよ。</li>
+        <li>(1) で求めた解を $x_0$ とおく。$x = x_0 + u$ と変換することにより，上の微分方程式を $u$ に関する微分方程式に変換せよ。</li>
+        <li>一般解 $x$ を求めよ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p><strong>(1) 平衡点の発見：</strong>$x^2 - x - 2 = (x-2)(x+1) = 0$ より平衡点は $x = 2$ と $x = -1$。定数関数 $x \equiv 2$，$x \equiv -1$ は解。</p>
+      <p><strong>(2) 変数変換：</strong>$x = 2 + u$ とおくと $x' = u'$。方程式を $u$ で書き直す：</p>
+      $$u' = (2+u)^2 - (2+u) - 2 = 4 + 4u + u^2 - 2 - u - 2 = 3u + u^2 = u(u+3)$$
+      <p><strong>(3) 変数分離で $u' = u(u+3)$ を解く：</strong>部分分数 $\dfrac{1}{u(u+3)} = \dfrac{1}{3} \cdot \dfrac{1}{u} - \dfrac{1}{3} \cdot \dfrac{1}{u+3}$。積分：</p>
+      $$\frac{1}{3}\ln\left|\frac{u}{u+3}\right| = t + C \Rightarrow \frac{u}{u+3} = Ce^{3t}$$
+      <p>$u$ について解いて $u = \dfrac{3Ce^{3t}}{1 - Ce^{3t}}$，$x = 2 + u$ を戻すと</p>
+      $$\boxed{x(t) = 2 + \frac{3Ce^{3t}}{1 - Ce^{3t}}} \quad (C \in \mathbb{R})$$
+      <p>$x = -1$ も解（$u = -3$ は恒等定数解 $u \equiv -3$）。</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <p>自律系 $x' = F(x)$ では<strong>まず因数分解して平衡点を求める</strong>。$F(x) = (x-2)(x+1)$ の根 $x = 2, -1$ が平衡点。</p>
+      <p>なぜ変数変換 $x = x_0 + u$（$x_0$ は平衡点）を行うか？ 平衡点付近で $u$ が小さいとき，$u' \approx F'(x_0) u$（線形化）で局所的な振る舞いが分かる。さらに非線形項を含めて厳密に解くことも，変換後の方程式が整理されて解きやすくなるため。</p>
+      <p>今回は $u' = u(u+3)$ という変数分離形に帰着し，部分分数展開 $\dfrac{1}{u(u+3)} = \dfrac{1}{3u} - \dfrac{1}{3(u+3)}$ を用いて積分した。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問題3 -->
+<section class="section-card" id="problem3">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">3</span> 二階線形ODE の因数分解による解法
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>線形微分方程式</p>
+      $$x'' - 3x' + 2x = 0$$
+      <p>を考える。</p>
+      <ol>
+        <li>この微分方程式の解 $x$ は，$y' - y = 0$，$z' - 2z = 0$ を満たす関数 $y$，$z$ を用いて $x = y + z$ と表されることを示せ。</li>
+        <li>一般解 $x$ を求めよ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>$y := x' - x$ とおく。$y' - 2y = (x'' - x') - 2(x' - x) = x'' - 3x' + 2x = 0$（問題の方程式）。</p>
+      <p>$y' = 2y$ の一般解：$y = Ce^{2t}$（$C$ は定数）。</p>
+      <p>$x' - x = Ce^{2t}$（一次線形）。積分因子 $e^{-t}$：$(xe^{-t})' = Ce^t$，積分して $xe^{-t} = Ce^t + D$，よって</p>
+      $$\boxed{x(t) = Ce^{2t} + De^t} \quad (C, D \in \mathbb{R})$$
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <div class="insight-box">
+        <div class="insight-title">💡 因数分解のアイデア</div>
+        <p>微分演算子 $D = d/dt$ を使うと方程式は $(D^2 - 3D + 2)x = 0$。多項式と同じように因数分解：$D^2 - 3D + 2 = (D-1)(D-2)$（特性方程式 $\lambda^2 - 3\lambda + 2 = 0$ の根は 1 と 2）。</p>
+        <p>$(D-2)(D-1)x = 0$ と書き換え，$y := (D-1)x = x' - x$ とおく。</p>
+      </div>
+      <div class="backward-think" style="margin:0.5rem 0 0.75rem;">
+        <div class="bt-title">🔄 なぜ $y = x' - x$ と定義するのか</div>
+        <p>$(D-2)(D-1)x = 0$ は「まず $(D-1)$ を $x$ に作用させ，次に $(D-2)$ を作用させると $0$ になる」という構造。</p>
+        <p>だから $y := (D-1)x = x' - x$ と定義すると，方程式は $(D-2)y = 0$，すなわち $y' - 2y = 0$ という<strong>一階線形方程式</strong>に帰着する。これなら積分因子ですぐ解ける。</p>
+        <p>手順：</p>
+        <ol>
+          <li>$y' - 2y = 0$ を解く → $y = Ce^{2t}$（$C$ は定数）</li>
+          <li>$x' - x = Ce^{2t}$ を解く（一次線形，積分因子 $e^{-t}$）</li>
+        </ol>
+        <p>答案では「$y := x' - x$ とおく」という宣言から始まるが，その着想は「二階演算子 $(D-2)(D-1)$ を1つずつ処理する」という因数分解の論理から来ている。</p>
+      </div>
+      <p>一般解の構造：$y' - y = 0$ の一般解 $Ce^t$ と $z' - 2z = 0$ の一般解 $De^{2t}$ の和 $x = Ce^t + De^{2t}$ と一致する。</p>
+      <div class="insight-box">
+        <div class="insight-title">💡 特性方程式との対応</div>
+        <p>二階線形定係数 $ax'' + bx' + cx = 0$ は特性方程式 $a\lambda^2 + b\lambda + c = 0$ の根 $\lambda_1, \lambda_2$ を用いて $x = C_1 e^{\lambda_1 t} + C_2 e^{\lambda_2 t}$（$\lambda_1 \ne \lambda_2$ の場合）。今回は $\lambda^2 - 3\lambda + 2 = (\lambda-1)(\lambda-2) = 0$ より $\lambda = 1, 2$。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- まとめ -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">📌 第4回のまとめ：ODEの解法選択</div>
+  <div class="section-card-body">
+    <p>ODEの解法は方程式の構造を見て決まる。</p>
+    <ul>
+      <li><strong>変数分離：</strong>$x' = f(t)g(x)$ の形。両辺を $g(x)$ で割り，$t$ と $x$ を分けて積分</li>
+      <li><strong>積分因子：</strong>$x' + p(t)x = q(t)$ の形。$e^{\int p\,dt}$ を掛けると左辺が完全微分</li>
+      <li><strong>同次形：</strong>$x' = f(x/t)$ の形。$u = x/t$ で変数分離形に</li>
+      <li><strong>平衡点変換：</strong>自律系 $x' = F(x)$ で $F(x_0) = 0$ なら $u = x - x_0$ で簡単化</li>
+      <li><strong>因数分解：</strong>定係数線形 → 特性方程式の根が指数関数解</li>
+    </ul>
+    <div class="warn-box">
+      <div class="warn-title">⚠ 積分定数の取り扱い</div>
+      <p>$\pm e^C$ などの任意定数は「$D$（任意実数）」と書き直す。恒等定数解（$x \equiv $ 定数）が別途存在することも確認する。</p>
+    </div>
+  </div>
+</section>
+
+</div>
+<div class="page-footer">
+  すかき演習 解説集 &mdash; 微分積分学 第4回 &nbsp;|&nbsp; <a href="../index.html" style="color:rgba(255,255,255,0.6)">目次に戻る</a>
+</div>
+<script src="../nav.js"></script>
+</body>
+</html>

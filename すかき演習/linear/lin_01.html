@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>線形代数 第1回 線形写像と行列表現 | すかき演習</title>
+<link rel="stylesheet" href="../style.css">
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>
+.logic-chain { background: #f0fff4; border-left: 3px solid #48bb78; padding: 0.75rem 1rem; margin: 0.75rem 0; border-radius: 0 6px 6px 0; font-family: 'Noto Sans JP', sans-serif; font-size: 0.9rem; }
+.backward-think { background: linear-gradient(135deg, #f5f3ff, #ede9fe); border: 1.5px solid #a78bfa; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+.backward-think .bt-title { color: #5b21b6; font-weight: 700; font-size: 0.85rem; font-family: 'Noto Sans JP', sans-serif; margin-bottom: 0.5rem; }
+.answer-box { background: #fafafa; border: 2px solid #334155; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+.answer-box .answer-title { font-weight: 700; font-size: 0.85rem; color: #334155; font-family: 'Noto Sans JP', sans-serif; margin-bottom: 0.75rem; letter-spacing: 0.05em; }
+.think-box { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 1.5px solid #86efac; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+.think-box .think-title { color: #166534; font-weight: 700; font-size: 0.85rem; font-family: 'Noto Sans JP', sans-serif; margin-bottom: 0.5rem; }
+</style>
+</head>
+<body>
+
+<header class="page-header linear">
+  <div class="header-inner">
+    <div>
+      <div class="header-title">線形代数学演習　第1回（4月14日）</div>
+      <div class="header-subtitle">線形写像の定義・行列表現・写像の合成・単射・全射</div>
+    </div>
+    <nav class="nav-links">
+      <a href="../index.html">↑ 目次</a>
+      <a href="lin_02.html">次の回 →</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- 概観 -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">📋 この回のテーマ</div>
+  <div class="section-card-body">
+    <p>線形代数の核心は「<strong>線形写像</strong>」だ。行列の計算ではなく，写像としての構造を理解することが目標。行列は線形写像を記述するための道具に過ぎない。</p>
+    <div class="def-box">
+      <div class="def-title">定義：線形写像</div>
+      <p>$\mathbb{R}$-ベクトル空間 $V, W$ の間の写像 $f : V \to W$ が<strong>線形写像</strong>（$\mathbb{R}$-線形写像）であるとは：</p>
+      <ul>
+        <li><strong>加法性：</strong>任意の $v_1, v_2 \in V$ に対して $f(v_1 + v_2) = f(v_1) + f(v_2)$</li>
+        <li><strong>スカラー倍性：</strong>任意の $v \in V$，$\alpha \in \mathbb{R}$ に対して $f(\alpha v) = \alpha f(v)$</li>
+      </ul>
+      <p>2条件は $f(av_1 + bv_2) = af(v_1) + bf(v_2)$（<strong>線形結合を保存する</strong>）という1条件にまとめられる。</p>
+    </div>
+    <div class="insight-box">
+      <div class="insight-title">💡 線形写像の基本性質（必ず成立）</div>
+      <p>$f$ が線形写像ならば $f(\mathbf{0}) = \mathbf{0}$（ゼロベクトルはゼロベクトルに写る）。</p>
+      <p>証明：$f(\mathbf{0}) = f(0 \cdot \mathbf{0}) = 0 \cdot f(\mathbf{0}) = \mathbf{0}$。</p>
+      <p>この性質を使うと「$f(\mathbf{0}) \ne \mathbf{0}$ ならば $f$ は線形写像でない」という反例の作り方がわかる。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 問題1 -->
+<section class="section-card" id="problem1">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">1</span> $f_A$ が線形写像であること，写像の等しさ
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$A = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$，$f_A : \mathbb{R}^2 \to \mathbb{R}^2$ を $f_A(x) = Ax$ で定義する。</p>
+      <ol>
+        <li>$f_A$ が線形写像であることを示せ。</li>
+        <li>線形写像 $f : \mathbb{R}^2 \to \mathbb{R}^2$ が $f((1,0)^T) = (a, c)^T$，$f((0,1)^T) = (b,d)^T$ を満たすとき，$f = f_A$ であることを示せ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p><strong>(1) $f_A$ が線形写像であることの証明</strong></p>
+      <p>任意の $x = (i,j)^T$，$y = (k,l)^T \in \mathbb{R}^2$，$\alpha \in \mathbb{R}$ に対して：</p>
+      <p><strong>加法性：</strong>$x + y = (i+k, j+l)^T$ なので
+      $$f_A(x+y) = A(x+y) = \begin{pmatrix}a(i+k)+b(j+l)\\c(i+k)+d(j+l)\end{pmatrix} = \begin{pmatrix}ai+bj\\ci+dj\end{pmatrix} + \begin{pmatrix}ak+bl\\ck+dl\end{pmatrix} = f_A(x) + f_A(y)$$
+      </p>
+      <p><strong>スカラー倍性：</strong>$\alpha x = (\alpha i, \alpha j)^T$ なので $f_A(\alpha x) = A(\alpha x) = \alpha Ax = \alpha f_A(x)$。</p>
+      <p>よって $f_A$ は線形写像。$\blacksquare$</p>
+      <hr style="margin:1rem 0; border-color:#cbd5e1;">
+      <p><strong>(2) $f = f_A$ の証明</strong></p>
+      <p>任意の $(x,y)^T \in \mathbb{R}^2$ を固定する。$(x,y)^T = x(1,0)^T + y(0,1)^T$ と書けるから $f$ の線形性より</p>
+      $$f\binom{x}{y} = xf\binom{1}{0} + yf\binom{0}{1} = x\binom{a}{c} + y\binom{b}{d} = \binom{ax+by}{cx+dy} = A\binom{x}{y} = f_A\binom{x}{y}$$
+      <p>$(x,y)^T$ は任意だったから $f = f_A$。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <p><strong>(1) について：</strong>行列とベクトルの積の定義から直接確認する。行列積は分配則・スカラー倍を満たすように定義されているので，ほぼ計算するだけで成立する。</p>
+
+      <div class="backward-think">
+        <div class="bt-title">🔄 線形写像は基底での値で決まる</div>
+        <p><strong>(2) の着想：</strong>任意の $(x, y)^T \in \mathbb{R}^2$ は標準基底で分解できる：$(x, y)^T = x(1,0)^T + y(0,1)^T$。</p>
+        <p>$f$ の線形性を使うと：$f((x,y)^T) = xf((1,0)^T) + yf((0,1)^T)$。</p>
+        <p>仮定より $f((1,0)^T) = (a,c)^T$，$f((0,1)^T) = (b,d)^T$ だから値が完全に決まる。</p>
+      </div>
+
+      <div class="insight-box">
+        <div class="insight-title">💡 写像の等しさの定義</div>
+        <p>写像 $f, g : V \to W$ が等しい（$f = g$）とは：
+        定義域と値域が等しく，かつ任意の $v \in V$ に対して $f(v) = g(v)$。
+        </p>
+        <p>$\mathbb{R}^2$ の場合，任意の $(x,y)^T$ で値が一致すること。</p>
+      </div>
+
+      <div class="insight-box">
+        <div class="insight-title">💡 重要な一般原理：線形写像は基底での値で一意に決まる</div>
+        <p>$\mathbb{R}^n$ から $\mathbb{R}^m$ への任意の線形写像 $f$ は，$n$ 本の基底ベクトルの行き先を指定することで一意に決まる。この基底ベクトルの行き先を並べたものが表現行列だ。</p>
+        <p>$f(e_j) = $ （行列の第 $j$ 列）という対応関係が成立する。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問題2 -->
+<section class="section-card" id="problem2">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">2</span> 線形写像の表現行列を求める
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>線形写像 $f : \mathbb{R}^2 \to \mathbb{R}^2$ が $f((2,1)^T) = (1,2)^T$，$f((3,4)^T) = (1,1)^T$ を満たすとき，$f(x) = Ax$ となる $2\times 2$ 行列 $A$ を求めよ。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>$A = \begin{pmatrix}a&b\\c&d\end{pmatrix}$ とおく。$f_A((2,1)^T) = (2a+b, 2c+d)^T = (1,2)^T$ より $2a+b=1, 2c+d=2$。$f_A((3,4)^T) = (3a+4b, 3c+4d)^T = (1,1)^T$ より $3a+4b=1, 3c+4d=1$。</p>
+      <p>第一組：$2a+b=1$, $3a+4b=1$。前者の 4 倍から後者を引くと $5a = 3$，$a = 3/5$，$b = 1 - 2(3/5) = -1/5$。</p>
+      <p>第二組：$2c+d=2$，$3c+4d=1$。同様に $5c = 7$，$c = 7/5$，$d = 2 - 2(7/5) = -4/5$。</p>
+      $$A = \frac{1}{5}\begin{pmatrix}3 & -1 \\ 7 & -4\end{pmatrix} \quad \blacksquare$$
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <div class="backward-think">
+        <div class="bt-title">🔄 解法の着想</div>
+        <p>問題1(2) より，$A$ の第 $j$ 列は $f$ の標準基底での値。$(2,1)^T$ と $(3,4)^T$ で値がわかっているので，まず $f(e_1)$ と $f(e_2)$ を求める。</p>
+        <p>$(2,1)^T$ と $(3,4)^T$ を標準基底で表す連立方程式：$\alpha(2,1)^T + \beta(3,4)^T = (1,0)^T$ を解いて $f(1,0)^T = \alpha f(2,1)^T + \beta f(3,4)^T$。</p>
+        <p>あるいは今回のように，$A$ の成分を未知数として条件式を立てて連立方程式を解く方法も素直で有効。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問題3 -->
+<section class="section-card" id="problem3">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">3</span> 写像の合成と行列の積
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$A, B$ がともに $2\times 2$ 行列で，$f_A, f_B : \mathbb{R}^2 \to \mathbb{R}^2$ を対応する線形写像とする。$f_A \circ f_B = f_{AB}$ を示せ。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>任意の $x \in \mathbb{R}^2$ に対して</p>
+      $$(f_A \circ f_B)(x) = f_A(f_B(x)) = f_A(Bx) = A(Bx) = (AB)x = f_{AB}(x)$$
+      <p>定義域・値域ともに $\mathbb{R}^2$ で一致しており，任意の $x$ で値が等しいから $f_A \circ f_B = f_{AB}$。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <div class="insight-box">
+        <div class="insight-title">💡 写像の合成と行列の積の「一致」</div>
+        <p>$f_A \circ f_B$ は「先に $f_B$，次に $f_A$」という操作。行列の積 $AB$ も「先に $B$ を掛け，次に $A$ を掛ける」操作だ。これらが一致することを示す。</p>
+        <p><strong>注意：順番！</strong>写像の合成では $(f_A \circ f_B)(x) = f_A(f_B(x))$。行列積は右から掛ける。$(AB)x = A(Bx)$。</p>
+      </div>
+      <p>証明の流れは非常にシンプルで，結合律 $A(Bx) = (AB)x$ を使うだけ。これは行列積の定義から従う。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問題4 -->
+<section class="section-card" id="problem4">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">4</span> 単射・全射と $\det A \ne 0$
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$f_A : \mathbb{R}^2 \to \mathbb{R}^2$ について次を示せ。</p>
+      <ol>
+        <li>$f_A$ が単射または全射であるための必要十分条件は $\det A \ne 0$（$= ad - bc \ne 0$）。</li>
+        <li>$f_A : \mathbb{Z}^2 \to \mathbb{Z}^2$ が全単射（全射かつ単射）であるための必要十分条件。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p><strong>(1) 単射 $\Leftrightarrow$ $ad - bc \ne 0$</strong></p>
+      <p><strong>（$\Leftarrow$）$ad-bc \ne 0$ ならば単射：</strong></p>
+      <p>$f_A\binom{w}{x} = f_A\binom{y}{z}$ を仮定。$aw+bx = ay+bz$，$cw+dx = cy+dz$。</p>
+      <p>第1式を $d$ 倍し第2式を $b$ 倍して引くと $(ad-bc)w = (ad-bc)y$。$ad-bc \ne 0$ より $w = y$。同様に $x = z$。よって単射。</p>
+      <p><strong>（$\Rightarrow$）$ad-bc = 0$ ならば単射でない：</strong></p>
+      <p>$f_A$ が単射でないことを示す（$f_A(v) = 0$ を $v = 0$ 以外で解く）。$ad = bc$ のとき $A\binom{-b}{a} = \binom{-ab+ba}{-cb+da} = \binom{0}{a(d-\frac{cb}{a})} = \binom{0}{0}$（$ad=bc$ を用いた）。$b, a$ が両方 $0$ でなければ $(-b,a)^T \ne 0$ は核の元。一方 $a = b = 0$ なら $A$ の第1列がゼロなので $(1,0)^T$ が核の元。よって単射でない。</p>
+      <p><strong>全射の証明も同様：</strong>任意の $(\alpha,\beta)^T$ に対して $ax+by = \alpha, cx+dy = \beta$ の解の存在性が $ad-bc \ne 0$ と等価（Cramer の公式）。</p>
+      <hr style="margin:1rem 0; border-color:#cbd5e1;">
+      <p><strong>(2) $f_A : \mathbb{Z}^2 \to \mathbb{Z}^2$ が全単射の条件</strong></p>
+      <p>まず $a, b, c, d \in \mathbb{Z}$ が必要（$(1,0)^T$ や $(0,1)^T$ の行き先が $\mathbb{Z}^2$ に入るため）。</p>
+      <p>全射 $\Leftrightarrow$ 任意の $(\alpha,\beta)^T \in \mathbb{Z}^2$ に対して整数解 $x, y$ が存在する $\Leftrightarrow$ Cramer の公式で $x, y \in \mathbb{Z}$ が保証される $\Leftrightarrow$ $\det A = \pm 1$。</p>
+      <p><strong>まとめ：</strong>$f_A : \mathbb{Z}^2 \to \mathbb{Z}^2$ が全単射 $\Leftrightarrow$ $a,b,c,d \in \mathbb{Z}$ かつ $\det A = \pm 1$。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+
+      <div class="def-box">
+        <div class="def-title">定義：単射・全射・全単射</div>
+        <ul>
+          <li><strong>単射（injective）：</strong>$f(v_1) = f(v_2) \Rightarrow v_1 = v_2$（異なる入力からは必ず異なる出力）</li>
+          <li><strong>全射（surjective）：</strong>任意の $w \in W$ に対してある $v \in V$ があって $f(v) = w$（値域が $W$ 全体）</li>
+          <li><strong>全単射（bijective）：</strong>単射かつ全射（逆写像が存在）</li>
+        </ul>
+      </div>
+
+      <div class="backward-think">
+        <div class="bt-title">🔄 単射の証明の標準的手順</div>
+        <p>$f_A(v_1) = f_A(v_2)$ を仮定して $v_1 = v_2$ を示す（または $f_A(v) = 0 \Rightarrow v = 0$，核が自明であることを示す同値な方法）。</p>
+        <p>逆向き（$\det A = 0$ ならば単射でない）は，核に非自明な元を具体的に構成して見せる。</p>
+      </div>
+
+      <div class="insight-box">
+        <div class="insight-title">💡 整数係数行列の逆行列が整数係数になる条件</div>
+        <p>逆行列の公式 $A^{-1} = \frac{1}{\det A}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}$ において，$\det A$ が整数のとき逆行列の係数が整数になるには $\det A = \pm 1$ が必要十分。</p>
+        <p>これは整数論の言葉では $A \in \mathrm{GL}(2,\mathbb{Z})$ という条件に対応する。</p>
+      </div>
+
+      <div class="thm-box">
+        <div class="thm-title">定理（$n$ 次正方行列の場合）</div>
+        <p>$n$ 次正方行列 $A$ に対し，次の3条件は同値：</p>
+        <ol>
+          <li>$\det A \ne 0$</li>
+          <li>$f_A : \mathbb{R}^n \to \mathbb{R}^n$ が全射</li>
+          <li>$f_A : \mathbb{R}^n \to \mathbb{R}^n$ が単射（よって全単射）</li>
+        </ol>
+        <p>有限次元の場合，単射 $\Leftrightarrow$ 全射（次元定理による）。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- まとめ -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">📌 第1回のまとめ</div>
+  <div class="section-card-body">
+    <ul>
+      <li><strong>線形写像の証明：</strong>加法性とスカラー倍性を定義から確認する（行列積の場合はほぼ自動）</li>
+      <li><strong>写像の等しさ：</strong>定義域・値域が一致し，任意の点で値が等しい</li>
+      <li><strong>線形写像は基底での値で決まる：</strong>$f(e_j)$ を並べた行列が表現行列</li>
+      <li><strong>合成と積：</strong>$f_A \circ f_B = f_{AB}$（順番に注意！）</li>
+      <li><strong>単射・全射と行列式：</strong>$\mathbb{R}^n \to \mathbb{R}^n$ では $\det A \ne 0 \Leftrightarrow$ 単射 $\Leftrightarrow$ 全射</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+<div class="page-footer">
+  すかき演習 解説集 &mdash; 線形代数学 第1回 &nbsp;|&nbsp; <a href="../index.html" style="color:rgba(255,255,255,0.6)">目次に戻る</a>
+</div>
+<script src="../nav.js"></script>
+</body>
+</html>

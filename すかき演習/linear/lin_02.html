@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>線形代数 第2回 回転・鏡映・直交行列 | すかき演習</title>
+<link rel="stylesheet" href="../style.css">
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>
+.logic-chain { background: #f0fff4; border-left: 3px solid #48bb78; padding: 0.75rem 1rem; margin: 0.75rem 0; border-radius: 0 6px 6px 0; font-family: 'Noto Sans JP', sans-serif; font-size: 0.9rem; }
+.backward-think { background: linear-gradient(135deg, #fdf4ff, #ede9fe); border: 1.5px solid #c084fc; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+.backward-think .bt-title { color: #6b21a8; font-weight: 700; font-size: 0.85rem; font-family: 'Noto Sans JP', sans-serif; margin-bottom: 0.5rem; }
+.answer-box { background: #fafafa; border: 2px solid #334155; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+.answer-box .answer-title { font-weight: 700; font-size: 0.85rem; color: #334155; font-family: 'Noto Sans JP', sans-serif; margin-bottom: 0.75rem; letter-spacing: 0.05em; }
+.think-box { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 1.5px solid #86efac; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+.think-box .think-title { color: #166534; font-weight: 700; font-size: 0.85rem; font-family: 'Noto Sans JP', sans-serif; margin-bottom: 0.5rem; }
+</style>
+</head>
+<body>
+
+<header class="page-header linear">
+  <div class="header-inner">
+    <div>
+      <div class="header-title">線形代数学演習　第2回（4月28日）</div>
+      <div class="header-subtitle">回転・鏡映行列・直交行列・行列式と向き付き面積</div>
+    </div>
+    <nav class="nav-links">
+      <a href="../index.html">↑ 目次</a>
+      <a href="lin_01.html">← 前の回</a>
+      <a href="lin_03.html">次の回 →</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- 概観 -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">📋 この回のテーマ</div>
+  <div class="section-card-body">
+    <p>幾何学的変換（回転・鏡映）を線形写像として扱う。行列の具体的な形を導き，それらの性質（直交行列，行列式との関係）を調べる。</p>
+    <div class="def-box">
+      <div class="def-title">回転行列と鏡映行列</div>
+      <ul>
+        <li><strong>回転行列 $R_\theta$：</strong>原点を中心に角度 $\theta$ 回転させる変換の行列。$R_\theta = \begin{pmatrix}\cos\theta & -\sin\theta \\ \sin\theta & \cos\theta\end{pmatrix}$</li>
+        <li><strong>鏡映行列 $T_\tau$：</strong>角度 $\tau$ の直線 $l_\tau$（$x$ 軸との角度が $\tau$ の直線）に関する鏡映の行列</li>
+      </ul>
+    </div>
+    <div class="def-box">
+      <div class="def-title">直交行列</div>
+      <p>$n$ 次正方行列 $A$ が<strong>直交行列</strong>であるとは ${}^t A A = A \, {}^t A = I$（単位行列）が成立すること。</p>
+      <p>同値な条件：$A$ の列ベクトルが正規直交基底（互いに直交する単位ベクトル）を成す。</p>
+      <p>直交行列の行列式は $\pm 1$（$\det({}^t A A) = (\det A)^2 = 1$ より）。$\det A = 1$ が回転，$\det A = -1$ が鏡映に対応。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 問題1 -->
+<section class="section-card" id="problem1">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">1</span> 回転行列 $R_\theta$ の導出
+  </div>
+  <div class="section-card-body">
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$\mathbb{R}^2$ の線形写像として，角度 $\theta$ の回転が行列 $R_\theta = \begin{pmatrix}\cos\theta & -\sin\theta\\\sin\theta & \cos\theta\end{pmatrix}$ で表されることを示せ。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>標準基底の行き先を計算する。</p>
+      <ul>
+        <li>$e_1 = (1,0)^T$ を角度 $\theta$ 回転させると $(\cos\theta, \sin\theta)^T$</li>
+        <li>$e_2 = (0,1)^T$ を角度 $\theta$ 回転させると $(-\sin\theta, \cos\theta)^T$</li>
+      </ul>
+      <p>線形写像はその行列表現として「基底の行き先を列に並べた行列」をもつ（第1回）。よって回転の行列は</p>
+      $$R_\theta = \begin{pmatrix}\cos\theta & -\sin\theta\\\sin\theta & \cos\theta\end{pmatrix}$$
+      <p>任意の $v = (x,y)^T$ に対し $f_{R_\theta}(v) = R_\theta v$ が回転と一致することは，$v = xe_1 + ye_2$ と線形性から従う。$\square$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <p><strong>なぜ基底の行き先を使うか：</strong>線形写像は基底での値だけで完全に決まる。だから「どんな $v$ に対しても成立するか」を確認する必要はなく，$e_1$，$e_2$ の2点だけ調べれば十分。計算量を最小化する戦略だ。</p>
+      <p><strong>基底ベクトルの回転は直感的：</strong>$(1,0)^T$ は $x$ 軸上の単位ベクトルで，偏角 $0$。$\theta$ 回転後は偏角 $\theta$ の単位ベクトル $(\cos\theta,\sin\theta)^T$。$(0,1)^T$ は偏角 $\pi/2$ なので，$\theta$ 回転後は偏角 $\pi/2+\theta$，すなわち $(-\sin\theta,\cos\theta)^T$。</p>
+
+      <div class="backward-think">
+        <div class="bt-title">🔄 別アプローチ：極座標で一般の $v$ に直接作用させる</div>
+        <p>ベクトル $v = (x,y)^T$ を極座標 $x = r\cos\phi$，$y = r\sin\phi$ で表す。$\theta$ 回転後は偏角が $\phi + \theta$ になるから</p>
+        $$R_\theta v = \begin{pmatrix}r\cos(\phi+\theta)\\r\sin(\phi+\theta)\end{pmatrix}$$
+        <p>三角関数の加法定理 $\cos(\phi+\theta) = \cos\phi\cos\theta - \sin\phi\sin\theta$，$\sin(\phi+\theta) = \sin\phi\cos\theta + \cos\phi\sin\theta$ を展開：</p>
+        $$R_\theta v = \begin{pmatrix}r\cos\phi\cos\theta - r\sin\phi\sin\theta \\ r\sin\phi\cos\theta + r\cos\phi\sin\theta\end{pmatrix} = \begin{pmatrix}\cos\theta & -\sin\theta\\\sin\theta & \cos\theta\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix}$$
+        <p>こちらは一般の $v$ に対して直接証明できるが，計算量が多い。試験では基底の行き先を使う方が素早い。</p>
+      </div>
+    </div>
+
+    <div class="insight-box">
+      <div class="insight-title">💡 行列を「基底の行き先」で構成する発想</div>
+      <p>線形写像の行列表現は「基底の行き先を並べればよい」。直感的に分かる2点（$(1,0)^T$ と $(0,1)^T$）の行き先を計算し，それを列に並べる。<br>これは線形代数を通じて使い続ける強力なテクニックだ。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 問題2 -->
+<section class="section-card" id="problem2">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">2</span> 鏡映行列 $T_\tau$ の導出
+  </div>
+  <div class="section-card-body">
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$x$ 軸と角 $\tau$ をなす直線 $l_\tau$ に関する鏡映変換の行列 $T_\tau$ を求めよ。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>$l_\tau$ への鏡映を3ステップの合成として表す：</p>
+      <ol>
+        <li>$R_{-\tau}$：$l_\tau$ が $x$ 軸に重なるよう $-\tau$ 回転</li>
+        <li>$A = \begin{pmatrix}1&0\\0&-1\end{pmatrix}$：$x$ 軸への鏡映（$y$ 成分を $-1$ 倍）</li>
+        <li>$R_\tau$：元の向きに $\tau$ 回転して戻す</li>
+      </ol>
+      <p>写像の合成順（右から作用）に対応して $T_\tau = R_\tau A R_{-\tau}$。計算すると：</p>
+      <p>$AR_{-\tau} = \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}\cos\tau & \sin\tau\\-\sin\tau & \cos\tau\end{pmatrix} = \begin{pmatrix}\cos\tau & \sin\tau\\\sin\tau & -\cos\tau\end{pmatrix}$</p>
+      <p>$T_\tau = R_\tau(AR_{-\tau}) = \begin{pmatrix}\cos\tau & -\sin\tau\\\sin\tau & \cos\tau\end{pmatrix}\begin{pmatrix}\cos\tau & \sin\tau\\\sin\tau & -\cos\tau\end{pmatrix}$</p>
+      <p>三角関数の加法定理（$\cos^2\tau - \sin^2\tau = \cos 2\tau$，$2\sin\tau\cos\tau = \sin 2\tau$）を用いて</p>
+      $$T_\tau = \begin{pmatrix}\cos 2\tau & \sin 2\tau\\\sin 2\tau & -\cos 2\tau\end{pmatrix}$$
+      $\square$
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <p><strong>なぜ3ステップの合成か：</strong>直線 $l_\tau$ への鏡映を直接計算するのは煩雑。しかし $x$ 軸への鏡映（$y$ 成分を $-1$ 倍）は自明。そこで「$x$ 軸に持ち込んで，鏡映して，戻す」という「既知の変換に帰着させる」アイデアが有効。</p>
+      <p><strong>合成の順番の注意：</strong>写像を右から作用させる規則に対応して，行列の積も右から並べる。「$R_{-\tau}$ が最初に $v$ に作用」→ 行列の積では右端に $R_{-\tau}$。この対応が逆になるミスが頻出。</p>
+
+      <div class="backward-think">
+        <div class="bt-title">🔄 引数が $2\tau$ になる理由</div>
+        <p>鏡映では「$\tau$ 方向の直線」への対称移動なので，角度が2倍になる（鏡の角度の2倍が「回転量」に相当）。$T_\tau$ の $(1,1)$ 成分は $\cos 2\tau$（$\tau$ ではない）。これは計算ミスではなく，本質的な性質。直感的には：$l_\tau$ を軸として折り返すと，$x$ 軸から $\tau$ の角度が「両側で $\tau$」重なって $2\tau$ になる。</p>
+      </div>
+    </div>
+
+    <div class="insight-box">
+      <div class="insight-title">💡 鏡映を3ステップの合成で考える</div>
+      <p>直線 $l_\tau$ への鏡映を直接計算するのは煩雑。代わりに：</p>
+      <ol>
+        <li><strong>$-\tau$ 回転（$R_{-\tau}$）：</strong>$l_\tau$ が $x$ 軸に重なるよう回転</li>
+        <li><strong>$x$ 軸への鏡映（$A = \begin{pmatrix}1&0\\0&-1\end{pmatrix}$）：</strong>$y$ 成分を $-1$ 倍</li>
+        <li><strong>$\tau$ 回転（$R_\tau$）：</strong>元の向きに戻す</li>
+      </ol>
+      <p>よって $T_\tau = R_\tau \cdot A \cdot R_{-\tau}$。</p>
+      <p><strong>重要：</strong>写像の合成の順番（右から作用）と行列の順番（右から掛ける）の対応に注意！$R_{-\tau}$ が最初に $v$ に作用するから，行列の積は $T_\tau = R_\tau A R_{-\tau}$。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 問題3 -->
+<section class="section-card" id="problem3">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">3</span> 合成の法則
+  </div>
+  <div class="section-card-body">
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>次を示せ：$R_{\theta_1} R_{\theta_2} = R_{\theta_1+\theta_2}$，$T_{\tau_1} T_{\tau_2} = R_{2(\tau_1 - \tau_2)}$，$R_\theta T_\tau = T_{\tau + \theta/2}$，$T_\tau R_\theta = T_{\tau - \theta/2}$。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p><strong>（1）$R_{\theta_1} R_{\theta_2} = R_{\theta_1 + \theta_2}$</strong></p>
+      <p>直接行列積を計算する（三角関数の加法定理を使う）：</p>
+      $$R_{\theta_1}R_{\theta_2} = \begin{pmatrix}\cos\theta_1 & -\sin\theta_1\\\sin\theta_1 & \cos\theta_1\end{pmatrix}\begin{pmatrix}\cos\theta_2 & -\sin\theta_2\\\sin\theta_2 & \cos\theta_2\end{pmatrix}$$
+      $$= \begin{pmatrix}\cos\theta_1\cos\theta_2 - \sin\theta_1\sin\theta_2 & -\cos\theta_1\sin\theta_2 - \sin\theta_1\cos\theta_2 \\\sin\theta_1\cos\theta_2 + \cos\theta_1\sin\theta_2 & -\sin\theta_1\sin\theta_2 + \cos\theta_1\cos\theta_2\end{pmatrix} = \begin{pmatrix}\cos(\theta_1+\theta_2) & -\sin(\theta_1+\theta_2)\\\sin(\theta_1+\theta_2) & \cos(\theta_1+\theta_2)\end{pmatrix} = R_{\theta_1+\theta_2}$$
+      <p>$\square$</p>
+      <p><strong>（2）$T_{\tau_1} T_{\tau_2} = R_{2(\tau_1 - \tau_2)}$</strong>，<strong>（3）$R_\theta T_\tau = T_{\tau + \theta/2}$</strong>，<strong>（4）$T_\tau R_\theta = T_{\tau - \theta/2}$</strong></p>
+      <p>$T_\tau = R_\tau A R_{-\tau}$（$A = \begin{pmatrix}1&0\\0&-1\end{pmatrix}$ は $x$ 軸への鏡映）と $R_{\alpha}R_{\beta} = R_{\alpha+\beta}$ を組み合わせる。</p>
+      <p><strong>（3）の証明の詳細：</strong></p>
+      <div class="logic-chain">
+        Step 1：$R_\theta T_\tau = R_\theta \cdot R_\tau A R_{-\tau} = R_{\theta+\tau} A R_{-\tau}$<br>
+        Step 2：$R_{\theta+\tau} = R_{(\tau+\theta/2)+\theta/2}$ と分解する（$(\tau+\theta/2) + \theta/2 = \tau+\theta$）<br>
+        Step 3：$R_{-\tau} = R_{-(\tau+\theta/2)+\theta/2}$ と分解する（$-(\tau+\theta/2)+\theta/2 = -\tau$）<br>
+        Step 4：<strong>補題 $R_\phi A R_\phi = A$</strong> を使う（後述）<br>
+        $$R_{\theta+\tau} A R_{-\tau} = R_{\tau+\theta/2}(R_{\theta/2} A R_{\theta/2})R_{-(\tau+\theta/2)} = R_{\tau+\theta/2} \cdot A \cdot R_{-(\tau+\theta/2)} = T_{\tau+\theta/2}$$
+      </div>
+      <div class="backward-think" style="margin:0.75rem 0;">
+        <div class="bt-title">🔄 補題：$R_\phi A R_\phi = A$ の証明</div>
+        <p>直接計算する（$A = \begin{pmatrix}1&0\\0&-1\end{pmatrix}$）：</p>
+        $$R_\phi A = \begin{pmatrix}\cos\phi & -\sin\phi\\\sin\phi & \cos\phi\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix} = \begin{pmatrix}\cos\phi & \sin\phi\\\sin\phi & -\cos\phi\end{pmatrix}$$
+        $$R_\phi A R_\phi = \begin{pmatrix}\cos\phi & \sin\phi\\\sin\phi & -\cos\phi\end{pmatrix}\begin{pmatrix}\cos\phi & -\sin\phi\\\sin\phi & \cos\phi\end{pmatrix} = \begin{pmatrix}\cos^2\phi+\sin^2\phi & 0 \\ 0 & -\sin^2\phi-\cos^2\phi\end{pmatrix} = \begin{pmatrix}1&0\\0&-1\end{pmatrix} = A \quad \square$$
+        <p>幾何学的な意味：$A$（$x$ 軸への鏡映）を $\phi$ 回転した座標系で見ると，$x$ 軸への鏡映はどの角度に向いた $x$ 軸への鏡映でも構造が同じ——という等価性。これが $R_\phi A R_\phi = A$ の本質。</p>
+      </div>
+      <p>（2），（4）も同様の手順で示せる。$\square$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <p><strong>直感的パターン：</strong>計算すると次のパターンが見える：</p>
+      <ul>
+        <li>$RR = R$（回転 × 回転 = 回転）</li>
+        <li>$TT = R$（鏡映 × 鏡映 = 回転）← 「2回鏡映は回転」</li>
+        <li>$RT = T$，$TR = T$（回転 × 鏡映 = 鏡映）</li>
+      </ul>
+      <p>これは $R \leftrightarrow 1$，$T \leftrightarrow -1$ とすると通常の実数の積と同じ規則。行列式で見ると $\det R = 1$，$\det T = -1$，$\det(AB) = \det(A)\det(B)$。</p>
+      <p><strong>一般の式（$T_{\tau_1} T_{\tau_2} = R_{2(\tau_1-\tau_2)}$ など）の読み方：</strong>引数の差が2倍になっている。2つの鏡映の合成は，鏡映軸のなす角の2倍だけ回転させる変換になる，という幾何学的事実が背後にある。</p>
+    </div>
+
+    <details>
+      <summary>別解：基底の行き先で確認（$R_{\theta_1} R_{\theta_2} = R_{\theta_1+\theta_2}$）</summary>
+      <div class="details-body">
+        <p>$(1,0)^T$ の行き先：$R_{\theta_2}$ で $(\cos\theta_2, \sin\theta_2)^T$ に，さらに $R_{\theta_1}$ で $(\cos(\theta_1+\theta_2), \sin(\theta_1+\theta_2))^T$ に。$(0,1)^T$ も同様。よって $R_{\theta_1+\theta_2}$ と一致。</p>
+        <p>この別解は計算量が少なく，「線形写像は基底の行き先で決まる」という原理を活用している。</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- 問題4 -->
+<section class="section-card" id="problem4">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">4</span> 直交行列の特徴付け
+  </div>
+  <div class="section-card-body">
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$2\times 2$ の直交行列（${}^t A A = I$ を満たす行列）を全て求めよ。それらは回転行列または鏡映行列であることを示せ。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>$A$ の列ベクトルを $a_1, a_2$ とする。${}^t A A = I$ は</p>
+      $$\begin{pmatrix}a_1 \cdot a_1 & a_1 \cdot a_2 \\ a_2 \cdot a_1 & a_2 \cdot a_2\end{pmatrix} = I$$
+      <p>つまり $|a_1| = |a_2| = 1$（単位ベクトル）かつ $a_1 \cdot a_2 = 0$（直交）。</p>
+      <p>$a_1 = (\cos\theta, \sin\theta)^T$ と書くと（単位ベクトルは偏角で決まる），$a_2$ は $a_1$ と直交する単位ベクトルなので，$a_2 = (-\sin\theta, \cos\theta)^T$（反時計回り方向）か $a_2 = (\sin\theta, -\cos\theta)^T$（時計回り）の2通り。</p>
+      <p>よって ${}^t A A = I$ の $2\times 2$ 解は：</p>
+      <ul>
+        <li>$A = \begin{pmatrix}\cos\theta & -\sin\theta\\\sin\theta & \cos\theta\end{pmatrix} = R_\theta$（回転行列，$\det A = 1$）</li>
+        <li>$A = \begin{pmatrix}\cos\theta & \sin\theta\\\sin\theta & -\cos\theta\end{pmatrix} = T_{\theta/2}$（鏡映行列，$\det A = -1$）</li>
+      </ul>
+      <p>$A A^t = I$ も同様（$R_\theta^t = R_{-\theta} = R_\theta^{-1}$，$T_\tau^t = T_\tau = T_\tau^{-1}$ から確認可能）。$\square$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <p><strong>${}^t A A = I$ の条件を「列ベクトルの条件」に翻訳する：</strong>行列積 ${}^t A A$ の $(i,j)$ 成分は第 $i$ 列と第 $j$ 列の内積。これが単位行列に等しい，というのは「列ベクトルが正規直交系」を意味する。この翻訳が問題を解く鍵。</p>
+      <p><strong>単位ベクトルは偏角で一意に決まる：</strong>$|a_1| = 1$ なら $a_1 = (\cos\theta, \sin\theta)^T$ と書ける。$a_2$ が $a_1$ と直交する単位ベクトルなら，$a_1$ を $\pm 90°$ 回転した2択しかない。これで全ての解が列挙できる。</p>
+
+      <div class="backward-think">
+        <div class="bt-title">🔄 行列式で向きを分類する</div>
+        <p>$\det A = a_1 \times a_2$（外積の $z$ 成分）。$a_2 = (-\sin\theta, \cos\theta)^T$ のとき $\det A = \cos^2\theta + \sin^2\theta = 1 > 0$（反時計回り）→ 回転行列。$a_2 = (\sin\theta, -\cos\theta)^T$ のとき $\det A = -\cos^2\theta - \sin^2\theta = -1 < 0$（時計回り）→ 鏡映行列。</p>
+      </div>
+    </div>
+
+    <h3>行列式と向き付き面積（雑談セクション）</h3>
+    <div class="insight-box">
+      <div class="insight-title">💡 $\det A$ の幾何学的意味</div>
+      <p>$\mathbb{R}^2$ の2本のベクトル $x = (a,c,0)^T$，$y = (b,d,0)^T$ の張る平行四辺形の面積は $|ad - bc|$（絶対値）。</p>
+      <p>$\det A$ はこの「向き付き面積」（反時計回りを正，時計回りを負とした面積）を $A$ が何倍するかを表す。</p>
+      <ul>
+        <li>回転行列 $R_\theta$：$\det R_\theta = 1$（面積を変えない，向きも保存）</li>
+        <li>鏡映行列 $T_\tau$：$\det T_\tau = -1$（面積を変えない，向きを反転）</li>
+      </ul>
+      <p>「鏡映を2回すると回転」の直感：$\det(TT) = (-1)(-1) = 1 = \det(R)$。</p>
+    </div>
+  </div>
+</section>
+
+<!-- まとめ -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">📌 第2回のまとめ</div>
+  <div class="section-card-body">
+    <ul>
+      <li><strong>回転行列の導出：</strong>極座標か，標準基底の行き先を並べる方法</li>
+      <li><strong>鏡映行列の導出：</strong>3ステップの合成 $T_\tau = R_\tau A R_{-\tau}$（順番が重要）</li>
+      <li><strong>合成の計算：</strong>行列積 = 写像の合成。右から作用する順番</li>
+      <li><strong>直交行列：</strong>${}^t A A = I$ $\Leftrightarrow$ 列ベクトルが正規直交基底。$2\times2$ では回転か鏡映</li>
+      <li><strong>行列式の意義：</strong>$\det R = 1$（向き保存），$\det T = -1$（向き反転）</li>
+    </ul>
+    <div class="insight-box">
+      <div class="insight-title">💡 自力で解くために：幾何学的発想を常に持つ</div>
+      <p>行列の計算に行き詰まったとき，「これは何という幾何学的変換か」と考えると見通しが開ける。回転・鏡映・拡大縮小などの変換を行列で記述する練習が線形代数の基礎を固める。</p>
+    </div>
+  </div>
+</section>
+
+</div>
+<div class="page-footer">
+  すかき演習 解説集 &mdash; 線形代数学 第2回 &nbsp;|&nbsp; <a href="../index.html" style="color:rgba(255,255,255,0.6)">目次に戻る</a>
+</div>
+<script src="../nav.js"></script>
+</body>
+</html>

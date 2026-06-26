@@ -1,0 +1,200 @@
+/* 線形代数学 I — 共通スタイル */
+:root {
+  --bg: #f4f3ee;
+  --surface: #ffffff;
+  --border: #dedad1;
+  --accent: #1f4e91;
+  --accent2: #122f5a;
+  --accent-soft: #edf1fa;
+  --text: #111;
+  --muted: #555;
+  --def-bg: #eef3ff;
+  --def-b: #1f4e91;
+  --thm-bg: #edfaf3;
+  --thm-b: #1d7a48;
+  --prop-bg: #f5eeff;
+  --prop-b: #6a2da0;
+  --ex-bg: #f7f7f5;
+  --ex-b: #888;
+  --pf-bg: #fafafa;
+  --note-bg: #fffce8;
+  --note-b: #b59000;
+  --sol-bg: #f0fff6;
+  --sol-b: #2a9050;
+  --warn-bg: #fff0f0;
+  --warn-b: #c03030;
+  --mot-bg: #f0f7ff;
+  --mot-b: #3070c0;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', 'Yu Gothic', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.9;
+  font-size: 15px;
+}
+
+/* ── ナビ ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--accent2);
+  display: flex; align-items: center;
+  padding: 0 1.2rem;
+  overflow-x: auto; white-space: nowrap;
+  scrollbar-width: none;
+}
+nav::-webkit-scrollbar { display: none; }
+.nav-brand {
+  color: #fff; font-weight: 700; font-size: 14px;
+  padding-right: 1rem; margin-right: 0.4rem;
+  border-right: 1px solid rgba(255,255,255,.25);
+  flex-shrink: 0;
+}
+nav a {
+  color: #bdd0f5; text-decoration: none; font-size: 13px;
+  padding: 0.65rem 0.8rem;
+  border-bottom: 3px solid transparent;
+  transition: color .15s, border-color .15s;
+  flex-shrink: 0;
+}
+nav a:hover, nav a.active { color: #fff; border-bottom-color: #6fa3ef; }
+
+/* ── レイアウト ── */
+.container { max-width: 860px; margin: 0 auto; padding: 2rem 1.4rem 5rem; }
+
+/* ── ページヘッダー ── */
+.page-header {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 2rem 1.5rem 1.5rem;
+  margin-bottom: 2.2rem; text-align: center;
+}
+.page-header h1 { font-size: 1.85rem; color: var(--accent2); }
+.page-header .meta { color: var(--muted); font-size: .88rem; margin-top: .4rem; }
+
+.toc { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; margin-top: 1.2rem; }
+.toc a {
+  background: var(--accent-soft); border: 1px solid #c5d3ee;
+  border-radius: 6px; padding: .35rem .85rem;
+  color: var(--accent2); text-decoration: none; font-size: .85rem;
+}
+.toc a:hover { background: #dae3f7; }
+
+/* ── セクション ── */
+.section {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; margin-bottom: 2rem; overflow: hidden;
+}
+.sec-header {
+  background: linear-gradient(135deg, var(--accent2), var(--accent));
+  color: #fff; padding: 1.1rem 1.6rem;
+}
+.sec-header .sec-tag { font-size: .78rem; opacity: .7; letter-spacing: .1em; }
+.sec-header h2 { font-size: 1.3rem; margin-top: .15rem; }
+.sec-body { padding: 1.6rem; }
+
+/* ── 見出し ── */
+h3 {
+  font-size: 1.05rem; color: var(--accent2); font-weight: 700;
+  margin: 2rem 0 .7rem;
+  border-bottom: 2px solid var(--accent-soft); padding-bottom: .3rem;
+}
+h3:first-child { margin-top: 0; }
+h4 { font-size: .95rem; color: var(--accent); font-weight: 700; margin: 1.3rem 0 .45rem; }
+
+p { margin-bottom: .8rem; }
+
+/* ── ボックス ── */
+.def, .thm, .prop, .cor, .ex, .note, .mot, .sol, .warn {
+  border-radius: 7px; padding: .9rem 1.1rem; margin: 1.1rem 0;
+}
+.box-label {
+  font-weight: 700; font-size: .78rem; letter-spacing: .07em;
+  display: block; margin-bottom: .35rem;
+}
+.def  { background: var(--def-bg);  border-left: 4px solid var(--def-b); }
+.def  .box-label { color: var(--def-b); }
+.thm  { background: var(--thm-bg);  border-left: 4px solid var(--thm-b); }
+.thm  .box-label { color: var(--thm-b); }
+.prop { background: var(--prop-bg); border-left: 4px solid var(--prop-b); }
+.prop .box-label { color: var(--prop-b); }
+.cor  { background: #fff8f0;        border-left: 4px solid #c06000; }
+.cor  .box-label { color: #804000; }
+.ex   { background: var(--ex-bg);   border-left: 4px solid var(--ex-b); }
+.ex   .box-label { color: #444; }
+.note { background: var(--note-bg); border-left: 4px solid var(--note-b); }
+.note .box-label { color: #7a6000; }
+.mot  { background: var(--mot-bg);  border-left: 4px solid var(--mot-b); }
+.mot  .box-label { color: #2050a0; }
+.sol  { background: var(--sol-bg);  border-left: 4px solid var(--sol-b); }
+.sol  .box-label { color: #1a6035; }
+.warn { background: var(--warn-bg); border-left: 4px solid var(--warn-b); }
+.warn .box-label { color: #902020; }
+
+/* ── 証明 ── */
+details { margin: .7rem 0; }
+details summary {
+  cursor: pointer; font-weight: 700; color: var(--accent);
+  font-size: .88rem; padding: .4rem .7rem; border-radius: 5px;
+  background: var(--accent-soft); list-style: none; user-select: none;
+}
+details summary::-webkit-details-marker { display: none; }
+details summary::before { content: '▶ '; font-size: .72rem; }
+details[open] summary::before { content: '▼ '; }
+.proof-body {
+  padding: .8rem 1rem; border-left: 3px solid #ccc;
+  margin-top: .5rem; color: #333; font-size: .92rem;
+  background: var(--pf-bg); border-radius: 0 5px 5px 0;
+}
+.qed { text-align: right; margin-top: .5rem; color: #666; }
+
+/* ── リスト ── */
+ol, ul { padding-left: 1.6rem; margin-bottom: .8rem; }
+li { margin-bottom: .3rem; }
+
+/* ── 数式 ── */
+.mathblock { overflow-x: auto; padding: .2rem 0; }
+
+/* ── 同値表 ── */
+.equiv {
+  background: #f5f5f0; border-radius: 6px; padding: .7rem 1rem;
+  margin: .8rem 0; font-size: .93rem;
+}
+.equiv .iff { color: var(--accent2); font-weight: 700; margin: 0 .5rem; }
+
+/* ── テーブル ── */
+table.axiom-table {
+  border-collapse: collapse; width: 100%; margin: .8rem 0;
+  font-size: .88rem;
+}
+table.axiom-table th, table.axiom-table td {
+  padding: .4rem .7rem; border: 1px solid var(--border);
+  vertical-align: top;
+}
+table.axiom-table th { background: var(--accent-soft); color: var(--accent2); font-weight: 700; }
+table.axiom-table tr:nth-child(even) td { background: #fafafa; }
+.ok { color: #1a8a40; font-weight: 700; }
+.ng { color: #c03030; font-weight: 700; }
+
+/* ── カード (index.html 用) ── */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin: 1.4rem 0; }
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 1.2rem 1.4rem;
+  text-decoration: none; color: var(--text);
+  transition: box-shadow .15s, border-color .15s;
+  display: block;
+}
+.card:hover { box-shadow: 0 3px 12px rgba(0,0,0,.1); border-color: #a0b8e8; }
+.card-tag { font-size: .75rem; font-weight: 700; color: var(--accent); letter-spacing: .08em; }
+.card h3 { color: var(--accent2); margin: .3rem 0 .5rem; border: none; padding: 0; font-size: 1rem; }
+.card p { color: var(--muted); font-size: .85rem; margin: 0; line-height: 1.6; }
+
+/* ── フッター ── */
+footer { text-align: center; color: #aaa; font-size: .8rem; margin-top: 3rem; }
+
+@media(max-width:600px){
+  .sec-body { padding: 1.1rem; }
+  .page-header h1 { font-size: 1.4rem; }
+  .card-grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>線形代数 第3回 行列式・逆行列・固有値・対角化 | すかき演習</title>
+<link rel="stylesheet" href="../style.css">
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>
+.answer-box { background: #fafafa; border: 2px solid #334155; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+.answer-box .answer-title { font-weight: 700; font-size: 0.85rem; color: #334155; font-family: 'Noto Sans JP', sans-serif; margin-bottom: 0.75rem; letter-spacing: 0.05em; }
+.think-box { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 1.5px solid #86efac; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+.think-box .think-title { color: #166534; font-weight: 700; font-size: 0.85rem; font-family: 'Noto Sans JP', sans-serif; margin-bottom: 0.5rem; }
+.case-block { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px; padding: 0.75rem 1rem; margin: 0.5rem 0; }
+.case-block .case-label { font-weight: 700; color: #334155; font-size: 0.85rem; margin-bottom: 0.4rem; }
+</style>
+</head>
+<body>
+
+<header class="page-header linear">
+  <div class="header-inner">
+    <div>
+      <div class="header-title">線形代数学演習　第3回（5月19日）</div>
+      <div class="header-subtitle">行列式・逆行列・Cayley-Hamilton定理・固有値・対角化</div>
+    </div>
+    <nav class="nav-links">
+      <a href="../index.html">↑ 目次</a>
+      <a href="lin_02.html">← 前の回</a>
+      <a href="lin_04.html">次の回 →</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- 概観 -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">📋 この回のテーマと必要知識</div>
+  <div class="section-card-body">
+    <p>この回は線形代数の核心を一気に扱う。$2\times2$ 行列を土台に「行列式がゼロ ↔ 核が自明でない」「逆行列の存在」「固有値・固有ベクトル・対角化」という流れを追う。</p>
+    <div class="def-box">
+      <div class="def-title">この回で使う定義・記法</div>
+      <ul>
+        <li>$A = \begin{pmatrix}a&b\\c&d\end{pmatrix}$ に対し，$\det A = ad - bc$，$\mathrm{tr}\,A = a + d$</li>
+        <li>$A^{-1}$（逆行列）：$AB = BA = I$ を満たす $B$</li>
+        <li>固有値 $\lambda$，固有ベクトル $v$：$Av = \lambda v$，$v \neq 0$</li>
+        <li>対角化：固有ベクトルを列に並べた $P$ で $P^{-1}AP = \mathrm{diag}(\lambda_1, \lambda_2)$</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 問題1 ===== -->
+<section class="section-card" id="problem1">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">1</span> $\det A = 0 \Leftrightarrow \exists v \neq 0,\ Av = 0$　&amp;　Cayley-Hamilton 定理
+  </div>
+  <div class="section-card-body">
+
+    <!-- 問題文 -->
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>(1) $2\times2$ 行列 $A$ に対し，$\det A = 0 \Leftrightarrow \exists v \neq 0,\ Av = 0$ を示せ。</p>
+      <p>(2) $2\times2$ 行列 $A$ に対し，$A^2 - (\mathrm{tr}\,A)A + (\det A)I = O$ を示せ（Cayley-Hamilton 定理）。</p>
+    </div>
+
+    <!-- 模範解答 1(1) -->
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答 1(1)</div>
+      <p>$A = \begin{pmatrix}a&b\\c&d\end{pmatrix}$，$v=(x,y)^T$ とする。</p>
+      <p><strong>（$\Rightarrow$）</strong> $\det A = 0$（すなわち $ad-bc=0$）を仮定する。</p>
+      <div class="case-block">
+        <div class="case-label">$a \neq 0$ または $b \neq 0$ のとき</div>
+        <p>$v = (b,\,-a)^T$ とおく（$a \ne 0$ または $b \ne 0$ なので $v \neq 0$）。</p>
+        <p>確認：$ax+by = a\cdot b + b\cdot(-a) = ab - ab = 0$，$cx + dy = c\cdot b + d\cdot(-a) = bc - ad = -(ad-bc) = 0$（$\det A = 0$ を使用）。</p>
+      </div>
+      <div class="case-block">
+        <div class="case-label">$a = b = 0$ のとき（第1行がゼロ）</div>
+        <p>$A = \begin{pmatrix}0&0\\c&d\end{pmatrix}$ の形。$\det A = 0\cdot d - 0\cdot c = 0$（自動的に満たされる）。</p>
+        <p>$v = (d,\,-c)^T$ とおく。$Av = \begin{pmatrix}0\\cd-cd\end{pmatrix} = \begin{pmatrix}0\\0\end{pmatrix}$。</p>
+        <p>もし $c = d = 0$ なら $A = O$（零行列）なので，任意の $v \ne 0$（例えば $v = (1,0)^T$）で $Av = 0$。</p>
+        <p>もし $c \ne 0$ または $d \ne 0$ なら $v = (d,-c)^T \ne (0,0)^T$ なので $v \ne 0$。</p>
+      </div>
+      <p>いずれの場合も $v \neq 0$ で $Av = 0$。</p>
+      <p><strong>（$\Leftarrow$）</strong> $v=(x,y)^T \neq 0$ で $Av=0$，すなわち $ax+by=0$，$cx+dy=0$ が成り立つとする。</p>
+      <p>1式を $d$ 倍・2式を $b$ 倍して引く：$(ad-bc)x=0$。</p>
+      <p>1式を $c$ 倍・2式を $a$ 倍して引く：$(ad-bc)y=0$。</p>
+      <p>$v\neq0$ より $x,y$ が同時に $0$ にはなれないので，$ad-bc=0$，すなわち $\det A=0$。$\square$</p>
+    </div>
+
+    <!-- 模範解答 1(2) -->
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答 1(2)</div>
+      <p>$\mathrm{tr}\,A = a+d$，$\det A = ad-bc$ を用いて直接計算する。</p>
+      $$A^2 = \begin{pmatrix}a^2+bc & ab+bd \\ ac+cd & bc+d^2\end{pmatrix}$$
+      $$(\mathrm{tr}\,A)A = \begin{pmatrix}a^2+ad & ab+bd \\ ac+cd & ad+d^2\end{pmatrix}, \quad (\det A)I = \begin{pmatrix}ad-bc & 0 \\ 0 & ad-bc\end{pmatrix}$$
+      $$A^2 - (\mathrm{tr}\,A)A = \begin{pmatrix}bc-ad & 0 \\ 0 & bc-ad\end{pmatrix} = -(\det A)I$$
+      <p>よって $A^2 - (\mathrm{tr}\,A)A + (\det A)I = O$。$\square$</p>
+    </div>
+
+    <!-- 思考法・解説 -->
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <p><strong>1(1) の方針選択：なぜ $(b,-a)^T$ を試みるのか</strong></p>
+      <p>$Av = 0$ の連立方程式 $ax+by=0$，$cx+dy=0$ を $v\neq0$ の範囲で解きたい。1番目の方程式だけ見ると $y=-ax/b$（$b\neq0$ のとき）だが，ゼロ除算を避けるため $x=b$，$y=-a$ と整数比で選ぶのが定石。$\det A=0$ という条件が，この $(b,-a)^T$ が2番目の式も自動的に満たすことを保証している。</p>
+      <p><strong>証明の向きの非対称性</strong></p>
+      <p>$(\Rightarrow)$：具体的なベクトルを「構成」して示す（存在証明）。場合分けが必要。</p>
+      <p>$(\Leftarrow)$：$v\neq0$ という仮定から式変形で $\det A=0$ を導く（より機械的）。</p>
+      <p><strong>1(2) の「意味」</strong></p>
+      <p>Cayley-Hamilton は「行列 $A$ は自分自身の特性多項式を満たす」という定理。$2\times2$ の特性多項式は $\lambda^2 - (\mathrm{tr}\,A)\lambda + \det A$ で，これの $\lambda$ を $A$ に「代入」した結果が $O$ になる。一般次元でも成立するが，証明はより高度。</p>
+    </div>
+
+    <div class="insight-box">
+      <div class="insight-title">💡 Cayley-Hamilton の応用：$A^n$ を $A, I$ の線形結合に帰着</div>
+      <p>$A^2 = (\mathrm{tr}\,A)A - (\det A)I$ から，$A^3, A^4, \ldots$ を帰納的に $\alpha A + \beta I$ の形に書ける。行列の積を繰り返さずに高次乗を得られる。</p>
+    </div>
+
+    <details>
+      <summary>別解：逆行列を使った証明（$\Leftarrow$ 方向のみ）</summary>
+      <div class="details-body">
+        <p>$v\neq0$ で $Av=0$ とし，$\det A\neq0$ と仮定（背理法）。後の問題2(2)より，逆行列 $A^{-1}$ が存在する。$Av=0$ の両辺に $A^{-1}$ を左掛け：$v = A^{-1}\cdot0 = 0$。$v\neq0$ に矛盾。よって $\det A=0$。</p>
+        <p>すっきりしているが問題2(2)の先取りに注意。</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ===== 問題2 ===== -->
+<section class="section-card" id="problem2">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">2</span> $\det(AB) = \det A \det B$　と　逆行列
+  </div>
+  <div class="section-card-body">
+
+    <!-- 問題文 -->
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>(1) $\det(AB) = \det A \cdot \det B$，$\mathrm{tr}(AB) = \mathrm{tr}(BA)$ を示せ。</p>
+      <p>(2) $\det A \neq 0 \Leftrightarrow \exists B,\ AB = BA = I$ を示せ。</p>
+    </div>
+
+    <!-- 模範解答 2(1) -->
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答 2(1)</div>
+      <p>$A=\begin{pmatrix}a&b\\c&d\end{pmatrix}$，$B=\begin{pmatrix}p&q\\r&s\end{pmatrix}$ として $AB$ を計算する。</p>
+      $$AB = \begin{pmatrix}ap+br & aq+bs \\ cp+dr & cq+ds\end{pmatrix}$$
+      $$\det(AB) = (ap+br)(cq+ds) - (aq+bs)(cp+dr)$$
+      $$= acpq + adps + bcqr + bdrs - acpq - adqr - bcps - bdrs$$
+      $$= (ad-bc)(ps-qr) = \det A \cdot \det B \quad \square$$
+      <p>$\mathrm{tr}(AB) = ap+br+cq+ds = pa+rb+qc+sd = \mathrm{tr}(BA)$。$\square$</p>
+    </div>
+
+    <!-- 模範解答 2(2) -->
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答 2(2)</div>
+      <p><strong>（$\Rightarrow$）$\det A \neq 0 \Rightarrow \exists B,\ AB = BA = I$：</strong></p>
+      <p>$B = \dfrac{1}{\det A}\begin{pmatrix}d & -b \\ -c & a\end{pmatrix}$ とおくと，直接計算により $AB = BA = I$ が成立（$\det A \neq 0$ なので $B$ は実数行列）。</p>
+      <p><strong>（$\Leftarrow$）$\exists B,\ AB = BA = I \Rightarrow \det A \neq 0$：</strong></p>
+      <p>$AB = I$ の両辺の行列式を取る。$\det I = 1$ であり，2(1) より $\det(AB) = \det A \cdot \det B = 1$。実数の積が1になるので $\det A \neq 0$。$\square$</p>
+    </div>
+
+    <!-- 思考法 -->
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <p><strong>逆行列の公式の導き方</strong></p>
+      <p>$BA = I$ の4つの方程式を $p, q, r, s$ について解くだけ。$\det A \neq 0$ という条件はゼロ除算を防ぐために必要。公式 $A^{-1} = \frac{1}{\det A}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}$ は「対角を入れ替え，非対角を符号反転」という覚えやすい形。</p>
+      <p><strong>「$AB=I \Rightarrow BA=I$」は自明ではない</strong></p>
+      <p>有限次元では成立するが，無限次元線形作用素では $AB=I$ かつ $BA\neq I$ の例が存在する（シフト作用素）。$2\times2$ の場合は Cayley-Hamilton を使って証明できる（雑談参照）。</p>
+      <p><strong>$\det(AB) = \det A \cdot \det B$ の意味</strong></p>
+      <p>行列式は「面積（体積）の拡大率」。$A$ で $\alpha$ 倍，$B$ で $\beta$ 倍すれば，合成 $AB$ は $\alpha\beta$ 倍。これが「行列式の積」の幾何学的意味。</p>
+    </div>
+
+    <details>
+      <summary>Cayley-Hamilton を使った「$AB=I \Rightarrow BA=I$」の証明</summary>
+      <div class="details-body">
+        <p>$\det A \neq 0$，$AB = I$ と仮定。Cayley-Hamilton より $A^2 - (\mathrm{tr}\,A)A + (\det A)I = O$。右から $B$ を掛けると</p>
+        $$A^2B - (\mathrm{tr}\,A)AB + (\det A)B = O$$
+        <p>$AB=I$ なので $A^2B = A(AB) = AI = A$，$AB = I$。代入：</p>
+        $$A - (\mathrm{tr}\,A)I + (\det A)B = O \quad\Rightarrow\quad B = \frac{-1}{\det A}(A - (\mathrm{tr}\,A)I)$$
+        <p>これを $BA$ に代入：$BA = \frac{-1}{\det A}(A^2 - (\mathrm{tr}\,A)A) = \frac{-1}{\det A}\cdot(-(\det A)I) = I$。</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ===== 問題3 ===== -->
+<section class="section-card" id="problem3">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">3</span> 固有値・固有ベクトル・対角化・$A^n$
+  </div>
+  <div class="section-card-body">
+
+    <!-- 問題文 -->
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$A = \begin{pmatrix}0&1\\2&1\end{pmatrix}$ に対し，次を求めよ。</p>
+      <p>(1) 固有値を全て求めよ。</p>
+      <p>(2) 各固有値に対する固有ベクトルを求めよ。</p>
+      <p>(3) $P^{-1}AP$ が対角行列になるような正則行列 $P$ を求め，実際に計算して確認せよ。</p>
+      <p>(4) $A^n$ を求めよ（$n$ は正の整数）。</p>
+    </div>
+
+    <!-- 模範解答 3(1) -->
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答 3(1)：固有値</div>
+      <p>特性多項式を計算する。</p>
+      $$\det(A - \lambda I) = \det\begin{pmatrix}-\lambda & 1 \\ 2 & 1-\lambda\end{pmatrix} = (-\lambda)(1-\lambda) - 2 = \lambda^2 - \lambda - 2 = (\lambda-2)(\lambda+1)$$
+      <p>よって固有値は $\lambda_1 = 2$，$\lambda_2 = -1$。</p>
+    </div>
+
+    <!-- 模範解答 3(2) -->
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答 3(2)：固有ベクトル</div>
+      <p><strong>$\lambda_1 = 2$ の場合：</strong>$(A - 2I)v = 0$，すなわち $\begin{pmatrix}-2&1\\2&-1\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix} = \begin{pmatrix}0\\0\end{pmatrix}$。</p>
+      <p>$-2x + y = 0$ より $y = 2x$。$x=1$ として $v_1 = \begin{pmatrix}1\\2\end{pmatrix}$。</p>
+      <p><strong>$\lambda_2 = -1$ の場合：</strong>$(A + I)v = 0$，すなわち $\begin{pmatrix}1&1\\2&2\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix} = \begin{pmatrix}0\\0\end{pmatrix}$。</p>
+      <p>$x + y = 0$ より $y = -x$。$x=-1$ として $v_2 = \begin{pmatrix}-1\\1\end{pmatrix}$。</p>
+    </div>
+
+    <!-- 模範解答 3(3) -->
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答 3(3)：対角化</div>
+      <p>$P = [v_1 \mid v_2] = \begin{pmatrix}1 & -1 \\ 2 & 1\end{pmatrix}$ とおく。</p>
+      <p>$\det P = 1\cdot1 - (-1)\cdot2 = 3 \neq 0$。逆行列の公式より $P^{-1} = \dfrac{1}{3}\begin{pmatrix}1&1\\-2&1\end{pmatrix}$。</p>
+      $$P^{-1}AP = \frac{1}{3}\begin{pmatrix}1&1\\-2&1\end{pmatrix}\begin{pmatrix}0&1\\2&1\end{pmatrix}\begin{pmatrix}1&-1\\2&1\end{pmatrix} = \frac{1}{3}\begin{pmatrix}1&1\\-2&1\end{pmatrix}\begin{pmatrix}2&1\\4&-1\end{pmatrix} = \frac{1}{3}\begin{pmatrix}6&0\\0&-3\end{pmatrix} = \begin{pmatrix}2&0\\0&-1\end{pmatrix} \quad \square$$
+    </div>
+
+    <!-- 模範解答 3(4) -->
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答 3(4)：$A^n$</div>
+      <p>$P^{-1}AP = \Lambda = \begin{pmatrix}2&0\\0&-1\end{pmatrix}$ より $A = P\Lambda P^{-1}$。よって</p>
+      $$A^n = P\Lambda^n P^{-1} = \begin{pmatrix}1&-1\\2&1\end{pmatrix}\begin{pmatrix}2^n&0\\0&(-1)^n\end{pmatrix}\cdot\frac{1}{3}\begin{pmatrix}1&1\\-2&1\end{pmatrix}$$
+      $$= \frac{1}{3}\begin{pmatrix}1&-1\\2&1\end{pmatrix}\begin{pmatrix}2^n & 2^n \\ -2(-1)^n & (-1)^n\end{pmatrix} = \frac{1}{3}\begin{pmatrix}2^n + 2(-1)^n & 2^n - (-1)^n \\ 2\cdot2^n - 2(-1)^n & 2\cdot2^n + (-1)^n\end{pmatrix}$$
+      $$\boxed{A^n = \frac{1}{3}\begin{pmatrix}2(-1)^n + 2^n & 2^n - (-1)^n \\ 2^{n+1} - 2(-1)^n & (-1)^n + 2^{n+1}\end{pmatrix}}$$
+      <p>確認（$n=1$）：$(1,2)$ 成分 $= \frac{1}{3}(2-(-1)) = 1$，$(2,1)$ 成分 $= \frac{1}{3}(4-(-2)) = 2$，$(1,1)$ 成分 $= \frac{1}{3}(-2+2) = 0$。一致 ✓</p>
+    </div>
+
+    <!-- 思考法 -->
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <p><strong>固有値の求め方：なぜ $\det(A-\lambda I)=0$ なのか</strong></p>
+      <p>$Av=\lambda v$ は $(A-\lambda I)v=0$。$v\neq0$ の解が存在 $\Leftrightarrow \det(A-\lambda I)=0$（問題1(1)と同じ論理）。固有値は「核が自明でなくなる $\lambda$ の値」。</p>
+      <p><strong>$2\times2$ 固有方程式の速解法</strong></p>
+      <p>特性多項式は $\lambda^2 - (\mathrm{tr}\,A)\lambda + \det A = 0$（Vieta の公式）。この例では $\mathrm{tr}\,A=1$，$\det A=-2$ なので「和が $1$，積が $-2$」の2数 → $2, -1$。</p>
+      <p><strong>固有ベクトルは「方向」が本質</strong></p>
+      <p>$(A-\lambda I)v=0$ の解は1次元（重複固有値でなければ）の部分空間で，どの非零ベクトルを選んでも対角化の結果は同じ。$v_1=(2,4)^T$，$v_2=(3,-3)^T$ のように定数倍しても $P^{-1}AP = \begin{pmatrix}2&0\\0&-1\end{pmatrix}$ は不変。</p>
+      <p><strong>なぜ $A^n = P\Lambda^n P^{-1}$ なのか</strong></p>
+      <p>$A = P\Lambda P^{-1}$ を $n$ 乗すると，隣接する $P^{-1}P = I$ が消えていく：</p>
+      $$A^n = (P\Lambda P^{-1})(P\Lambda P^{-1})\cdots = P\Lambda(P^{-1}P)\Lambda(P^{-1}P)\cdots\Lambda P^{-1} = P\Lambda^n P^{-1}$$
+      <p>対角行列の冪は対角成分を $n$ 乗するだけなので計算が容易。</p>
+    </div>
+
+    <details>
+      <summary>行列の高次乗を対角化なしで求める（Cayley-Hamilton 使用）</summary>
+      <div class="details-body">
+        <p>この例では $\mathrm{tr}\,A=1$，$\det A=-2$ なので $A^2 = A + 2I$（Cayley-Hamilton）。</p>
+        <p>一般に $A^n = \alpha_n A + \beta_n I$ と書けて，漸化式：$\alpha_{n+1} = \alpha_n + 2\beta_n$，$\beta_{n+1} = \beta_n$...と地道に計算することもできる。</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- 雑談 -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">💬 雑談・発展的話題</div>
+  <div class="section-card-body">
+    <div class="insight-box">
+      <div class="insight-title">💡 固有ベクトルのスカラー倍自由度と「固有空間」</div>
+      <p>固有値 $\lambda$ に対する固有空間 $E_\lambda = \ker(A-\lambda I)$ は部分空間。重複固有値でなければ $\dim E_\lambda = 1$（1次元）。固有ベクトルとはその中の非零元。</p>
+    </div>
+    <div class="insight-box">
+      <div class="insight-title">💡 Cayley-Hamilton と「行列は自分の特性多項式を満たす」</div>
+      <p>$2\times2$ の特性多項式は $\lambda^2 - (\mathrm{tr}\,A)\lambda + \det A$。これの $\lambda$ に $A$ を「代入」すると $O$ になる（行列は自身の特性方程式の根）。$n\times n$ でも成立するが，証明は Jordan 標準形等を使う。</p>
+    </div>
+  </div>
+</section>
+
+<!-- まとめ -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">📌 第3回のまとめ</div>
+  <div class="section-card-body">
+    <ul>
+      <li><strong>det A = 0 ↔ ker A ≠ {0}：</strong>具体的なベクトルを構成（$\Rightarrow$）または連立方程式の解の存在で示す（$\Leftarrow$）</li>
+      <li><strong>Cayley-Hamilton：</strong>$A^2 = (\mathrm{tr}A)A - (\det A)I$。逆行列の表示・高次乗の計算に使える</li>
+      <li><strong>det(AB) = det A det B：</strong>直接計算。「面積の拡大率の積」という幾何学的意味</li>
+      <li><strong>逆行列：</strong>det A ≠ 0 ↔ 逆行列存在。公式は「対角入れ替え・非対角符号反転 ÷ det A」</li>
+      <li><strong>固有値：</strong>$\det(A-\lambda I) = 0$ を解く。$2\times2$ は $\mathrm{tr}, \det$ から速く求まる</li>
+      <li><strong>対角化：</strong>固有ベクトルを列に並べた $P$ で $P^{-1}AP = \mathrm{diag}(\lambda_1,\lambda_2)$</li>
+      <li><strong>行列の冪：</strong>$A^n = P\Lambda^n P^{-1}$（$\Lambda^n$ は対角成分の $n$ 乗）</li>
+    </ul>
+    <div class="insight-box">
+      <div class="insight-title">💡 自力で解くための手順（対角化まで）</div>
+      <ol>
+        <li>$\det(A-\lambda I)=0$ → 固有値（Vieta の公式で速く解く）</li>
+        <li>各 $\lambda_i$ に対して $(A-\lambda_i I)v = 0$ → 固有ベクトル（1次方程式を解くだけ）</li>
+        <li>$P = [v_1 \mid v_2]$，$\det P \neq 0$ を確認，$P^{-1}$ を計算</li>
+        <li>$A^n = P \mathrm{diag}(\lambda_1^n, \lambda_2^n) P^{-1}$ を展開</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+</div>
+<div class="page-footer">
+  すかき演習 解説集 &mdash; 線形代数学 第3回 &nbsp;|&nbsp; <a href="../index.html" style="color:rgba(255,255,255,0.6)">目次に戻る</a>
+</div>
+<script src="../nav.js"></script>
+</body>
+</html>

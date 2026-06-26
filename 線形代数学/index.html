@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>線形代数学 I 解説ノート</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        macros: {
+          R: '\\mathbb{R}', C: '\\mathbb{C}', K: '\\mathbb{K}',
+          Ker: '\\operatorname{Ker}', Im: '\\operatorname{Im}'
+        }
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body>
+
+<nav>
+  <span class="nav-brand">線形代数学 I</span>
+  <a href="index.html" class="active">トップ</a>
+  <a href="s1.html">§1 ベクトル空間</a>
+  <a href="s2.html">§2 部分空間</a>
+  <a href="s3.html">§3 Kernel / Image</a>
+</nav>
+
+<div class="container">
+
+  <div class="page-header">
+    <h1>線形代数学 I 解説ノート</h1>
+    <p class="meta">講義ノート①②（S2ターム）をもとに作成 ／ 授業ノートに準拠した解説・例題付き</p>
+    <div class="toc">
+      <a href="s1.html">§1 ベクトル空間・線形写像</a>
+      <a href="s2.html">§2 部分空間</a>
+      <a href="s3.html">§3 Kernel と Image</a>
+    </div>
+  </div>
+
+  <!-- セクションカード -->
+  <div class="card-grid">
+    <a class="card" href="s1.html">
+      <div class="card-tag">§ 1</div>
+      <h3>ベクトル空間・線形写像</h3>
+      <p>ベクトル空間の定義（V1〜V11）、線形写像の定義と具体例、同型写像。確認例・非例つき。</p>
+    </a>
+    <a class="card" href="s2.html">
+      <div class="card-tag">§ 2</div>
+      <h3>部分空間</h3>
+      <p>部分空間の定義（S1〜S3）、確認手順、直線・平面・解空間などの具体例、span（生成される部分空間）。</p>
+    </a>
+    <a class="card" href="s3.html">
+      <div class="card-tag">§ 3</div>
+      <h3>Kernel と Image</h3>
+      <p>核・像の定義と部分空間性、単射の特徴付け（Ker = {0}）、行列表示との関係、次元の不変性。</p>
+    </a>
+  </div>
+
+  <!-- 重要定義クイックリファレンス -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-tag">Quick Reference</div>
+      <h2>重要定義・定理 一覧</h2>
+    </div>
+    <div class="sec-body">
+
+      <h3>§1 の主要事項</h3>
+      <table class="axiom-table">
+        <tr><th>番号</th><th>名称</th><th>内容（要約）</th></tr>
+        <tr>
+          <td>定義 1.1</td>
+          <td>$\mathbb{K}$-ベクトル空間</td>
+          <td>$(V,+,0,\cdot)$ が (V1)〜(V11) を満たす。加法群の公理 (V4)〜(V7)、スカラー倍の公理 (V8)〜(V11)。</td>
+        </tr>
+        <tr>
+          <td>系 1.2</td>
+          <td>ベクトル空間の基本性質</td>
+          <td>逆元の一意性（$\Rightarrow -x$ が well-defined）、$0\cdot x=0$、$(-1)\cdot x = -x$。</td>
+        </tr>
+        <tr>
+          <td>定例 1.3</td>
+          <td>一次結合</td>
+          <td>$n$ 個の和はカッコのつけ方によらない（結合律の反復）。$a_1x_1+\cdots+a_nx_n$ が意味を持つ。</td>
+        </tr>
+        <tr>
+          <td>定義 1.4</td>
+          <td>$\mathbb{K}$-線形写像</td>
+          <td>$T(x+y)=T(x)+T(y)$ (L1) かつ $T(ax)=aT(x)$ (L2) を満たす写像。</td>
+        </tr>
+        <tr>
+          <td>系 1.5</td>
+          <td>線形写像の基本性質</td>
+          <td>$T(0)=0$、$T(-x)=-T(x)$、$T(\sum a_ix_i)=\sum a_iT(x_i)$。</td>
+        </tr>
+        <tr>
+          <td>定義 1.7</td>
+          <td>同型写像・同型</td>
+          <td>全単射な線形写像 $T:V\xrightarrow{\sim}W$。$V\cong W$ は同値関係（反射・対称・推移律）。</td>
+        </tr>
+      </table>
+
+      <h3>§2 の主要事項</h3>
+      <table class="axiom-table">
+        <tr><th>番号</th><th>名称</th><th>内容（要約）</th></tr>
+        <tr>
+          <td>定義 2.1</td>
+          <td>部分空間</td>
+          <td>$W\subseteq V$ が (S1) $0\in W$、(S2) 加法に閉、(S3) スカラー倍に閉 を満たす。</td>
+        </tr>
+        <tr>
+          <td>定義 2.2</td>
+          <td>生成される部分空間</td>
+          <td>$\langle v_1,\ldots,v_k\rangle_\mathbb{K} = \{a_1v_1+\cdots+a_kv_k\mid a_i\in\mathbb{K}\}$（$v_1,\ldots,v_k$ の span）。</td>
+        </tr>
+      </table>
+
+      <h3>§3 の主要事項</h3>
+      <table class="axiom-table">
+        <tr><th>番号</th><th>名称</th><th>内容（要約）</th></tr>
+        <tr>
+          <td>定義 3.1</td>
+          <td>核・像</td>
+          <td>$\Ker(T)=\{v\in V\mid T(v)=0\}$（$V$ の部分空間）、$\Im(T)=\{T(v)\mid v\in V\}$（$W$ の部分空間）。</td>
+        </tr>
+        <tr>
+          <td>系 3.2</td>
+          <td>Ker, Im の部分空間性</td>
+          <td>$\Ker(T)\subseteq V$, $\Im(T)\subseteq W$ はどちらも部分空間（線形性から (S1)〜(S3) を確認）。</td>
+        </tr>
+        <tr>
+          <td>定理 3.3</td>
+          <td>単射の特徴付け</td>
+          <td>$T$ が単射 $\iff$ $\Ker(T)=\{0\}$。</td>
+        </tr>
+        <tr>
+          <td>系 3.4</td>
+          <td>行列表示との関係</td>
+          <td>$x\in\Ker(T)$ $\iff$ $Ax=0$（斉次連立一次方程式の解）。</td>
+        </tr>
+        <tr>
+          <td>系 3.5</td>
+          <td>$m < n$ なら単射でない</td>
+          <td>$T:\mathbb{K}^n\to\mathbb{K}^m$ で $m<n$ ならば $T$ は単射になれない。</td>
+        </tr>
+        <tr>
+          <td>定理 3.6</td>
+          <td>次元の同型不変性</td>
+          <td>$\mathbb{K}^m\cong\mathbb{K}^n$ $\Rightarrow$ $m=n$。次元はベクトル空間の本質的な指標。</td>
+        </tr>
+      </table>
+
+      <h3>論理の流れ（依存関係）</h3>
+      <div class="note" style="font-size:.9rem">
+        <span class="box-label">定理・系の依存関係</span>
+        <div style="overflow-x:auto">
+          <pre style="font-family:monospace; line-height:2; font-size:.88rem; color:#333">
+定義1.1（ベクトル空間）
+  └── 系1.2（基本性質：逆元一意性・0倍・-1倍）
+       └── 定義1.4（線形写像）
+            ├── 系1.5（T(0)=0, T(-x)=-T(x), 一次結合保存）
+            ├── 定義1.7（同型写像）
+            └── 定義2.1（部分空間）
+                 ├── 定義2.2（span は部分空間）
+                 └── 定義3.1（Ker, Im） ── 系3.2（Ker, Im は部分空間）
+                      └── 定理3.3（単射 ⟺ Ker={0}）
+                           ├── 系3.4（Ker = 斉次方程式の解）
+                           ├── 系3.5（m &lt; n なら単射でない）
+                           └── 定理3.6（同型 ⟹ m=n）
+          </pre>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 記号一覧 -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-tag">Notation</div>
+      <h2>記号・用語一覧</h2>
+    </div>
+    <div class="sec-body">
+      <table class="axiom-table">
+        <tr><th>記号</th><th>意味</th><th>初出</th></tr>
+        <tr><td>$\mathbb{K}$</td><td>$\mathbb{R}$ または $\mathbb{C}$（スカラー体）</td><td>§1 基本設定</td></tr>
+        <tr><td>$V, W$</td><td>$\mathbb{K}$-ベクトル空間</td><td>定義 1.1</td></tr>
+        <tr><td>$0\in V$</td><td>ゼロベクトル（零元）</td><td>定義 1.1 (V2)</td></tr>
+        <tr><td>$-x$</td><td>$x$ の逆元（$x+(-x)=0$）</td><td>系 1.2(1)</td></tr>
+        <tr><td>$x-y$</td><td>$x+(-y)$ の略記</td><td>系 1.2</td></tr>
+        <tr><td>$T: V\to W$</td><td>$V$ から $W$ への写像</td><td>定義 1.4</td></tr>
+        <tr><td>$T: V\xrightarrow{\sim} W$</td><td>同型写像</td><td>定義 1.7</td></tr>
+        <tr><td>$V\cong W$</td><td>$V$ と $W$ は同型</td><td>定義 1.7</td></tr>
+        <tr><td>$W\subseteq V$</td><td>$W$ は $V$ の部分集合</td><td>定義 2.1</td></tr>
+        <tr><td>$\langle v_1,\ldots,v_k\rangle_\mathbb{K}$</td><td>$v_1,\ldots,v_k$ が生成する部分空間（span）</td><td>定義 2.2</td></tr>
+        <tr><td>$\operatorname{Ker}(T)$</td><td>$T$ の核 $= \{v\in V\mid T(v)=0\}$</td><td>定義 3.1</td></tr>
+        <tr><td>$\operatorname{Im}(T)$</td><td>$T$ の像 $= \{T(v)\mid v\in V\}$</td><td>定義 3.1</td></tr>
+        <tr><td>$T_A$</td><td>行列 $A$ による線形写像 $v\mapsto Av$</td><td>§1 例 1</td></tr>
+        <tr><td>$e_j$</td><td>$\mathbb{K}^n$ の第 $j$ 基本単位ベクトル</td><td>§1 例 1</td></tr>
+        <tr><td>$M_{m,n}(\mathbb{K})$</td><td>$m\times n$ 行列の空間</td><td>§1 基本設定</td></tr>
+        <tr><td>$C^\infty((a,b))$</td><td>$(a,b)$ 上の $C^\infty$ 級（無限回微分可能）複素数値関数全体</td><td>§1 例</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <footer>線形代数学 I 解説ノート — 講義ノート①② より作成</footer>
+
+</div>
+</body>
+</html>
