@@ -26,7 +26,6 @@
   --mot-bg: #f0f7ff;
   --mot-b: #3070c0;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', 'Yu Gothic', sans-serif;
   background: var(--bg);

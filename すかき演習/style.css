@@ -27,11 +27,7 @@
   --radius-lg: 12px;
 }
 
-/* ---- Reset & Base ---- */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-html { scroll-behavior: smooth; }
-
+/* ---- Base ---- */
 body {
   font-family: var(--font-serif);
   background: var(--bg);

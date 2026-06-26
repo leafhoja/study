@@ -2,6 +2,11 @@
    共通スタイル — 全科目サイト共通
    ═══════════════════════════════════════════════ */
 
+/* ── リセット ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { -webkit-font-smoothing: antialiased; }
+
 /* ── 教科一覧へのback link ── */
 a.nav-back {
   color: rgba(255,255,255,.62);
