@@ -19,21 +19,80 @@
 html { scroll-behavior: smooth; }
 body { -webkit-font-smoothing: antialiased; }
 
-/* ── 教科一覧へのback link ── */
-a.nav-back {
-  color: rgba(255,255,255,.62);
-  font-size: .8rem;
-  padding-right: 1rem;
-  margin-right: .4rem;
-  border-right: 1px solid rgba(255,255,255,.22);
-  text-decoration: none;
-  white-space: nowrap;
-  flex-shrink: 0;
-  transition: color .15s;
+/* ── ナビバー（全ページ共通） ── */
+.navbar {
+  background: var(--primary);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0,0,0,.3);
 }
-a.nav-back:hover { color: rgba(255,255,255,.95); text-decoration: none; }
+.navbar-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+}
+.navbar-brand {
+  font-size: .92rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  padding: 14px 0;
+  flex-shrink: 0;
+  letter-spacing: .02em;
+  white-space: nowrap;
+}
+.navbar-brand:hover { text-decoration: none; color: #fff; }
+.navbar-links {
+  display: flex;
+  gap: 2px;
+  margin-left: auto;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.navbar-links::-webkit-scrollbar { display: none; }
+.navbar-links a {
+  color: #bee3f8;
+  text-decoration: none;
+  padding: 8px 13px;
+  border-radius: 5px;
+  font-size: .85rem;
+  font-weight: 600;
+  flex-shrink: 0;
+  transition: background .18s, color .18s;
+}
+.navbar-links a:hover { background: rgba(255,255,255,.14); color: #fff; text-decoration: none; }
+.navbar-links a.active { background: rgba(255,255,255,.22); color: #fff; }
+.navbar-links a.nav-back {
+  color: rgba(255,255,255,.65);
+  border-right: 1px solid rgba(255,255,255,.22);
+  padding-right: 16px;
+  margin-right: 4px;
+  border-radius: 0;
+}
+.navbar-links a.nav-back:hover { background: transparent; color: rgba(255,255,255,.95); }
 
-/* ── トップナビ（科目インデックスページ用） ── */
+/* ── ページヒーロー（共通） ── */
+.hero {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-lt) 60%, #2b6cb0 100%);
+  color: #fff;
+  padding: 48px 24px 44px;
+  text-align: center;
+}
+.hero h1 { font-size: 2rem; letter-spacing: .03em; margin-bottom: 8px; font-weight: 700; }
+.hero .subtitle { color: #bee3f8; font-size: .95rem; }
+.hero .meta { color: #90cdf4; font-size: .82rem; margin-top: 6px; }
+.hero-sm { padding: 28px 24px 24px; }
+.hero-sm h1 { font-size: 1.4rem; letter-spacing: .02em; margin-bottom: 6px; }
+.hero-sm .subtitle { font-size: .85rem; }
+.hero-calc { background: linear-gradient(135deg, #1e3a8a 0%, #1e4799 60%, #2563eb 100%); }
+.hero-linear { background: linear-gradient(135deg, #14532d 0%, #166534 60%, #16a34a 100%); }
+
+/* ── 後方互換：top-nav は navbar にリダイレクト ── */
 .top-nav {
   background: var(--primary);
   padding: .55rem 1.5rem;
@@ -80,6 +139,13 @@ a.nav-back:hover { color: rgba(255,255,255,.95); text-decoration: none; }
   z-index: 9999;
   transition: width .08s linear;
   pointer-events: none;
+}
+
+/* ── レスポンシブ ── */
+@media (max-width: 640px) {
+  .navbar-links a { padding: 8px 8px; font-size: .78rem; }
+  .hero h1 { font-size: 1.5rem; }
+  .hero-sm h1 { font-size: 1.2rem; }
 }
 
 /* ── 印刷スタイル ── */
