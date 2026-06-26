@@ -71,9 +71,26 @@ a:hover { text-decoration: underline; }
 .header-title { font-size: 1.25rem; font-weight: 700; letter-spacing: 0.02em; }
 .header-subtitle { font-size: 0.85rem; opacity: 0.8; margin-top: 0.2rem; font-family: var(--font-sans); }
 
-.nav-links { display: flex; gap: 1rem; font-family: var(--font-sans); font-size: 0.85rem; }
-.nav-links a { color: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.3); padding: 0.3rem 0.8rem; border-radius: 20px; transition: all 0.2s; }
+.nav-links { display: flex; gap: 0.6rem; font-family: var(--font-sans); font-size: 0.85rem; flex-wrap: wrap; }
+.nav-links a { color: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.3); padding: 0.3rem 0.8rem; border-radius: 20px; transition: all 0.2s; white-space: nowrap; }
 .nav-links a:hover { background: rgba(255,255,255,0.2); color: white; text-decoration: none; }
+.nav-links a.nav-back { color: rgba(255,255,255,0.6); border-color: rgba(255,255,255,0.2); font-size: 0.78rem; }
+
+/* ---- トップナビ（すかき演習インデックス用） ---- */
+.top-nav {
+  background: var(--primary);
+  padding: 0.55rem 1.5rem;
+  display: flex;
+  align-items: center;
+}
+.top-nav a.nav-back {
+  color: rgba(255,255,255,0.7);
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.top-nav a.nav-back:hover { color: #fff; text-decoration: none; }
 
 .container { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
 

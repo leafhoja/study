@@ -66,17 +66,29 @@ code { font-family: var(--mono); font-size: .85em; background: #eee; padding: .1
   color: #fff; white-space: nowrap;
 }
 .site-header .logo span { opacity: .65; font-weight: 400; }
-.site-header nav { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+.site-header nav {
+  display: flex; gap: 1.2rem;
+  overflow-x: auto; white-space: nowrap;
+  scrollbar-width: none; -ms-overflow-style: none;
+}
+.site-header nav::-webkit-scrollbar { display: none; }
 .site-header nav a {
   color: rgba(255,255,255,.8);
   font-size: .82rem; font-weight: 500;
   letter-spacing: .03em;
   transition: color .15s;
+  flex-shrink: 0;
 }
 .site-header nav a:hover,
 .site-header nav a.active { color: #fff; text-decoration: none; }
 .site-header nav a.active {
   border-bottom: 2px solid rgba(255,255,255,.6);
+}
+.site-header nav a.nav-back {
+  opacity: .65;
+  padding-right: 1rem;
+  margin-right: .4rem;
+  border-right: 1px solid rgba(255,255,255,.25);
 }
 
 /* ─── インデックスページ ─── */
@@ -470,6 +482,6 @@ mjx-container[display="true"] { margin: .8em auto !important; }
   .formula-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 480px) {
-  .site-header { flex-wrap: wrap; padding: .6rem 1rem; }
+  .site-header { padding: .6rem 1rem; }
   .site-header nav { font-size: .75rem; gap: .8rem; }
 }

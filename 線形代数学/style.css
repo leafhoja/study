@@ -59,6 +59,12 @@ nav a {
   flex-shrink: 0;
 }
 nav a:hover, nav a.active { color: #fff; border-bottom-color: #6fa3ef; }
+nav a.nav-back {
+  color: rgba(255,255,255,.6); font-size: 12px;
+  padding-right: 1rem; margin-right: .2rem;
+  border-right: 1px solid rgba(255,255,255,.2);
+  border-bottom-color: transparent !important;
+}
 
 /* ── レイアウト ── */
 .container { max-width: 860px; margin: 0 auto; padding: 2rem 1.4rem 5rem; }

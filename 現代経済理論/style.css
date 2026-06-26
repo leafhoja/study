@@ -37,7 +37,12 @@ body {
   display: flex;
   gap: 2px;
   margin-left: auto;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
+.navbar-links::-webkit-scrollbar { display: none; }
 .navbar-links a {
   color: #bee3f8;
   text-decoration: none;
@@ -45,10 +50,16 @@ body {
   border-radius: 5px;
   font-size: .85rem;
   font-weight: 600;
+  flex-shrink: 0;
   transition: background .18s, color .18s;
 }
 .navbar-links a:hover { background: rgba(255,255,255,.14); color: #fff; }
 .navbar-links a.active { background: rgba(255,255,255,.22); color: #fff; }
+.navbar-links a.nav-back {
+  color: rgba(255,255,255,.6); font-size: .78rem;
+  margin-right: 4px; padding-right: 13px;
+  border-right: 1px solid rgba(255,255,255,.2);
+}
 
 /* ===== HERO ===== */
 .hero {
