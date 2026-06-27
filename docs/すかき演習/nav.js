@@ -36,6 +36,16 @@
       ]},
   ];
 
+  var KAKOMON_PAGES = [
+    { file: 'kakomon_lin_01.html', num: '線形 小テスト', title: '固有値・直交行列・Hom',
+      problems: [
+        { id: 'problem1', title: '表現行列・核・像' },
+        { id: 'problem2', title: '直交行列と冪' },
+        { id: 'problem3', title: '固有値・対角化' },
+        { id: 'problem4', title: 'Hom空間と同型' },
+      ]},
+  ];
+
   var LIN_PAGES = [
     { file: 'lin_01.html', num: '第1回', title: '線形写像と行列表現',
       problems: [
@@ -51,7 +61,7 @@
         { id: 'problem3', title: '合成の法則' },
         { id: 'problem4', title: '直交行列の特徴' },
       ]},
-    { file: 'lin_03.html', num: '第3回', title: '行列式と連立方程式',
+    { file: 'lin_03.html', num: '第3回', title: '行列式・逆行列・固有値・対角化',
       problems: [
         { id: 'problem1', title: 'detA=0 ⟺ Av=0' },
         { id: 'problem2', title: 'det(AB) と逆行列' },
@@ -76,7 +86,7 @@
   function buildNav() {
     var pathname = location.pathname;
     var currentFile = pathname.split('/').pop() || '';
-    var inSubdir = /\/(calculus|linear)\//.test(pathname);
+    var inSubdir = /\/(calculus|linear|kakomon)\//.test(pathname);
     var prefix = inSubdir ? '../' : '';
     var calcPrefix = prefix + 'calculus/';
     var linPrefix = prefix + 'linear/';
@@ -171,6 +181,10 @@
     body.appendChild(buildGroup(
       LIN_PAGES, linPrefix,
       '🔷 線形代数学', 'sidenav-gtitle-lin', 'sidenav-item-lin', 'sidenav-problems-lin'
+    ));
+    body.appendChild(buildGroup(
+      KAKOMON_PAGES, prefix + 'kakomon/',
+      '📝 過去問', 'sidenav-gtitle-lin', 'sidenav-item-lin', 'sidenav-problems-lin'
     ));
 
     document.body.appendChild(nav);
