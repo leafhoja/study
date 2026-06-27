@@ -184,6 +184,19 @@ MathJax = {
       <p><strong>スカラー倍の閉性：</strong>$(af)(cv_1+dv_2) = af(cv_1+dv_2) = a(cf(v_1)+df(v_2)) = c(af)(v_1)+d(af)(v_2)$。よって $af \in V^*$。</p>
       <p>その他の公理（結合律，交換律，逆元など）は $\mathbb{R}$ での演算から自動的に成立する。よって $V^*$ は $\mathbb{R}$-ベクトル空間。$\square$</p>
     </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 なぜ「3条件」ではなく「8公理」を確認するのか</div>
+      <p><strong>部分空間の判定と新しいベクトル空間の定義は違う。</strong></p>
+      <p>$V$ の部分集合 $U$ が $V$ の部分空間かどうかを確認するときは，$U$ が既に $V$ の中にある（加法もスカラー倍も $V$ から引き継ぐ）ので<strong>3条件（零元，加法閉，スカラー倍閉）だけ</strong>で足りる。残りの公理は親空間 $V$ から自動的に受け継がれるからだ。</p>
+      <p>ところが $V^*$ は「$V$ の部分集合」ではない。$V$ の外側に新たに定義した集合で，演算（$(f+g)(v) := f(v)+g(v)$ など）も新たに定義している。</p>
+      <p>したがって $V^*$ が本当にベクトル空間になっているかは，ベクトル空間の<strong>8公理すべて</strong>を独立に確認する必要がある。幸い結合律・交換律・逆元の存在などは $\mathbb{R}$ の演算の性質から直接従うため，確認が大幅に省略できる。</p>
+      <div class="logic-chain">
+        U ⊂ (既知のベクトル空間 V) の部分空間 → 3条件チェックで十分<br>
+        $V^*$ = 新規に定義した集合 → 8公理すべてをチェックする必要がある<br>
+        （ただし演算が $\mathbb{R}$ から引き継がれるものは一括で済む）
+      </div>
+    </div>
     <div class="answer-box">
       <div class="answer-title">📝 (2)(3) の模範解答</div>
       <p><strong>(2) $\varphi: V \to (V^*)^*$ の線形性：</strong>$v \in V$ に対し $\hat v: V^* \to \mathbb{R}$ を $\hat v(f) = f(v)$ で定義し，$\varphi(v) = \hat v$ とする。</p>
@@ -208,8 +221,18 @@ MathJax = {
       <p><strong>$\Phi$ の発見方法。</strong>$V$ の元 $v$ は「$V^*$ の元 $\phi$ を受け取り，$\phi(v)$ を返す」写像 $\hat v: V^* \to \mathbb{K}$ を自然に定める。「$v$ を引数，$\phi$ を関数」から「$\phi$ を引数，$v$ を固定」へ役割を交換するだけで，これが $\Phi(v) = \hat v$ という正準写像になる。</p>
       <p><strong>単射性の証明戦略。</strong>$\ker\Phi = \{0\}$ を示すには，$\hat v = 0$（全ての $\phi$ に対し $\phi(v)=0$）から $v=0$ を導く。「全ての $\phi$ で 0 になる」という強い条件を使うには，双対基底 $e_j^*$ を代入するのが定石—これで $v$ の各成分 $v_j = e_j^*(v) = 0$ が出る。</p>
       <div class="insight-box" style="margin-top:0.75rem">
-        <div class="insight-title">💡 「正準的」（canonical）とは</div>
-        <p>$\Phi$ の定義に基底を選ぶ操作が含まれていない（$v$ と $\phi$ だけで決まる）。これが $V \cong V^*$（双対基底を経由した同型）との違い—そちらは基底の選び方に依存する「非正準的な」同型。$V \cong (V^*)^*$ は「正準的」な同型。</p>
+        <div class="insight-title">💡 「正準的」（canonical）とは ── $V \cong V^*$ と $V \cong (V^*)^*$ の違い</div>
+        <p>有限次元では $\dim V = \dim V^*$ なので $V \cong V^*$（同型）である。しかしこの同型写像は<strong>基底の選び方に依存する</strong>。たとえば基底 $\{e_1, e_2\}$ を取れば $e_i \mapsto e_i^*$ という同型が作れるが，別の基底 $\{f_1, f_2\}$ なら別の同型になる。「自然に決まる対応」ではない。</p>
+        <p>一方 $\Phi: V \to (V^*)^*$，$v \mapsto \hat v$（$\hat v(\phi) = \phi(v)$）は基底を一切使わない定義で，$v$ と $\phi$ の役割交換という純粋に構造的な操作だ。これが「正準的」な同型と呼ばれる理由。</p>
+        <div class="logic-chain">
+          $V \to V^*$：基底 $\{e_i\}$ を選んで $e_i \mapsto e_i^*$ で定義 → <strong>非正準的</strong>（基底依存）<br>
+          $V \to (V^*)^*$：$v \mapsto (\phi \mapsto \phi(v))$ で定義 → <strong>正準的</strong>（基底不要，構造だけで決まる）
+        </div>
+        <p>圏論の言葉では，正準的同型は「自然変換（natural transformation）」として定義される。有限次元では両者とも同型だが，無限次元では $\Phi: V \to (V^*)^*$ は単射だが全射でない場合がある（$V$ が真に $(V^*)^*$ の部分空間になる）。</p>
+      </div>
+      <div class="warn-box">
+        <div class="warn-title">⚠ $V \cong V^*$ は「特定の」基底なしには言えない</div>
+        <p>たとえば $V = \mathbb{R}^2$ に標準基底を選べば $V \cong V^*$ という写像を書けるが，基底を取り替えたら同じ写像が機能しなくなる。双対基底 $e_i^*$ は基底 $\{e_i\}$ に依存して定義されるため，$V \cong V^*$ の同型は基底に依存（非正準）。一方 $V \cong (V^*)^*$ の正準埋め込み $\Phi$ は基底を使わない。</p>
       </div>
     </div>
 
@@ -250,6 +273,30 @@ MathJax = {
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- 自力確認チェックリスト -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">📋 自力確認チェックリスト</div>
+  <div class="section-card-body">
+    <details>
+      <summary>第4回を理解できているかセルフチェック（クリックして展開）</summary>
+      <div class="details-body">
+        <p style="font-family:var(--font-sans); font-size:0.85rem; color:#6b7280; margin-bottom:0.5rem;">できると思ったら ✓，怪しいなら解説を再読する。</p>
+        <ul class="checklist">
+          <li>$\ker(f)$ が部分空間であることを，「$0 \in \ker(f)$・スカラー倍と加法で閉じる」の3条件で証明できるか</li>
+          <li>なぜ $\ker(f)$ は3条件チェックで足りるが，$V^*$ は8公理を確認すべきなのかを説明できるか</li>
+          <li>単射 $\Leftrightarrow$ $\ker(f) = \{0\}$ の証明を両方向書けるか（$f(v_1-v_2)=0$ の変換がカギ）</li>
+          <li>$\{v \in V \mid f(v) = 1\}$ が部分空間でない理由を，ゼロベクトルの議論で言えるか</li>
+          <li>指定された核をもつ線形写像 $f: \mathbb{R}^3 \to \mathbb{R}$ を，$f(x,y,z) = ax+by+cz$ の形から構成できるか</li>
+          <li>$\varphi(v)(\phi) = \phi(v)$ の定義から，$\varphi$ の線形性と単射性を証明できるか</li>
+          <li>単射性の証明で「双対基底 $e_j^*$ を代入する」手がなぜ機能するかを説明できるか</li>
+          <li>内積写像 $\tilde\Phi: v \mapsto \langle\cdot, v\rangle$ の単射性で「$u = v$ と置く」手の意味を理解しているか</li>
+          <li>$V \cong V^*$ が非正準で $V \cong (V^*)^*$ が正準である理由を説明できるか</li>
+        </ul>
+      </div>
+    </details>
   </div>
 </section>
 

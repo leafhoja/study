@@ -268,13 +268,20 @@ MathJax = {
       </div>
     </div>
 
+    <div class="warn-box">
+      <div class="warn-title">⚠ $\{b_n\}$ は単調減少であり，問3の定理（単調増加＆有界→収束）を直接は使えない</div>
+      <p>問題3で示した「単調増加で上に有界 → 収束」という定理を $\{b_n\}$ に直接適用しようとすると，$\{b_n\}$ は単調<strong>減少</strong>なので型が合わない。正しい対応は「$\{-b_n\}$ は単調増加で上に有界（$-b_n \ge -M$）だから問3より収束する。よって $\{b_n\}$ も収束する」という議論，またはそもそも「単調減少で下に有界 → 収束」という定理を定式化して使う。</p>
+      <p>模範解答でも "Weierstrass の定理" と書いているが，これは「単調 & 有界 → 収束」の両方向を含む定理として述べている点に注意。</p>
+    </div>
+
     <div class="think-box">
       <div class="think-title">🧠 思考法・解説</div>
 
       <div class="insight-box">
-        <div class="insight-title">💡 $b_n$，$c_n$ の意味</div>
-        <p>$b_n = \sup\{a_m \mid m \ge n\}$ は「$n$ 番目以降の $a_m$ の最大値（の下限）」。$n$ が大きくなるほど対象集合が小さくなるから $b_n$ は単調減少。極限 $\limsup a_n$ は「数列が到達できる最大の値の極限」と解釈できる。</p>
-        <p>$c_n$ は逆に「$n$ 番目以降の最小値（の上限）」で，$\liminf a_n$ は「到達できる最小値の極限」。</p>
+        <div class="insight-title">💡 $b_n$，$c_n$ の意味と単調性</div>
+        <p>$b_n = \sup\{a_m \mid m \ge n\}$ は「$n$ 番目以降の $a_m$ の最大値」。$n$ が大きくなると対象集合が小さくなる（より多くの項が除外される）ので，上限は小さくなる：$b_n$ は単調<strong>減少</strong>。</p>
+        <p>$c_n = \inf\{a_m \mid m \ge n\}$ は「$n$ 番目以降の最小値」。$n$ が大きくなると下限は大きくなる：$c_n$ は単調<strong>増加</strong>。</p>
+        <p>常に $c_n \le a_n \le b_n$ が成立する（$a_n$ 自身が集合に含まれるため）。特に $c_n \le b_n$ で，$n \to \infty$ のとき $b_n, c_n$ の極限が等しければ $a_n$ がはさみうちされる。</p>
       </div>
 
       <div class="insight-box">
@@ -289,6 +296,29 @@ MathJax = {
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- 自力確認チェックリスト -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">📋 自力確認チェックリスト</div>
+  <div class="section-card-body">
+    <details>
+      <summary>第2回を理解できているかセルフチェック（クリックして展開）</summary>
+      <div class="details-body">
+        <p style="font-family:var(--font-sans); font-size:0.85rem; color:#6b7280; margin-bottom:0.5rem;">できると思ったら ✓，怪しいなら解説を再読する。</p>
+        <ul class="checklist">
+          <li>$\sup A$ の定義を「上界の最小値」として正確に言えるか。$\sup$ と max の違いは？</li>
+          <li>$[0,1]$ と $(0,1)$ の $\inf$ がともに 0 だが一方には最小値があり他方にないことを説明できるか</li>
+          <li>$\sup\{a \in \mathbb{Q} \mid a \le \sqrt{2}\} = \sqrt{2}$（有理数でないことに注意）を，$\sup$ の定義から証明できるか</li>
+          <li>収束数列が有界であることの証明で，$\varepsilon = 1$ として $M = \max(|a_1|,\ldots,|a_N|,|\alpha|+1)$ という上界を構成できるか</li>
+          <li>単調増加＆有界な数列の収束の証明で「上限 $\alpha$ より小さい値は上界でない → $a_N > \alpha - \varepsilon$ となる $N$ が存在」という論法を使えるか</li>
+          <li>$\{b_n\}$（$b_n = \sup_{m \ge n} a_m$）が単調<strong>減少</strong>であることを，集合の包含 $\{a_m | m\ge n+1\} \subset \{a_m | m \ge n\}$ から導けるか</li>
+          <li>$\limsup a_n = \liminf a_n = \alpha$ から $\lim a_n = \alpha$ を，$c_n \le a_n \le b_n$ のはさみうちで示せるか</li>
+          <li>「$\lim a_n$ が存在する $\Rightarrow$ $\limsup = \liminf$」の方向で，$\varepsilon$-近傍が $b_n$ と $c_n$ を $\alpha$ に近づける議論を追えるか</li>
+        </ul>
+      </div>
+    </details>
   </div>
 </section>
 

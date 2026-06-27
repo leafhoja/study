@@ -265,8 +265,20 @@ MathJax = {
     <details>
       <summary>行列の高次乗を対角化なしで求める（Cayley-Hamilton 使用）</summary>
       <div class="details-body">
-        <p>この例では $\mathrm{tr}\,A=1$，$\det A=-2$ なので $A^2 = A + 2I$（Cayley-Hamilton）。</p>
-        <p>一般に $A^n = \alpha_n A + \beta_n I$ と書けて，漸化式：$\alpha_{n+1} = \alpha_n + 2\beta_n$，$\beta_{n+1} = \beta_n$...と地道に計算することもできる。</p>
+        <p>$\mathrm{tr}\,A=1$，$\det A=-2$ なので Cayley-Hamilton より $A^2 - A - 2I = O$，すなわち $A^2 = A + 2I$。</p>
+        <p>一般に $A^n = \alpha_n A + \beta_n I$ の形に書けることを帰納法で示す。</p>
+        <p>$n=1$：$A^1 = 1 \cdot A + 0 \cdot I$（$\alpha_1 = 1, \beta_1 = 0$）。</p>
+        <p>$A^{n+1} = A \cdot A^n = A(\alpha_n A + \beta_n I) = \alpha_n A^2 + \beta_n A = \alpha_n(A + 2I) + \beta_n A = (\alpha_n + \beta_n)A + 2\alpha_n I$。</p>
+        <p>漸化式：$\alpha_{n+1} = \alpha_n + \beta_n$，$\beta_{n+1} = 2\alpha_n$。初期値 $\alpha_1=1, \beta_1=0$ から $(\alpha_2, \beta_2) = (1, 2), (\alpha_3, \beta_3) = (3, 2), \ldots$ と求まる。一般項は $\alpha_n = \frac{2^n - (-1)^n}{3}$，$\beta_n = \frac{2(-1)^n(1-2^n)}{3}$（固有値から誘導）。</p>
+        <p>Cayley-Hamilton を使う方法は対角化行列 $P$ の計算が不要で，行列積の計算量が少ない。</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>固有ベクトルの選び方は $A^n$ の結果に影響しないか（スカラー倍の自由度）</summary>
+      <div class="details-body">
+        <p>$\lambda = 2$ の固有ベクトルとして $v_1 = (1, 2)^T$ の代わりに $cv_1 = (c, 2c)^T$（$c \ne 0$）を選ぶとどうなるか。$P$ が $c$ 倍の列を持てば $P^{-1}$ の対応する行が $1/c$ 倍になり，$P \Lambda^n P^{-1}$ の計算では $c \cdot (1/c) = 1$ となってキャンセルする。したがって $A^n = P\Lambda^n P^{-1}$ の結果は固有ベクトルのスカラー倍に依存しない。</p>
+        <p>これは「固有空間の基底として好きな非零ベクトルを選べる」という自由度があってもよい，という保証だ。計算を単純にするために整数比のよい固有ベクトルを選ぶと計算ミスが減る。</p>
       </div>
     </details>
   </div>
@@ -284,6 +296,30 @@ MathJax = {
       <div class="insight-title">💡 Cayley-Hamilton と「行列は自分の特性多項式を満たす」</div>
       <p>$2\times2$ の特性多項式は $\lambda^2 - (\mathrm{tr}\,A)\lambda + \det A$。これの $\lambda$ に $A$ を「代入」すると $O$ になる（行列は自身の特性方程式の根）。$n\times n$ でも成立するが，証明は Jordan 標準形等を使う。</p>
     </div>
+  </div>
+</section>
+
+<!-- 自力確認チェックリスト -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">📋 自力確認チェックリスト</div>
+  <div class="section-card-body">
+    <details>
+      <summary>第3回を理解できているかセルフチェック（クリックして展開）</summary>
+      <div class="details-body">
+        <p style="font-family:var(--font-sans); font-size:0.85rem; color:#6b7280; margin-bottom:0.5rem;">できると思ったら ✓，怪しいなら解説を再読する。</p>
+        <ul class="checklist">
+          <li>$\det A = 0 \Leftrightarrow \exists v \ne 0, Av = 0$ の $\Rightarrow$ 方向で具体的な $v = (b, -a)^T$ を構成できるか</li>
+          <li>$\Leftarrow$ 方向で，方程式 $Av=0$ から $\det A = 0$ を代数的に導けるか（$x, y$ を消去する操作）</li>
+          <li>Cayley-Hamilton 定理 $A^2 = (\mathrm{tr}\,A)A - (\det A)I$ を直接計算で証明できるか</li>
+          <li>$\det(AB) = \det A \cdot \det B$ の証明を $2\times 2$ 行列の直接計算で追えるか</li>
+          <li>「$AB = I \Rightarrow \det A \ne 0$」を，行列式の積の性質 $\det(AB) = 1$ から導けるか</li>
+          <li>$2\times2$ の固有方程式を $\mathrm{tr}\,A$，$\det A$ の Vieta の公式を使って速く解けるか（この例では和 1，積 $-2$ の2数）</li>
+          <li>固有ベクトルを $(A - \lambda I)v = 0$ から，1本の方程式だけで解けるか</li>
+          <li>$A^n = P\Lambda^n P^{-1}$ を展開し，$P\Lambda^n P^{-1}$ の各成分を計算できるか</li>
+          <li>Cayley-Hamilton で $A^2 = A + 2I$ と分かったとき，$A^3 = A^2 \cdot A = (A+2I)A = A^2 + 2A$ と帰納的に $A^n = \alpha_n A + \beta_n I$ に展開できるか</li>
+        </ul>
+      </div>
+    </details>
   </div>
 </section>
 

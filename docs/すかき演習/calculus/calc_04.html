@@ -172,6 +172,14 @@ MathJax = {
 
     <div class="think-box">
       <div class="think-title">🧠 思考法・解説</div>
+      <div class="backward-think">
+        <div class="bt-title">🔄 積分因子 $\mu(t) = e^{\int p(t)\,dt}$ はどこから来るか</div>
+        <p>目標は $x' + p(t)x = q(t)$ を「積の微分の形 $(\mu x)' = \mu q$ に変換すること」。$(\mu x)' = \mu' x + \mu x'$ なので，両辺に $\mu$ を掛けると</p>
+        $$\mu x' + \mu p(t) x = \mu q(t)$$
+        <p>これが $(\mu x)' = \mu x' + \mu' x$ と一致するためには $\mu' = \mu p(t)$，すなわち</p>
+        $$\frac{\mu'}{\mu} = p(t) \quad\Rightarrow\quad (\log \mu)' = p(t) \quad\Rightarrow\quad \mu = e^{\int p(t)\,dt}$$
+        <p>積分因子は「左辺を完全微分にする乗数」であり，$\mu'/\mu = p$ という関係から自然に決まる。</p>
+      </div>
       <div class="insight-box">
         <div class="insight-title">💡 積分因子のアイデア</div>
         <p>一次線形 $x' + p(t)x = q(t)$ の形。$p(t) = \cos t$ に対して積分因子 $\mu(t) = e^{\int \cos t\,dt} = e^{\sin t}$ を掛ける。なぜ？ 左辺が $\dfrac{d}{dt}(\mu x)$ の形になるから（積の微分の逆）：</p>
@@ -219,6 +227,18 @@ MathJax = {
       <p>自律系 $x' = F(x)$ では<strong>まず因数分解して平衡点を求める</strong>。$F(x) = (x-2)(x+1)$ の根 $x = 2, -1$ が平衡点。</p>
       <p>なぜ変数変換 $x = x_0 + u$（$x_0$ は平衡点）を行うか？ 平衡点付近で $u$ が小さいとき，$u' \approx F'(x_0) u$（線形化）で局所的な振る舞いが分かる。さらに非線形項を含めて厳密に解くことも，変換後の方程式が整理されて解きやすくなるため。</p>
       <p>今回は $u' = u(u+3)$ という変数分離形に帰着し，部分分数展開 $\dfrac{1}{u(u+3)} = \dfrac{1}{3u} - \dfrac{1}{3(u+3)}$ を用いて積分した。</p>
+    </div>
+
+    <div class="insight-box">
+      <div class="insight-title">💡 平衡点の安定性：相線図（phase line）で読む</div>
+      <p>$x' = F(x) = (x-2)(x+1)$ の符号を考える：</p>
+      <ul>
+        <li>$x < -1$ のとき：$(x-2) < 0$，$(x+1) < 0$ → $F(x) = (+) > 0$，すなわち $x$ が増加</li>
+        <li>$-1 < x < 2$ のとき：$(x-2) < 0$，$(x+1) > 0$ → $F(x) < 0$，すなわち $x$ が減少</li>
+        <li>$x > 2$ のとき：$(x-2) > 0$，$(x+1) > 0$ → $F(x) > 0$，すなわち $x$ が増加</li>
+      </ul>
+      <p>相線図：$\longrightarrow \mathbf{x=-1} \longleftarrow \quad\longrightarrow \mathbf{x=2} \longrightarrow$</p>
+      <p>$x = -1$ は<strong>安定平衡点</strong>（両側から引き寄せられる），$x = 2$ は<strong>不安定平衡点</strong>（両側から離れていく）。これは $F'(-1) = -3 < 0$（安定），$F'(2) = 3 > 0$（不安定）という線形化の判定とも一致する。</p>
     </div>
 
   </div>
@@ -275,6 +295,29 @@ MathJax = {
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- 自力確認チェックリスト -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">📋 自力確認チェックリスト</div>
+  <div class="section-card-body">
+    <details>
+      <summary>第4回を理解できているかセルフチェック（クリックして展開）</summary>
+      <div class="details-body">
+        <p style="font-family:var(--font-sans); font-size:0.85rem; color:#6b7280; margin-bottom:0.5rem;">できると思ったら ✓，怪しいなら解説を再読する。</p>
+        <ul class="checklist">
+          <li>$x' = tx$ を見て，変数分離か積分因子か迷わず積分因子で解けるか（または変数分離でも解けるか）</li>
+          <li>積分因子 $\mu = e^{\int p(t)\,dt}$ の式が，$\mu'/\mu = p$ という条件から導けるか</li>
+          <li>ロジスティック方程式で平衡点（恒等定数解）を先に確認する習慣があるか</li>
+          <li>同次形 $x' = f(x/t)$ を見たとき，$u = x/t$ の置換で変数分離形になることを示せるか</li>
+          <li>自律系 $x' = F(x)$ の平衡点の「安定・不安定」を $F'$ の符号で判定できるか</li>
+          <li>Riccati 型で $x = x_0 + u$（$x_0$ は平衡点）の変換後，$u$ の ODE が変数分離になることを確認できるか</li>
+          <li>二階線形定係数 ODE の特性方程式 $\lambda^2 + b\lambda + c = 0$ を解いて一般解を書けるか</li>
+          <li>積分定数 $\pm e^{C_0}$ を「$C$（任意実数）」に書き直す癖がついているか</li>
+        </ul>
+      </div>
+    </details>
   </div>
 </section>
 

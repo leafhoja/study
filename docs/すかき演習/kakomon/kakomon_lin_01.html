@@ -133,8 +133,16 @@ MathJax = {
 
     <div class="think-box">
       <div class="think-title">🧠 思考の出発点</div>
-      <p><strong>「行列を求めよ」は方程式で立てる。</strong>$f_A(\mathbf{v}) = A\mathbf{v}$ なので，$n$ 個の入出力ペアがあれば，列を横並びにして $A \cdot [\mathbf{v}_1 \cdots \mathbf{v}_n] = [\mathbf{w}_1 \cdots \mathbf{w}_n]$ という行列方程式が作れる。入力行列が正則なら $A = QP^{-1}$ で一意に決まる。</p>
-      <p><strong>$\det(A)=0$ のとき，核は自明でない。</strong>$\mathrm{rank}(A)=1$ なら次元定理より $\dim\mathrm{Ker}=1$。Im は A の列空間（全列が同じ方向を向いているので1次元）。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 $A = QP^{-1}$ という式の導出</div>
+        <p>$f = f_A$ なので入出力の関係は「行列 $A$ を未知数として $A \cdot P = Q$ という行列方程式」として立てられる（$P$ の各列が入力ベクトル，$Q$ の各列が対応する出力ベクトル）。</p>
+        <p>$P$ が正則（$\det P \ne 0$）なら，右から $P^{-1}$ を掛けて $A = Q P^{-1}$ と解ける。$P$ が正則かどうかは $\det P$ を計算して確認する（正則でなければ $A$ は一意に決まらない可能性がある）。</p>
+      </div>
+      <p><strong>$\det(A)=0$ のとき，核は自明でない。</strong>$\mathrm{rank}(A)=1$ なら次元定理より $\dim\mathrm{Ker}=1$。Im は $A$ の列空間（全列が同じ方向を向いているので1次元）。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 $4x = 3y$ という核の方程式はどこから来るか</div>
+        <p>$A = \frac{1}{5}\begin{pmatrix}12&-9\\8&-6\end{pmatrix}$ に対し $A\mathbf{v} = \mathbf{0}$ を解く。第1行から $12x - 9y = 0 \Rightarrow 4x = 3y$，第2行から $8x - 6y = 0 \Rightarrow 4x = 3y$（同じ式）。$\mathrm{rank}(A) = 1$ なのでどの行も同じ情報しか持っていない。$y = t$ とおくと $x = 3t/4$，整数比 $x:y = 3:4$ に取れば $\mathbf{v} = (3,4)^T$。</p>
+      </div>
     </div>
 
   </div>
@@ -197,6 +205,11 @@ MathJax = {
       <div class="think-title">🧠 思考の出発点</div>
       <p><strong>(1) の核心：</strong>「det は積の準同型」$\det(A^n) = (\det A)^n$。奇数乗が 1 になる実数は 1 のみ（偶数乗だと $-1$ も候補になる）。これを使うと det の値が決まり，分類定理から型が決まる。</p>
       <p><strong>(2) の核心：</strong>直交行列は回転か鏡映の2種類しかない。鏡映の対合性 $S^2=E$ が偶数乗で効く。奇数のとき $S^n = S \ne E$ なので鏡映は排除される。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 「奇数乗が 1 になる実数は 1 のみ」の証明</div>
+        <p>$d^n = 1$（$n$ 奇数，$d \in \mathbb{R}$）を解く。$g(d) = d^n$ は奇数次の単調増加関数（$g'(d) = nd^{n-1} \geq 0$，等号は $d = 0$ のみ）。$g(1) = 1$ かつ $g$ は狭義単調増加（$d \ne 0$ では）なので $g(d) = 1 \Leftrightarrow d = 1$。</p>
+        <p>偶数のとき $g(-1) = (-1)^n = 1$ も成立するため $d = \pm 1$ の2解が候補になり，$\det A = -1$（鏡映）の可能性が残る。</p>
+      </div>
     </div>
 
   </div>
@@ -260,7 +273,12 @@ MathJax = {
     <div class="think-box">
       <div class="think-title">🧠 思考の出発点</div>
       <p><strong>流れをつかむ：</strong>固有方程式 → 固有値 → 固有ベクトル → 対角化行列 $P$ → $A = P\Lambda P^{-1}$ → $A^n = P\Lambda^n P^{-1}$。この一連の流れは「行列の冪を求めよ」という問題の標準戦略。</p>
-      <p><strong>固有ベクトルの求め方：</strong>$(A-\lambda_i E)\mathbf{v}=\mathbf{0}$ の非自明解を探す。行基本変形して自由変数から書く。スカラー倍の自由度があるので簡単な整数にとることが多い。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 $\mathrm{tr}\,A$，$\det A$ から固有値を速く求める（Vieta の公式）</div>
+        <p>$A = \begin{pmatrix}13&-30\\5&-12\end{pmatrix}$ の場合：$\mathrm{tr}\,A = 13+(-12) = 1$，$\det A = 13\cdot(-12)-(-30)\cdot 5 = -156+150 = -6$。</p>
+        <p>特性方程式 $\lambda^2 - (\mathrm{tr}\,A)\lambda + \det A = 0$ に代入すると $\lambda^2 - \lambda - 6 = 0$，解は「和が 1，積が $-6$」の2数。すぐに $\lambda = 3, -2$ と分かる（行列式の展開より先に Vieta で見当をつける方が速い）。</p>
+      </div>
+      <p><strong>固有ベクトルの求め方：</strong>$(A-\lambda_i E)\mathbf{v}=\mathbf{0}$ の非自明解を探す。$2\times2$ では1本の方程式だけで十分（2行は比例するはず）。スカラー倍の自由度があるので簡単な整数にとる。</p>
       <p><strong>$\det(P)=1$ は計算のラッキー：</strong>$P^{-1}$ が整数行列になり，後の計算が楽になる。</p>
     </div>
 
@@ -323,6 +341,32 @@ MathJax = {
       <p><strong>(2) 同型を示すには線形性・単射性・全射性の3つを示す。</strong>単射性を示すとき「$\varphi(f)=0 \Rightarrow f=\mathbf{0}$（零写像）」を示すのが定石（$\ker\varphi$ を調べる）。全射性では，$w\in W$ が与えられたとき「原像になる元を具体的に構成」するのが素直な方針。$V=\mathbb{R}$ のとき線形写像は $x\mapsto xw$ の形に書ける，という事実がそのまま全射の証明になる。</p>
     </div>
 
+  </div>
+</section>
+
+<!-- 自力確認チェックリスト -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">📋 小テスト自力確認チェックリスト</div>
+  <div class="section-card-body">
+    <details>
+      <summary>小テストの問題を自力で解けるかセルフチェック（クリックして展開）</summary>
+      <div class="details-body">
+        <p style="font-family:var(--font-sans); font-size:0.85rem; color:#6b7280; margin-bottom:0.5rem;">できると思ったら ✓，怪しいなら解説を再読する。</p>
+        <ul class="checklist">
+          <li><strong>問1：</strong>2つの入出力ペアから「$A \cdot P = Q$，$A = QP^{-1}$」という行列方程式を立てられるか</li>
+          <li><strong>問1：</strong>$\det A = 0$ を確認した後，$\ker(f)$ の基底を $Av=0$ の方程式1本で求められるか</li>
+          <li><strong>問1：</strong>次元定理 $\dim\ker + \dim\mathrm{Im} = 2$ を使って Im の次元を確認できるか</li>
+          <li><strong>問2(1)：</strong>$\det(A^n) = (\det A)^n = 1$ から $n$ 奇数なら $\det A = 1$ を導けるか</li>
+          <li><strong>問2(1)：</strong>$\det A = 1$ の直交行列は回転行列のみ，という分類定理を使えるか</li>
+          <li><strong>問2(2)：</strong>鏡映行列 $S(\alpha)^2 = E$ という対合性を，$n$ の偶奇で場合分けして使えるか</li>
+          <li><strong>問3：</strong>$\mathrm{tr}\,A$ と $\det A$ から特性方程式 $\lambda^2 - (\mathrm{tr})\ \lambda + (\det) = 0$ を書き，Vieta で固有値を速く求められるか</li>
+          <li><strong>問3：</strong>$A^n = P\Lambda^n P^{-1}$ の公式と，$P$ の形（固有ベクトルを列に並べる）を理解しているか</li>
+          <li><strong>問4(1)：</strong>$\mathrm{Hom}(V,W)$ が部分空間でなく新しい空間であるため，8公理すべての確認が必要な点を意識しているか</li>
+          <li><strong>問4(2)：</strong>$\varphi(f) = f(1)$ の単射性で「$f(1) = 0_W \Rightarrow f(x) = xf(1) = 0$ for all $x$」という線形性の使い方ができるか</li>
+          <li><strong>問4(2)：</strong>全射性で「任意の $w \in W$ に対し $f_w(x) = xw$ という原像を具体的に構成」できるか</li>
+        </ul>
+      </div>
+    </details>
   </div>
 </section>
 

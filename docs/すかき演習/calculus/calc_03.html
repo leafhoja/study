@@ -91,6 +91,11 @@ MathJax = {
       <p>よって極限 $\lim_{x\to 0} \dfrac{f'(x) - f'(0)}{x}$ は存在しない。$f$ は $x = 0$ で2回微分可能でない。$\blacksquare$</p>
     </div>
 
+    <div class="warn-box">
+      <div class="warn-title">⚠ よくある間違い：$x \ne 0$ の微分公式を $x = 0$ に転用する</div>
+      <p>$x \ne 0$ では $f'(x) = 2x\sin(1/x) - \cos(1/x)$ が成立するが，この式に $x = 0$ を代入することはできない（$\cos(1/0)$ は未定義）。$f'(0)$ は定義式 $\displaystyle\lim_{x\to 0} \frac{f(x)-f(0)}{x}$ から直接求めること。「微分可能なら微分公式を使える」は $x \ne 0$ の範囲でしか保証されていない。</p>
+    </div>
+
     <div class="think-box">
       <div class="think-title">🧠 思考法・解説</div>
       <p><strong>なぜ $x^2 \sin(1/x)$ を考えるのか？</strong></p>
@@ -159,8 +164,13 @@ MathJax = {
       <p>この「離散 → 稠密 → 連続」の拡張パターンは解析学で頻出する。</p>
 
       <div class="insight-box">
-        <div class="insight-title">💡 連続性がなければ？</div>
-        <p>連続性の仮定を外すと，$f(x+y) = f(x) + f(y)$ を満たす $f$ で $f(x) = ax$ の形でないものが（選択公理を使えば）存在する。Axiom of Choice を用いて構成される「Hamel 基底」というものを使う。連続性（または単調性）の仮定が Cauchy 方程式の「まともな解」を特定するために本質的だ。</p>
+        <div class="insight-title">💡 連続性がなければ？（Hamel 基底と病理的解）</div>
+        <p>連続性の仮定を外すと，$f(x+y) = f(x) + f(y)$ を満たす $f$ で $f(x) = ax$ の形でないものが存在する。選択公理（Axiom of Choice）を認めると，$\mathbb{R}$ を有理数体 $\mathbb{Q}$ 上のベクトル空間と見なしたときの基底（Hamel 基底）$B$ が存在する。すると「$b \in B$ ごとに異なる実数値 $c_b$ を割り当て，$\mathbb{Q}$-線形に拡張する」という構成で，$f \ne ax$ の Cauchy 方程式の解が得られる。</p>
+        <p>こうした「病理的解」は至る所で不連続であり，グラフは $\mathbb{R}^2$ の中で稠密になる（可視化不可能）。<strong>連続性（または単調性，可測性など）があると病理解は消える</strong>—これが連続性仮定の本質的な役割だ。</p>
+      </div>
+      <div class="warn-box">
+        <div class="warn-title">⚠ 問題文の「有理数 $x, y$」に注意</div>
+        <p>この問題では函数方程式 $f(x+y)=f(x)+f(y)$ が「任意の有理数 $x, y$」に対して成立することから出発し，連続性を使って実数全体に拡張する。「任意の実数 $x,y$ で成立」と読み間違えると，Step 4（連続性による実数への拡張）が不要に見えてしまう。</p>
       </div>
     </div>
 
@@ -242,6 +252,29 @@ MathJax = {
       <p>$f_3'(x)$ の計算では $(x^x)' = x^x(\log x + 1)$ という $f_2'$ の結果を使い回す。複雑に見えても「まず $f_2$ の結果を書いておく」という意識で整理する。</p>
     </div>
 
+  </div>
+</section>
+
+<!-- 自力確認チェックリスト -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">📋 自力確認チェックリスト</div>
+  <div class="section-card-body">
+    <details>
+      <summary>第3回を理解できているかセルフチェック（クリックして展開）</summary>
+      <div class="details-body">
+        <p style="font-family:var(--font-sans); font-size:0.85rem; color:#6b7280; margin-bottom:0.5rem;">できると思ったら ✓，できない・怪しいなら解説を再読する。</p>
+        <ul class="checklist">
+          <li>$f'(0)$ を求めるとき，差分商の定義 $\lim_{x\to 0}(f(x)-f(0))/x$ に必ず戻れるか</li>
+          <li>$f''(0)$ が存在しないことを証明するために，極限が存在しない点列を具体的に構成できるか</li>
+          <li>なぜ $h_n = 1/(2n\pi)$ を選んだかを自分の言葉で説明できるか</li>
+          <li>$x\log x \to 0$（$x\to+0$）を $u=1/x$ で置換して証明できるか</li>
+          <li>Cauchy 方程式の証明で「整数 → 有理数 → 実数」の拡張の各ステップの意味を言えるか</li>
+          <li>$f(x+y)=f(x)+f(y)$ が有理数でのみ成立しているのに実数全体で $f(x)=ax$ が示せる理由を説明できるか</li>
+          <li>$x^{x^x} = e^{x^x \log x}$ と変形して，積の微分と連鎖率だけで $f_3'(x)$ を求められるか</li>
+          <li>$\lim_{x\to+0} f_n(x)$ の奇偶による違いを帰納法の骨格で説明できるか</li>
+        </ul>
+      </div>
+    </details>
   </div>
 </section>
 

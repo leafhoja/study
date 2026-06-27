@@ -274,6 +274,75 @@ MathJax = {
   </div>
 </section>
 
+<!-- 雑談：群構造 -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">💬 雑談：$\{R_\theta, T_\tau\}$ の群構造と行列式の代数</div>
+  <div class="section-card-body">
+    <p>問3の合成の結果をまとめると次の表になる（$R$ は回転，$T$ は鏡映）：</p>
+    <table style="border-collapse:collapse; width:100%; font-family:var(--font-sans); font-size:0.9rem; margin:0.75rem 0;">
+      <thead>
+        <tr style="background:#dcfce7;">
+          <th style="border:1px solid #86efac; padding:0.4rem 0.75rem;">$\circ$（左 $\times$ 右）</th>
+          <th style="border:1px solid #86efac; padding:0.4rem 0.75rem;">$R$（回転）</th>
+          <th style="border:1px solid #86efac; padding:0.4rem 0.75rem;">$T$（鏡映）</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="border:1px solid #86efac; padding:0.4rem 0.75rem;"><strong>$R$（回転）</strong></td>
+          <td style="border:1px solid #86efac; padding:0.4rem 0.75rem;">$R$（回転）</td>
+          <td style="border:1px solid #86efac; padding:0.4rem 0.75rem;">$T$（鏡映）</td>
+        </tr>
+        <tr>
+          <td style="border:1px solid #86efac; padding:0.4rem 0.75rem;"><strong>$T$（鏡映）</strong></td>
+          <td style="border:1px solid #86efac; padding:0.4rem 0.75rem;">$T$（鏡映）</td>
+          <td style="border:1px solid #86efac; padding:0.4rem 0.75rem;">$R$（回転）</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>これは $\{+1, -1\}$ と実数の乗法（$+1$ が恒等元，$(-1)^2 = +1$）の積表と完全に同じ構造だ。$R \leftrightarrow +1$，$T \leftrightarrow -1$ と対応させると，$TT = R$（鏡映を2回すると回転）は $(-1)^2 = +1$ に対応する。</p>
+    <div class="insight-box">
+      <div class="insight-title">💡 行列式で見る：$\det$ は「符号」の準同型</div>
+      <p>$\det R_\theta = 1$，$\det T_\tau = -1$ であり，$\det(AB) = \det A \cdot \det B$ （問3の結果）より：</p>
+      <ul>
+        <li>$\det(R \cdot R) = 1 \cdot 1 = 1$ → 回転（$\det = 1$）</li>
+        <li>$\det(T \cdot T) = (-1)(-1) = 1$ → 回転（$\det = 1$）</li>
+        <li>$\det(R \cdot T) = 1 \cdot (-1) = -1$ → 鏡映（$\det = -1$）</li>
+        <li>$\det(T \cdot R) = (-1) \cdot 1 = -1$ → 鏡映（$\det = -1$）</li>
+      </ul>
+      <p>「行列式の値が $+1$ か $-1$ か」が「回転か鏡映か」を完全に決定している。合成の型が $\det$ の積だけから分かるのは，$\det$ が群準同型 $(\mathrm{O}(2), \circ) \to (\{+1,-1\}, \cdot)$ を与えているからだ。</p>
+    </div>
+    <div class="insight-box">
+      <div class="insight-title">💡 行列式と「向き付き面積」（TA の雑談より）</div>
+      <p>$2 \times 2$ の行列式は平行四辺形の「向き付き面積」を表す。$R_\theta$ は長さと角度を保つ等長変換なので面積比は 1，向きも保つので $\det = +1$。$T_\tau$ は長さを保つが折り返すので向きが反転し，$\det = -1$。</p>
+      <p>抽象的な $\det(AB) = \det A \cdot \det B$ の等式も，「$A$ で $\alpha$ 倍，$B$ で $\beta$ 倍したら合成で $\alpha\beta$ 倍」という面積の連鎖として直感的に理解できる。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 自力確認チェックリスト -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">📋 自力確認チェックリスト</div>
+  <div class="section-card-body">
+    <details>
+      <summary>第2回を理解できているかセルフチェック（クリックして展開）</summary>
+      <div class="details-body">
+        <p style="font-family:var(--font-sans); font-size:0.85rem; color:#6b7280; margin-bottom:0.5rem;">できると思ったら ✓，怪しいなら解説を再読する。</p>
+        <ul class="checklist">
+          <li>標準基底 $e_1, e_2$ の $\theta$ 回転後を「偏角の加算」で計算し，$R_\theta$ の行列を書けるか</li>
+          <li>$T_\tau = R_\tau A R_{-\tau}$ という3ステップ合成を，「$l_\tau$ を $x$ 軸に持ち込んで戻す」という発想から導けるか</li>
+          <li>$T_\tau$ の $(1,1)$ 成分が $\cos 2\tau$（$\tau$ でなく $2\tau$）になる理由を幾何的に説明できるか</li>
+          <li>行列の積の順番と写像の合成の順番の対応（右から左）を意識しているか</li>
+          <li>補題 $R_\phi A R_\phi = A$ を直接計算で証明できるか</li>
+          <li>${}^t A A = I$ という条件を「列ベクトルが正規直交基底」と翻訳できるか</li>
+          <li>$\det = 1$ が回転，$\det = -1$ が鏡映であることを，$2 \times 2$ 直交行列の分類から導けるか</li>
+          <li>$TT = R$（鏡映2回 = 回転）を，$\det(TT) = (-1)^2 = 1$ の論理で説明できるか</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
 <!-- まとめ -->
 <section class="section-card">
   <div class="section-card-header" style="background:#dcfce7; color:#166534;">📌 第2回のまとめ</div>
