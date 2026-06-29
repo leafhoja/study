@@ -469,12 +469,11 @@ MathJax = {
   </p>
 
   <div class="box box-note">
-    <div class="box-head"><span class="box-tag">等温変化への適用</span>$dP = 0$（等温変化）のとき</div>
+    <div class="box-head"><span class="box-tag">等圧変化への適用</span>$dP = 0$（等圧変化）のとき</div>
     <div class="box-body">
-      <p>等温変化 $dT = 0$ かつ $dP = 0$（圧力一定という条件ではなく，等温線に沿った等圧状態を考える）
-      の場合，全微分から：</p>
-      $$0 = \left(\frac{\partial P}{\partial T}\right)_V + \left(\frac{\partial P}{\partial V}\right)_T \frac{dV}{dT}$$
-      <p>これは次の「偏微分の $-1$ 関係」の導出に使われる。</p>
+      <p>等圧変化 $dP = 0$ の場合，上の全微分を $dT$ で割ると：</p>
+      $$0 = \left(\frac{\partial P}{\partial T}\right)_V + \left(\frac{\partial P}{\partial V}\right)_T \left(\frac{\partial V}{\partial T}\right)_P$$
+      <p>ここで $dP = 0$ の経路に沿った $dV/dT = \left(\partial V/\partial T\right)_P$ を用いた。これは次の「偏微分の $-1$ 関係」そのものである。</p>
     </div>
   </div>
 
@@ -566,7 +565,7 @@ MathJax = {
       <p>
         $\kappa$ の符号：$T$ 一定で圧力 $P$ を増やすと体積 $V$ は減る（$\partial V/\partial P < 0$）。
         $\kappa$ が<em>正の値</em>になるよう，定義の前に $-1$ をつける。
-        単位はどちらも $\mathrm{Pa}^{-1}$ または $\mathrm{K}^{-1}$（それぞれ）。
+        単位：$\beta$ は $\mathrm{K}^{-1}$（温度の逆数），$\kappa$ は $\mathrm{Pa}^{-1}$（圧力の逆数）。
       </p>
     </div>
   </div>

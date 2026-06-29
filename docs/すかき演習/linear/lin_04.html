@@ -202,12 +202,12 @@ MathJax = {
       <p><strong>(2) $\varphi: V \to (V^*)^*$ の線形性：</strong>$v \in V$ に対し $\hat v: V^* \to \mathbb{R}$ を $\hat v(f) = f(v)$ で定義し，$\varphi(v) = \hat v$ とする。</p>
       <p>$\hat v$ が線形写像であること：$\hat v(af + bg) = (af+bg)(v) = af(v) + bg(v) = a\hat v(f) + b\hat v(g)$。</p>
       <p>$\varphi$ が線形写像であること：$\widehat{av + bw}(f) = f(av+bw) = af(v)+bf(w) = (a\hat v + b\hat w)(f)$。</p>
-      <p>$\varphi$ の単射性（$\ker\varphi = \{0\}$ の確認）：$\hat v = 0$，すなわち「全ての $f \in V^*$ に対し $\hat v(f) = f(v) = 0$」と仮定する。</p>
+      <p>$\varphi$ の単射性（$\ker\varphi = \{0\}$ の確認）：$\hat v = 0$，すなわち「全ての $f \in V^*$ に対し $\hat v(f) = f(v) = 0$」と仮定する。以下 $V$ が有限次元の場合の証明。</p>
       <p style="margin-left:1rem; color:#374151; font-size:0.93em;">
-        <strong>双対基底の使い方：</strong>$V$ に基底 $\{e_1,\ldots,e_n\}$ をとる。その双対基底 $e_j^* \in V^*$ は $e_j^*(e_i) = \delta_{ij}$（$i = j$ なら 1，それ以外は 0）で定義される。
+        <strong>双対基底の使い方（有限次元 $V$ のとき）：</strong>$V$ に基底 $\{e_1,\ldots,e_n\}$ をとる。その双対基底 $e_j^* \in V^*$ は $e_j^*(e_i) = \delta_{ij}$（$i = j$ なら 1，それ以外は 0）で定義される。
         $v = v_1 e_1 + \cdots + v_n e_n$ と展開すると，$e_j^*(v) = v_j$（第 $j$ 成分を取り出す）。
         $\hat v = 0$ という仮定より，特に $f = e_j^*$ を代入すると $v_j = e_j^*(v) = \hat v(e_j^*) = 0$（各 $j = 1,\ldots,n$）。
-        全成分 $v_j = 0$ なので $v = 0$。
+        全成分 $v_j = 0$ なので $v = 0$。（無限次元の場合も $\varphi$ は単射だが，その証明には Hahn-Banach の定理が必要。）
       </p>
       <p>よって $\ker\varphi = \{0\}$，$\varphi$ は単射。$\square$</p>
       <p><strong>(3) $V = \mathbb{R}^n$ における内積写像 $\Psi: v \mapsto (\cdot, v)$ の線形性：</strong>$\Psi(v)(w) := (w, v)$ とおく。</p>

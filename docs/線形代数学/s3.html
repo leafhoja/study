@@ -252,7 +252,7 @@
 
           <strong>$\operatorname{Im}(T)$ の計算</strong>：$A$ の列ベクトルの span：
           $\left\langle\begin{pmatrix}1\\0\end{pmatrix},\begin{pmatrix}1\\1\end{pmatrix},\begin{pmatrix}0\\1\end{pmatrix}\right\rangle$。
-          $\begin{pmatrix}1\\0\end{pmatrix}$ と $\begin{pmatrix}1\\1\end{pmatrix}$ は平行でないので $\mathbb{R}^2$ を張る。
+          $\begin{pmatrix}1\\0\end{pmatrix}$ と $\begin{pmatrix}1\\1\end{pmatrix}$ は平行でない（1次独立）ので $\mathbb{R}^2$（2次元）の基底を成し，$\mathbb{R}^2$ 全体を張る（任意の $\begin{pmatrix}a\\b\end{pmatrix} = (a-b)\begin{pmatrix}1\\0\end{pmatrix} + b\begin{pmatrix}1\\1\end{pmatrix}$）。
           $$\operatorname{Im}(T) = \mathbb{R}^2$$
           よって $T$ は全射（値域全体に届く）。
         </div>
@@ -516,10 +516,12 @@
       <details>
         <summary>定理 3.6 の証明（クリックで展開）</summary>
         <div class="proof-body">
-          $m\ne n$ を仮定して矛盾を導く。$m\ne n$ ならば $m>n$ または $n>m$ のいずれかが成立。
-          もし同型写像 $T: \mathbb{K}^m\xrightarrow{\sim}\mathbb{K}^n$ が存在するとすると、
-          $T$ も $T^{-1}$ もともに単射（同型写像は全単射）。
-          しかし $m\ne n$ のとき系 3.5 より $T$ または $T^{-1}$ のいずれかが単射でなくなり矛盾する。
+          $m\ne n$ を仮定して矛盾を導く。同型写像 $T: \mathbb{K}^m\xrightarrow{\sim}\mathbb{K}^n$ が存在するとすると，$T$ も $T^{-1}$ も単射（全単射の定義）。
+          <ul style="margin:0.5rem 0 0.5rem 1.2rem; font-size:0.9rem;">
+            <li>$m > n$ のとき：$T: \mathbb{K}^m \to \mathbb{K}^n$ に系 3.5 を適用（入力次元 $m >$ 出力次元 $n$）→ $T$ は単射でない。矛盾。</li>
+            <li>$m < n$ のとき：$T^{-1}: \mathbb{K}^n \to \mathbb{K}^m$ に系 3.5 を適用（入力次元 $n >$ 出力次元 $m$）→ $T^{-1}$ は単射でない。矛盾。</li>
+          </ul>
+          いずれの場合も矛盾するから，$m = n$。
           <div class="qed">QED</div>
         </div>
       </details>

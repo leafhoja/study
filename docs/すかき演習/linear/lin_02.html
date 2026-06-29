@@ -187,10 +187,10 @@ MathJax = {
       <p><strong>（3）の証明の詳細：</strong></p>
       <div class="logic-chain">
         Step 1：$R_\theta T_\tau = R_\theta \cdot R_\tau A R_{-\tau} = R_{\theta+\tau} A R_{-\tau}$<br>
-        Step 2：$R_{\theta+\tau} = R_{(\tau+\theta/2)+\theta/2}$ と分解する（$(\tau+\theta/2) + \theta/2 = \tau+\theta$）<br>
-        Step 3：$R_{-\tau} = R_{-(\tau+\theta/2)+\theta/2}$ と分解する（$-(\tau+\theta/2)+\theta/2 = -\tau$）<br>
-        Step 4：<strong>補題 $R_\phi A R_\phi = A$</strong> を使う（後述）<br>
-        $$R_{\theta+\tau} A R_{-\tau} = R_{\tau+\theta/2}(R_{\theta/2} A R_{\theta/2})R_{-(\tau+\theta/2)} = R_{\tau+\theta/2} \cdot A \cdot R_{-(\tau+\theta/2)} = T_{\tau+\theta/2}$$
+        Step 2：$R_{\alpha+\beta} = R_\alpha R_\beta$ より $R_{\theta+\tau} = R_{\tau+\theta/2} \cdot R_{\theta/2}$（$(\tau+\theta/2) + \theta/2 = \tau+\theta$）<br>
+        Step 3：同様に $R_{-\tau} = R_{\theta/2} \cdot R_{-(\tau+\theta/2)}$（$\theta/2 + (-(\tau+\theta/2)) = -\tau$。回転は可換なので順序は問わない）<br>
+        Step 4：Step 2・3 を代入し，<strong>補題 $R_\phi A R_\phi = A$</strong> を使う（後述）<br>
+        $$R_{\theta+\tau} A R_{-\tau} = \bigl(R_{\tau+\theta/2} R_{\theta/2}\bigr) A \bigl(R_{\theta/2} R_{-(\tau+\theta/2)}\bigr) = R_{\tau+\theta/2}(R_{\theta/2} A R_{\theta/2})R_{-(\tau+\theta/2)} = R_{\tau+\theta/2} \cdot A \cdot R_{-(\tau+\theta/2)} = T_{\tau+\theta/2}$$
       </div>
       <div class="backward-think" style="margin:0.75rem 0;">
         <div class="bt-title">🔄 補題：$R_\phi A R_\phi = A$ の証明</div>

@@ -79,37 +79,37 @@ MathJax = {
 
     <div class="think-box">
       <div class="think-title">🧠 方針を立てる前に</div>
-      <p><strong>何を示すか：</strong>「$e^{a_n} \to e^a$」$= $ 「任意の $\varepsilon > 0$ に対し，ある $N$ が存在して $n \geq N \Rightarrow |e^{a_n} - e^a| < \varepsilon$」。</p>
-      <p><strong>何を使えるか：</strong>$a_n \to a$（仮定），平均値定理（または指数関数の性質）。</p>
+      <p><strong>何を示すか：</strong>「$e^{a_n} \to e^a$」$= $ 「任意の $\varepsilon > 0$ に対し，ある $N$ が存在して $n > N \Rightarrow |e^{a_n} - e^a| < \varepsilon$」。</p>
+      <p><strong>何を使えるか：</strong>$a_n \to a$（仮定），指数関数の単調性。</p>
       <div class="backward-think">
         <div class="bt-title">🔄 ゴールから逆算する</div>
-        <p>$|e^{a_n} - e^a|$ を $|a_n - a|$ で上から抑えたい。平均値定理を使うと</p>
-        $$|e^{a_n} - e^a| = e^c |a_n - a| \quad (c \text{ は } a_n \text{ と } a \text{ の間の点})$$
-        <p>$c$ は $a_n$ と $a$ の間なので，$|a_n - a| < 1$ が言えていれば $c \in (a-1,\, a+1)$ の範囲に収まり，$e^c \leq e^{a+1}$（有界な定数）が使える。だから「まず $|a_n - a| < 1$ を確保してから，$\varepsilon$ のサイズを調整する」という2段階の取り方になる。</p>
+        <p>$|e^{a_n} - e^a| < \varepsilon$ を達成したい。$e^x$ は単調増加なので，$|a_n - a| < \delta$ から $e^{a-\delta} < e^{a_n} < e^{a+\delta}$ が得られる。</p>
+        <p>上側の不等式 $e^{a_n} - e^a < e^{a+\delta} - e^a = e^a(e^\delta - 1)$ がちょうど $\varepsilon$ になるように $\delta$ を決めればよい：</p>
+        $$e^a(e^\delta - 1) = \varepsilon \iff \delta = \log\!\left(1 + \frac{\varepsilon}{e^a}\right).$$
+        <p>この $\delta$ を $a_n \to a$ の定義に食わせれば一発で済む。</p>
       </div>
     </div>
 
     <div class="answer-box">
       <div class="answer-title">📝 解答</div>
-      <p>$\varepsilon > 0$ を任意に与える。以下の2条件を満たす $N$ を構成する。</p>
-      <p><strong>Step 1（$\varepsilon_1$ の設定）.</strong>　$\varepsilon_1 := \min\!\left(1,\; \dfrac{\varepsilon}{e^{a+1}}\right) > 0$ とおく。</p>
+      <p>$\varepsilon > 0$ を任意に与える。$\varepsilon' := \log\!\left(1 + \dfrac{\varepsilon}{e^a}\right) > 0$ とおく（$\varepsilon > 0$ より $1 + \varepsilon/e^a > 1$ なので正）。</p>
       <p>$a_n \to a$ の仮定より，ある $N \in \mathbb{N}$ が存在して</p>
-      $$n \geq N \implies |a_n - a| < \varepsilon_1.$$
-      <p><strong>Step 2（上界の評価）.</strong>　$n \geq N$ を固定する。$|a_n - a| < \varepsilon_1 \leq 1$ なので，$a_n$ と $a$ の間の任意の点 $c$ に対して</p>
-      $$a - 1 < c < a + 1 \implies e^c < e^{a+1}.$$
-      <p>平均値定理を $e^x$ に適用すると，$a_n$ と $a$ の間のある $c$ に対して</p>
-      $$|e^{a_n} - e^a| = e^c |a_n - a|.$$
-      <p>したがって</p>
-      $$|e^{a_n} - e^a| = e^c |a_n - a| < e^{a+1} \cdot \varepsilon_1 \leq e^{a+1} \cdot \frac{\varepsilon}{e^{a+1}} = \varepsilon.$$
-      <p>以上より，任意の $\varepsilon > 0$ に対して上記の $N$ が存在し $n \geq N \Rightarrow |e^{a_n} - e^a| < \varepsilon$ が成立する。よって $e^{a_n} \to e^a$。$\square$</p>
+      $$n > N \implies |a_n - a| < \varepsilon'.$$
+      <p>$n > N$ を固定する。$a - \varepsilon' < a_n < a + \varepsilon'$ かつ $e^x$ は単調増加なので</p>
+      $$e^{a - \varepsilon'} < e^{a_n} < e^{a + \varepsilon'}.$$
+      <p><strong>上からの評価：</strong></p>
+      $$e^{a_n} - e^a < e^{a+\varepsilon'} - e^a = e^a(e^{\varepsilon'} - 1) = e^a \cdot \frac{\varepsilon}{e^a} = \varepsilon.$$
+      <p><strong>下からの評価：</strong></p>
+      $$e^{a_n} - e^a > e^{a-\varepsilon'} - e^a = e^a(e^{-\varepsilon'} - 1) = -\frac{\varepsilon}{1 + \varepsilon/e^a} > -\varepsilon.$$
+      <p>よって $|e^{a_n} - e^a| < \varepsilon$。$\varepsilon > 0$ は任意だったから $e^{a_n} \to e^a$。$\square$</p>
     </div>
 
     <div class="think-box">
       <div class="think-title">🔑 ポイントまとめ</div>
       <ul>
-        <li><strong>平均値定理：</strong>$f(b) - f(a) = f'(c)(b-a)$ は「差を微分で評価する」基本技。$f = e^x$ なら $f' = e^x$ なので差がそのまま評価できる。</li>
-        <li><strong>2段階の $\varepsilon$ 設定：</strong>$\min(1, \varepsilon / C)$ という形は頻出。「まず $|a_n - a| < 1$ で定数 $C = e^{a+1}$ を確保し，次に $\varepsilon/C$ で誤差を制御する」というセット。</li>
-        <li><strong>別解（$|e^t - 1| \leq |t|e^{|t|}$ を使う方法）：</strong>$|e^{a_n} - e^a| = e^a|e^{a_n - a} - 1|$，$|e^s - 1| \leq |s|e^{|s|}$（$|s| \leq 1$）を使っても同様に示せる。</li>
+        <li><strong>対数で $\varepsilon$ を逆算：</strong>「$|e^{a_n} - e^a| < \varepsilon$ にしたい」→ $e^x$ の単調性を使って $e^{a+\delta} - e^a = \varepsilon$ から $\delta = \log(1+\varepsilon/e^a)$ を決める，という逆算が核心。</li>
+        <li><strong>$\varepsilon'$ の正値確認：</strong>$\varepsilon > 0 \Rightarrow 1 + \varepsilon/e^a > 1 \Rightarrow \log(\cdots) > 0$ を必ず確認する。$a_n \to a$ の定義に食わせる $\varepsilon'$ が正でないと論法が破綻する。</li>
+        <li><strong>下からの評価：</strong>$e^{-\varepsilon'} - 1 = \dfrac{1}{1+\varepsilon/e^a} - 1 = \dfrac{-\varepsilon/e^a}{1+\varepsilon/e^a}$，これに $e^a$ をかけると $-\varepsilon/(1+\varepsilon/e^a) > -\varepsilon$。符号に注意。</li>
       </ul>
     </div>
 
@@ -165,7 +165,9 @@ MathJax = {
       <p>$a_k := \sqrt[k]{k} = k^{1/k}$ とおくと，求める極限は $\displaystyle\lim_{n\to\infty} A_n = \lim_{n\to\infty}\frac{1}{n}\sum_{k=1}^n a_k$。</p>
       <p><strong>$a_k \to 1$ の確認：</strong></p>
       $$a_k = k^{1/k} = e^{\frac{\ln k}{k}}.$$
-      <p>$\displaystyle\lim_{k\to\infty} \frac{\ln k}{k} = 0$（$\ln k$ は $k$ より遥かに遅く増大する）ので，指数関数の連続性より $a_k \to e^0 = 1$。</p>
+      <p>$\ln t \leq t - 1$（$t > 0$）に $t = \sqrt{k}$ を代入すると $\ln\sqrt{k} \leq \sqrt{k} - 1 < \sqrt{k}$，ゆえに</p>
+      $$0 \leq \frac{\ln k}{k} = \frac{2\ln\sqrt{k}}{k} < \frac{2}{\sqrt{k}} \xrightarrow{k\to\infty} 0.$$
+      <p>はさみうちより $(\ln k)/k \to 0$。指数関数の連続性より $a_k = e^{(\ln k)/k} \to e^0 = 1$。</p>
       <p><strong>(1) の適用：</strong>$a_k \to 1 = \alpha$ なので，Cesàro 平均定理（(1)）より</p>
       $$\lim_{n\to\infty} \frac{1 + \sqrt{2} + \sqrt[3]{3} + \cdots + \sqrt[n]{n}}{n} = \lim_{n\to\infty} A_n = \boxed{1}.$$
     </div>
@@ -295,7 +297,10 @@ MathJax = {
       <p>$x = 0$ での微分係数を定義から計算する：</p>
       $$f_n'(0) = \lim_{h \to 0} \frac{f_n(h) - 0}{h} = \lim_{h \to 0} h^{n-1} \sin\frac{1}{h}.$$
 
-      <p><strong>場合 $n = 1$：</strong>　$\displaystyle\lim_{h\to 0} \sin\dfrac{1}{h}$ は振動して存在しない。よって $f_1$ は $x = 0$ で<strong>微分不可能</strong>。</p>
+      <p><strong>場合 $n = 1$：</strong>　$\displaystyle\lim_{h\to 0} \sin\dfrac{1}{h}$ が存在しないことを，2つの列を構成して示す。</p>
+      <p>$h_k = \dfrac{1}{2\pi k} \to 0$ に対し $\sin\dfrac{1}{h_k} = \sin 2\pi k = 0 \to 0$。</p>
+      <p>$h_k' = \dfrac{1}{2\pi k + \pi/2} \to 0$ に対し $\sin\dfrac{1}{h_k'} = \sin\!\left(2\pi k + \dfrac{\pi}{2}\right) = 1 \to 1$。</p>
+      <p>同じ点 $0$ に収束する2列で値の極限が異なるから，$\displaystyle\lim_{h\to 0}\sin\dfrac{1}{h}$ は存在しない。よって $f_1$ は $x = 0$ で<strong>微分不可能</strong>。</p>
 
       <p><strong>場合 $n \geq 2$：</strong>　$\left|h^{n-1}\sin\dfrac{1}{h}\right| \leq |h|^{n-1} \to 0$（$h \to 0$）。はさみうちの原理より</p>
       $$f_n'(0) = 0.$$
@@ -450,8 +455,8 @@ MathJax = {
       <div class="details-body">
         <p style="font-family:var(--font-sans); font-size:0.85rem; color:#6b7280; margin-bottom:0.5rem;">できると思ったら ✓，怪しいなら解説を再読する。</p>
         <ul class="checklist">
-          <li><strong>問1：</strong>「$a_n \to a$ を使って $e^{a_n} \to e^a$ を示す」ために平均値定理を適用し，$e^c$ の上界を $e^{a+1}$ で評価できるか</li>
-          <li><strong>問1：</strong>$\varepsilon_1 = \min(1,\, \varepsilon/e^{a+1})$ という2段階設定の意味を説明できるか</li>
+          <li><strong>問1：</strong>$e^{a_n} - e^a < \varepsilon$ にしたいとき，$e^x$ の単調性から $\varepsilon' = \log(1+\varepsilon/e^a)$ を逆算できるか。$\varepsilon' > 0$ の確認も含めて</li>
+          <li><strong>問1：</strong>下からの評価 $e^{a_n} - e^a > e^a(e^{-\varepsilon'}-1) = -\varepsilon/(1+\varepsilon/e^a) > -\varepsilon$ を自力で導けるか</li>
           <li><strong>問2(1)：</strong>「前半の有限和を $C/n$ で抑え，後半を $\varepsilon/2$ で抑える」分割を自力で書けるか</li>
           <li><strong>問2(2)：</strong>$\sqrt[k]{k} = e^{(\ln k)/k} \to 1$ を示したうえで Cesàro 平均定理を適用できるか</li>
           <li><strong>問3(1)：</strong>$f'(x) = (1+x^2)^{-1/2}$，$f''(x) = -x(1+x^2)^{-3/2}$ を正しく計算して代入できるか</li>

@@ -383,23 +383,16 @@
 
           <strong>(2) $0\cdot x = 0$</strong>：<br>
           スカラーの $0$（$\mathbb{K}$ の零元）でベクトル $x$ を掛けるとゼロベクトルになることを示す。
-          各等号の右上に使った公理を示す：
           $$\begin{aligned}
             0\cdot x
-              &\overset{(\text{V6})}{=} 0\cdot x + 0 \\
-              &\overset{(\text{V7})}{=} 0\cdot x + \bigl(x + (-x)\bigr) \\
-              &\overset{(\text{V5})}{=} \bigl(0\cdot x + x\bigr) + (-x) \\
-              &\overset{(\text{V11})}{=} \bigl(0\cdot x + 1\cdot x\bigr) + (-x) \\
-              &\overset{(\text{V9})}{=} (0+1)\cdot x + (-x) \\
-              &\phantom{{}={}} = 1\cdot x + (-x) \quad (\mathbb{K}\text{ での計算：}0+1=1) \\
-              &\overset{(\text{V11})}{=} x + (-x) \\
-              &\overset{(\text{V7})}{=} 0
+              &\overset{(\text{V9})}{=} (0+0)\cdot x = 0\cdot x + 0\cdot x
           \end{aligned}$$
+          両辺に $-(0\cdot x)$ を加えると（V7）：
+          $$0 = 0\cdot x$$
           <p style="margin-top:.3rem">
-            <em>ポイント</em>：$0$（ゼロベクトル）を $x+(-x)$ に書き換えて巧みに利用するのが鍵。
-            「スカラー $0$ を掛ければ当然 $0$」と直感的には明らかに見えるが、
-            それを公理だけから厳密に導くにはこのような迂回が必要。
-            これが公理的アプローチの特徴であり、「当たり前に見えることほど証明が要る」という事例である。
+            <em>ポイント</em>：$\mathbb{K}$ での等式 $0 + 0 = 0$（自明）を V9（分配法則）で使うと
+            $0 \cdot x = 0 \cdot x + 0 \cdot x$ が得られ，両辺から $0 \cdot x$ を引くだけで証明できる。
+            「当たり前に見えること」でも公理から厳密に導く必要があるが，最短の証明は案外シンプルである。
           </p>
           <br>
 
@@ -826,8 +819,8 @@
     </div>
     <div class="sec-body">
 
-      <div class="def">
-        <span class="box-label">定義 1.6</span>
+      <div class="prop">
+        <span class="box-label">命題 1.6</span>
         $T: V\to W$ が $\mathbb{K}$-線形写像かつ<strong>全単射</strong>であるならば、逆写像 $T^{-1}:W\to V$ も線形写像になる。
       </div>
 
@@ -855,7 +848,7 @@
         <ul>
           <li><strong>「同型 ＝ ラベルの貼り替え」</strong>：$V\cong W$ のとき、$T$ は $V$ の各元と $W$ の各元を 1 対 1 に対応させる「辞書」。ベクトル空間としての加法・スカラー倍の<em>構造は完全に同じ</em>で、元の「名前（ラベル）」だけが異なる。</li>
           <li><strong>全単射が必要な理由</strong>：単射でないと複数の元が同じ行き先になり逆写像が存在しない。全射でないと対応のない元が生じて「辞書」が不完全になる。</li>
-          <li><strong>定義 1.6 の注意</strong>：「全単射な線形写像の逆写像が自動的に線形」であることは自明でない。これは証明が必要（定理 3.6 や次の講義で扱う）。</li>
+          <li><strong>命題 1.6 の注意</strong>：「全単射な線形写像の逆写像が自動的に線形」であることは自明でない。これは証明が必要（定理 3.6 や次の講義で扱う）。</li>
         </ul>
       </div>
 

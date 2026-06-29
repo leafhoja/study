@@ -284,7 +284,7 @@ MathJax = {
         <p>$\lim a_n = a$ より，ある $N_2$ があって $n \ge N_2 \Rightarrow |a_n - a| < \dfrac{\varepsilon}{2(1+|b|)}$。</p>
         <p>$\lim b_n = b$ より，ある $N_3$ があって $n \ge N_3 \Rightarrow |b_n - b| < \dfrac{\varepsilon}{2M}$。</p>
         <p>$N = \max\{N_2, N_3\}$ とおく。任意の $n \ge N$ に対して</p>
-        $$|a_n b_n - ab| \le |a_n||b_n - b| + |b||a_n - a| \le M \cdot \frac{\varepsilon}{2M} + (1+|b|) \cdot \frac{\varepsilon}{2(1+|b|)} = \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon$$
+        $$|a_n b_n - ab| \le |a_n||b_n - b| + |b||a_n - a| < M \cdot \frac{\varepsilon}{2M} + (1+|b|) \cdot \frac{\varepsilon}{2(1+|b|)} = \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon$$
       </div>
 
       <div class="proof-box">
@@ -423,9 +423,9 @@ MathJax = {
       <div class="proof-box">
         <div class="proof-title">証明</div>
         <p>上の計算より $a_n = 1 - 10^{-n}$。任意の $\varepsilon > 0$ をとる。</p>
-        <p>$10^N \ge 1/\varepsilon$ すなわち $N \ge \log_{10}(1/\varepsilon)$ となる自然数 $N$ を取る（Archimedes の原理）。</p>
-        <p>任意の $n \ge N$ に対して $10^{-n} \le 10^{-N} \le \varepsilon$ より</p>
-        $$|a_n - 1| = 10^{-n} \le \varepsilon$$
+        <p>$10^N > 1/\varepsilon$ すなわち $N > \log_{10}(1/\varepsilon)$ となる自然数 $N$ を取る（Archimedes の原理）。</p>
+        <p>任意の $n \ge N$ に対して $10^{-n} \le 10^{-N} < \varepsilon$ より</p>
+        $$|a_n - 1| = 10^{-n} < \varepsilon$$
         <p>よって $\lim_{n\to\infty} a_n = 1$，すなわち $0.999\cdots = 1$。</p>
       </div>
     </div>

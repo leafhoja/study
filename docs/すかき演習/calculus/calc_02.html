@@ -109,7 +109,7 @@ MathJax = {
       <p><strong>(3) $A = \{a \in \mathbb{Q} \mid a \le \sqrt{2}\}$ の上限は $\sqrt{2}$</strong></p>
       <p>$\sqrt{2}$ が $A$ の上界であることは定義より明らか（$a \le \sqrt{2}$ が条件だから）。</p>
       <p>$b < \sqrt{2}$ を仮定する。有理数の稠密性より $b < q < \sqrt{2}$ を満たす有理数 $q$ が存在する。$q \in A$ かつ $q > b$ だから $b$ は $A$ の上界でない。よって $\sup A = \sqrt{2}$。</p>
-      <p>下限が存在しない理由：任意の実数 $b$ に対し，有理数の稠密性より $b - 1 < d < b$ を満たす有理数 $d$ が存在して $d \le \sqrt{2}$ かつ $d < b$，なので $b$ は下界でない。</p>
+      <p>下限が存在しない（$\inf A = -\infty$）理由：任意の実数 $b$ に対し，$n > -b$ を満たす自然数 $n$ をとると $-n < b$ かつ $-n \le 0 < \sqrt{2}$ より $-n \in A$。よって $b$ は $A$ の下界でない。$b$ は任意だったから $A$ に下界は存在しない。</p>
     </div>
 
     <div class="think-box">
@@ -184,7 +184,7 @@ MathJax = {
 
     <div class="problem-box">
       <h3>問題文</h3>
-      <p>$\{a_n\}_{n=1,2,\ldots}$ は上に有界だから，Weierstrass の定理より上限 $\alpha$ が存在する。$\{a_n\}_{n=1,2,\ldots}$ が $\alpha$ に収束することを示せ。</p>
+      <p>$\{a_n\}_{n=1,2,\ldots}$ は<strong>単調増加</strong>かつ上に有界であるとする。Weierstrass の定理より上限 $\alpha = \sup\{a_n \mid n = 1,2,\ldots\}$ が存在する。このとき $\{a_n\}_{n=1,2,\ldots}$ が $\alpha$ に収束することを示せ。</p>
     </div>
 
     <div class="answer-box">

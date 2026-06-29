@@ -269,7 +269,7 @@ MathJax = {
         <p>一般に $A^n = \alpha_n A + \beta_n I$ の形に書けることを帰納法で示す。</p>
         <p>$n=1$：$A^1 = 1 \cdot A + 0 \cdot I$（$\alpha_1 = 1, \beta_1 = 0$）。</p>
         <p>$A^{n+1} = A \cdot A^n = A(\alpha_n A + \beta_n I) = \alpha_n A^2 + \beta_n A = \alpha_n(A + 2I) + \beta_n A = (\alpha_n + \beta_n)A + 2\alpha_n I$。</p>
-        <p>漸化式：$\alpha_{n+1} = \alpha_n + \beta_n$，$\beta_{n+1} = 2\alpha_n$。初期値 $\alpha_1=1, \beta_1=0$ から $(\alpha_2, \beta_2) = (1, 2), (\alpha_3, \beta_3) = (3, 2), \ldots$ と求まる。一般項は $\alpha_n = \frac{2^n - (-1)^n}{3}$，$\beta_n = \frac{2(-1)^n(1-2^n)}{3}$（固有値から誘導）。</p>
+        <p>漸化式：$\alpha_{n+1} = \alpha_n + \beta_n$，$\beta_{n+1} = 2\alpha_n$。初期値 $\alpha_1=1, \beta_1=0$ から $(\alpha_2, \beta_2) = (1, 2), (\alpha_3, \beta_3) = (3, 2), \ldots$ と求まる。一般項は $\alpha_n = \frac{2^n - (-1)^n}{3}$，$\beta_n = \frac{2^n + 2(-1)^n}{3}$（漸化式 $\beta_{n+2} = \beta_{n+1} + 2\beta_n$ の特性根 $2, -1$ から誘導。$n=1$ で確認：$\beta_1 = (2-2)/3 = 0$ ✓）。</p>
         <p>Cayley-Hamilton を使う方法は対角化行列 $P$ の計算が不要で，行列積の計算量が少ない。</p>
       </div>
     </details>

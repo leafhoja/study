@@ -217,7 +217,7 @@ MathJax = {
       <p>$f_A\binom{w}{x} = f_A\binom{y}{z}$ を仮定。$aw+bx = ay+bz$，$cw+dx = cy+dz$。</p>
       <p>第1式を $d$ 倍し第2式を $b$ 倍して引くと $(ad-bc)w = (ad-bc)y$。$ad-bc \ne 0$ より $w = y$。同様に $x = z$。よって単射。</p>
       <p><strong>（$\Rightarrow$）$ad-bc = 0$ ならば単射でない：</strong></p>
-      <p>$f_A$ が単射でないことを示す（$f_A(v) = 0$ を $v = 0$ 以外で解く）。$ad = bc$ のとき $A\binom{-b}{a} = \binom{-ab+ba}{-cb+da} = \binom{0}{a(d-\frac{cb}{a})} = \binom{0}{0}$（$ad=bc$ を用いた）。$b, a$ が両方 $0$ でなければ $(-b,a)^T \ne 0$ は核の元。一方 $a = b = 0$ なら $A$ の第1列がゼロなので $(1,0)^T$ が核の元。よって単射でない。</p>
+      <p>$f_A$ が単射でないことを示す（$f_A(v) = 0$ を $v = 0$ 以外で解く）。$ad = bc$ のとき，$A\binom{-b}{a} = \binom{-ab+ba}{-cb+da} = \binom{0}{ad-bc} = \binom{0}{0}$（$ad=bc$ を用いた）。$a, b$ が両方 $0$ でなければ $(-b,a)^T \ne 0$ は核の元。一方 $a = b = 0$ なら $A\binom{d}{-c} = \binom{0 \cdot d + 0 \cdot(-c)}{cd + d(-c)} = \binom{0}{0}$ であり，$(c,d) \ne (0,0)$ のとき $(d,-c)^T \ne 0$ が核の元（$c = d = 0$ なら $A = O$ なので任意の非零ベクトルが核の元）。よって単射でない。</p>
       <p><strong>全射の証明も同様：</strong>任意の $(\alpha,\beta)^T$ に対して $ax+by = \alpha, cx+dy = \beta$ の解の存在性が $ad-bc \ne 0$ と等価（Cramer の公式）。</p>
       <hr style="margin:1rem 0; border-color:#cbd5e1;">
       <p><strong>(2) $f_A : \mathbb{Z}^2 \to \mathbb{Z}^2$ が全単射の条件</strong></p>

@@ -827,14 +827,13 @@ MathJax = {
   <div class="box box-prf">
     <div class="box-head"><span class="box-tag">別証明</span>不可逆サイクル $C''$ を使った導出</div>
     <div class="box-body">
-      <p>A → B の可逆過程と B → A の不可逆断熱過程からなるサイクル $C''$ を構成する：</p>
+      <p>A → B の不可逆断熱過程と B → A の可逆過程からなるサイクル $C''$ を構成する：</p>
       $$\oint_{C''}\frac{\delta Q}{T}
-        = \underbrace{\int_{A\to B}^{\text{可逆}}\frac{\delta Q}{T}}_{S_B - S_A}
-        + \underbrace{\int_{B\to A}^{\text{不可逆}}\ \frac{\delta Q}{T}}_{=\,0\ (\text{断熱})} < 0$$
-      <p>Clausius の不等式より $C''$ は不可逆なので $< 0$。第一項は $S_B - S_A$，第二項は断熱より $0$ なので：</p>
-      $$(S_B - S_A) + 0 < 0 \implies S_B < S_A$$
-      <p>つまり B → A（不可逆断熱過程）でエントロピーは増大した（$S_A > S_B$）。
-      言い換えれば，断熱不可逆過程でエントロピーは必ず増加する。</p>
+        = \underbrace{\int_{A\to B}^{\text{不可逆断熱}}\frac{\delta Q}{T}}_{=\,0}
+        + \underbrace{\int_{B\to A}^{\text{可逆}}\frac{\delta Q}{T}}_{-(S_B - S_A)} < 0$$
+      <p>Clausius の不等式より $C''$ は不可逆（断熱部分が不可逆）なので $< 0$。第一項は断熱より $0$，第二項は $-(S_B - S_A)$ なので：</p>
+      $$0 - (S_B - S_A) < 0 \implies S_B - S_A > 0 \implies \boxed{\Delta S \ge 0}$$
+      <p>断熱不可逆過程 A → B でエントロピーは必ず増加する。$\square$</p>
     </div>
   </div>
 
@@ -1007,7 +1006,7 @@ MathJax = {
       </ul>
       <p>
         P-V グラフにおいて「等エントロピー曲線」が断熱曲線であり、
-        断熱変化ではその曲線上か「上側」（体積が大きい側・圧力が高い側）にしか移動できない。
+        断熱変化ではその曲線上か「上側」（同じ体積での圧力が高い側，すなわちエントロピーが大きい側）にしか移動できない。
       </p>
     </div>
   </div>

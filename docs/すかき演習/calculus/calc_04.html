@@ -215,11 +215,12 @@ MathJax = {
       <p><strong>(1) 平衡点の発見：</strong>$x^2 - x - 2 = (x-2)(x+1) = 0$ より平衡点は $x = 2$ と $x = -1$。定数関数 $x \equiv 2$，$x \equiv -1$ は解。</p>
       <p><strong>(2) 変数変換：</strong>$x = 2 + u$ とおくと $x' = u'$。方程式を $u$ で書き直す：</p>
       $$u' = (2+u)^2 - (2+u) - 2 = 4 + 4u + u^2 - 2 - u - 2 = 3u + u^2 = u(u+3)$$
-      <p><strong>(3) 変数分離で $u' = u(u+3)$ を解く：</strong>部分分数 $\dfrac{1}{u(u+3)} = \dfrac{1}{3} \cdot \dfrac{1}{u} - \dfrac{1}{3} \cdot \dfrac{1}{u+3}$。積分：</p>
-      $$\frac{1}{3}\ln\left|\frac{u}{u+3}\right| = t + C \Rightarrow \frac{u}{u+3} = Ce^{3t}$$
+      <p><strong>(3) $u' = u(u+3)$ を解く：</strong>$u = 0$（$x \equiv 2$）と $u = -3$（$x \equiv -1$）は恒等定数解。$u \ne 0, -3$ のとき変数分離できる：</p>
+      <p>部分分数 $\dfrac{1}{u(u+3)} = \dfrac{1}{3} \cdot \dfrac{1}{u} - \dfrac{1}{3} \cdot \dfrac{1}{u+3}$。積分：</p>
+      $$\frac{1}{3}\ln\left|\frac{u}{u+3}\right| = t + C_0 \Rightarrow \frac{u}{u+3} = Ce^{3t} \quad (C \ne 0)$$
       <p>$u$ について解いて $u = \dfrac{3Ce^{3t}}{1 - Ce^{3t}}$，$x = 2 + u$ を戻すと</p>
       $$\boxed{x(t) = 2 + \frac{3Ce^{3t}}{1 - Ce^{3t}}} \quad (C \in \mathbb{R})$$
-      <p>$x = -1$ も解（$u = -3$ は恒等定数解 $u \equiv -3$）。</p>
+      <p>$C = 0$ のとき $x \equiv 2$（恒等定数解を含む）。$x \equiv -1$（$u \equiv -3$）は有限の $C$ では表せず，別解として加える。</p>
     </div>
 
     <div class="think-box">
@@ -264,8 +265,8 @@ MathJax = {
 
     <div class="answer-box">
       <div class="answer-title">📝 模範解答</div>
-      <p>$y := x' - x$ とおく。$y' - 2y = (x'' - x') - 2(x' - x) = x'' - 3x' + 2x = 0$（問題の方程式）。</p>
-      <p>$y' = 2y$ の一般解：$y = Ce^{2t}$（$C$ は定数）。</p>
+      <p>補助変数 $w := x' - x$ とおく（問題の $y, z$ とは別物）。$w' - 2w = (x'' - x') - 2(x' - x) = x'' - 3x' + 2x = 0$（問題の方程式）。</p>
+      <p>$w' = 2w$ の一般解：$w = Ce^{2t}$（$C$ は定数）。</p>
       <p>$x' - x = Ce^{2t}$（一次線形）。積分因子 $e^{-t}$：$(xe^{-t})' = Ce^t$，積分して $xe^{-t} = Ce^t + D$，よって</p>
       $$\boxed{x(t) = Ce^{2t} + De^t} \quad (C, D \in \mathbb{R})$$
     </div>
@@ -280,13 +281,13 @@ MathJax = {
       <div class="backward-think" style="margin:0.5rem 0 0.75rem;">
         <div class="bt-title">🔄 なぜ $y = x' - x$ と定義するのか</div>
         <p>$(D-2)(D-1)x = 0$ は「まず $(D-1)$ を $x$ に作用させ，次に $(D-2)$ を作用させると $0$ になる」という構造。</p>
-        <p>だから $y := (D-1)x = x' - x$ と定義すると，方程式は $(D-2)y = 0$，すなわち $y' - 2y = 0$ という<strong>一階線形方程式</strong>に帰着する。これなら積分因子ですぐ解ける。</p>
+        <p>だから $w := (D-1)x = x' - x$ と定義すると，方程式は $(D-2)w = 0$，すなわち $w' - 2w = 0$ という<strong>一階線形方程式</strong>に帰着する。これなら積分因子ですぐ解ける。</p>
         <p>手順：</p>
         <ol>
-          <li>$y' - 2y = 0$ を解く → $y = Ce^{2t}$（$C$ は定数）</li>
+          <li>$w' - 2w = 0$ を解く → $w = Ce^{2t}$（$C$ は定数）</li>
           <li>$x' - x = Ce^{2t}$ を解く（一次線形，積分因子 $e^{-t}$）</li>
         </ol>
-        <p>答案では「$y := x' - x$ とおく」という宣言から始まるが，その着想は「二階演算子 $(D-2)(D-1)$ を1つずつ処理する」という因数分解の論理から来ている。</p>
+        <p>答案では「$w := x' - x$ とおく」という宣言から始まるが，その着想は「二階演算子 $(D-2)(D-1)$ を1つずつ処理する」という因数分解の論理から来ている。</p>
       </div>
       <p>一般解の構造：$y' - y = 0$ の一般解 $Ce^t$ と $z' - 2z = 0$ の一般解 $De^{2t}$ の和 $x = Ce^t + De^{2t}$ と一致する。</p>
       <div class="insight-box">
