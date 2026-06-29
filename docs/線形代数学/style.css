@@ -159,7 +159,11 @@ table.axiom-table tr:nth-child(even) td { background: #fafafa; }
 footer { text-align: center; color: #aaa; font-size: .8rem; margin-top: 3rem; }
 
 @media(max-width:600px){
-  .sec-body { padding: 1.1rem; }
-  .page-header h1 { font-size: 1.4rem; }
+  .sec-body { padding: 1rem; }
+  .sec-header { padding: .85rem 1rem; }
+  .sec-header h2 { font-size: 1.1rem; }
+  .container { padding: 1.5rem 1rem 4rem; }
   .card-grid { grid-template-columns: 1fr; }
+  table.axiom-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .mathblock { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 }

@@ -248,7 +248,15 @@ body {
 /* ===== RESPONSIVE ===== */
 @media (max-width: 640px) {
   .year-grid { grid-template-columns: 1fr; }
-  .hero h1 { font-size: 1.5rem; }
-  .options { padding-left: 24px; }
-  .navbar-links a { padding: 8px 8px; font-size: .78rem; }
+  .container { padding: 16px 12px 40px; }
+  .exam-header { display: block; padding: 16px 18px; }
+  .exam-header .ey { font-size: 2rem; }
+  .qcard-body { padding: 14px 14px 10px; }
+  .options { padding: 4px 10px 12px 16px; }
+  .opt { font-size: .85rem; }
+  .exp-toggle { padding: 11px 14px; }
+  .exp-body { padding: 14px 16px 16px; }
+  .q-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .page-nav { flex-direction: column; }
+  .page-nav a { text-align: center; }
 }

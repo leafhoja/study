@@ -161,9 +161,18 @@ body {
 
 /* ── レスポンシブ ── */
 @media (max-width: 640px) {
-  .navbar-links a { padding: 8px 8px; font-size: .78rem; }
+  .navbar-links a { padding: 10px 8px; font-size: .78rem; }
+  .hero { padding: 32px 16px 28px; }
   .hero h1 { font-size: 1.5rem; }
+  .hero-sm { padding: 20px 16px 18px; }
   .hero-sm h1 { font-size: 1.2rem; }
+  /* MathJax 数式のはみ出し防止 */
+  mjx-container { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+  mjx-container[display="true"] { display: block !important; }
+}
+@media (max-width: 400px) {
+  .navbar-brand { font-size: .82rem; }
+  #back-to-top { width: 44px; height: 44px; bottom: 16px; right: 12px; }
 }
 
 /* ── 印刷スタイル ── */
