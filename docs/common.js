@@ -60,6 +60,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     var cur = location.pathname.split('/').pop() || 'index.html';
     document.querySelectorAll('nav a[href], header a[href]').forEach(function (a) {
+      if (a.classList.contains('nav-back')) return;
       var href = a.getAttribute('href').split('#')[0].split('/').pop();
       if (href === cur) a.classList.add('active');
     });

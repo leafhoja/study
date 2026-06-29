@@ -37,6 +37,14 @@
   ];
 
   var KAKOMON_PAGES = [
+    { file: 'kakomon_calc_01.html', num: '微積 小テスト', title: 'ε-N・Cesàro・高階微分・gₙ',
+      problems: [
+        { id: 'problem1', title: 'ε-N論法：e^{aₙ}→eᵃ' },
+        { id: 'problem2', title: 'Cesàro 平均' },
+        { id: 'problem3', title: 'arcsinh の高階微分' },
+        { id: 'problem4', title: 'xⁿsin(1/x) の微分可能性' },
+        { id: 'problem5', title: '指数部分和 gₙ(x)' },
+      ]},
     { file: 'kakomon_lin_01.html', num: '線形 小テスト', title: '固有値・直交行列・Hom',
       problems: [
         { id: 'problem1', title: '表現行列・核・像' },
@@ -197,7 +205,7 @@
     toggleBtn.setAttribute('aria-controls', 'sidenav');
     toggleBtn.textContent = '☰';
 
-    var headerInner = document.querySelector('.header-inner');
+    var headerInner = document.querySelector('.header-inner, .navbar-inner');
     if (headerInner) {
       headerInner.insertBefore(toggleBtn, headerInner.firstChild);
     }
