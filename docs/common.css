@@ -159,6 +159,15 @@ body {
   pointer-events: none;
 }
 
+/* ── 数式のはみ出し防止（全画面サイズ共通） ── */
+mjx-container[display="true"] {
+  display: block !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
 /* ── レスポンシブ ── */
 @media (max-width: 640px) {
   .navbar-links a { padding: 10px 8px; font-size: .78rem; }
@@ -166,9 +175,6 @@ body {
   .hero h1 { font-size: 1.5rem; }
   .hero-sm { padding: 20px 16px 18px; }
   .hero-sm h1 { font-size: 1.2rem; }
-  /* MathJax 数式のはみ出し防止 */
-  mjx-container { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
-  mjx-container[display="true"] { display: block !important; }
 }
 @media (max-width: 400px) {
   .navbar-brand { font-size: .82rem; }

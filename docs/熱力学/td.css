@@ -384,13 +384,16 @@ code { font-family: var(--mono); font-size: .85em; background: #eee; padding: .1
 /* ─── 数式スタイル ─── */
 .math-block {
   overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
   margin: 1rem 0;
   padding: .6rem 0;
+  -webkit-overflow-scrolling: touch;
 }
 .math-center { text-align: center; }
 
 /* MJX overrides: larger display math */
-mjx-container[display="true"] { margin: .8em auto !important; }
+mjx-container[display="true"] { margin: .8em auto !important; max-width: 100%; overflow-x: auto; }
 
 /* ─── 表 ─── */
 .td-table {

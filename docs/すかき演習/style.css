@@ -182,7 +182,7 @@ a:hover { text-decoration: underline; }
 }
 
 /* Math display utilities */
-.math-display { overflow-x: auto; padding: 0.5rem 0; }
+.math-display { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding: 0.5rem 0; -webkit-overflow-scrolling: touch; }
 
 /* Tags */
 .tag {
@@ -294,7 +294,7 @@ li { margin-bottom: 0.3rem; }
   .problem-box, .def-box, .thm-box, .insight-box, .warn-box, .proof-box {
     padding: 1rem 1.1rem;
   }
-  .math-display { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .math-display { overflow-x: auto; max-width: 100%; -webkit-overflow-scrolling: touch; }
 }
 
 .subject-section { }

@@ -118,7 +118,7 @@ ol, ul { padding-left: 1.6rem; margin-bottom: .8rem; }
 li { margin-bottom: .3rem; }
 
 /* ── 数式 ── */
-.mathblock { overflow-x: auto; padding: .2rem 0; }
+.mathblock { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding: .2rem 0; -webkit-overflow-scrolling: touch; }
 
 /* ── 同値表 ── */
 .equiv {
