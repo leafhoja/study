@@ -43,7 +43,7 @@ MathJax = {
 </nav>
 <div class="hero hero-sm hero-calc">
   <h1>微分積分学演習　第4回</h1>
-  <p class="subtitle">常微分方程式：変数分離・積分因子・同次形・連立ODE</p>
+  <p class="subtitle">常微分方程式：変数分離・同次形・置換・部分分数</p>
 </div>
 
 <div class="container">
@@ -54,9 +54,9 @@ MathJax = {
   <div class="section-card-body">
     <p>常微分方程式（Ordinary Differential Equation, ODE）とは，未知関数 $x(t)$ とその導関数の間の方程式だ。解法は方程式の「型」によって異なる。</p>
     <div class="ode-type"><div class="ode-label">型1：変数分離形</div> $x' = f(t) g(x)$ → 両辺を変数ごとに分けて積分</div>
-    <div class="ode-type"><div class="ode-label">型2：一次線形微分方程式</div> $x' + p(t)x = q(t)$ → 積分因子 $\mu(t) = e^{\int p(t)\,dt}$ を掛ける</div>
-    <div class="ode-type"><div class="ode-label">型3：同次形</div> $x' = f(x/t)$ → $u = x/t$ と置換して変数分離形に帰着</div>
-    <div class="ode-type"><div class="ode-label">型4：連立線形ODE</div> $y' = y, z' = 2z$ などに因数分解で分解して解く</div>
+    <div class="ode-type"><div class="ode-label">型2：同次形</div> $x' = f(x/t)$ → $u = x/t$ と置換して変数分離形に帰着</div>
+    <div class="ode-type"><div class="ode-label">型3：置換形</div> 繰り返す $t,x$ の組み合わせ $u = u(t,x)$ を置いて変数分離形に変換</div>
+    <div class="ode-type"><div class="ode-label">型4：定係数2階線形</div> $(D-\lambda_1)(D-\lambda_2)x = 0$ に因数分解 → 変数分離を繰り返す</div>
     <div class="insight-box">
       <div class="insight-title">💡 一般解・特殊解・初期値問題</div>
       <ul>
@@ -84,18 +84,19 @@ MathJax = {
 
     <div class="answer-box">
       <div class="answer-title">📝 模範解答</div>
-      <p>$y(t) = x(t)/e^{t^2/2}$ とおく。$y' = (x' \cdot e^{t^2/2} - x \cdot te^{t^2/2})/(e^{t^2/2})^2 = (x' - tx)/e^{t^2/2} = 0$。</p>
-      <p>よって $y$ は定数。$y(t) = y(0) = x(0)/1 = x(0)$。$C = x(0)$ とおくと</p>
+      <p>$x = 0$ は定数解（$C = 0$ に対応）。$x \ne 0$ のとき変数分離：</p>
+      $$\frac{dx}{x} = t\,dt$$
+      <p>両辺を積分：$\ln|x| = \dfrac{t^2}{2} + C_0$，よって $|x| = e^{C_0}e^{t^2/2}$。$C = \pm e^{C_0}$ とおくと</p>
       $$\boxed{x(t) = Ce^{t^2/2}} \quad (C \in \mathbb{R})$$
     </div>
 
     <div class="think-box">
       <div class="think-title">🧠 思考法・解説</div>
       <div class="backward-think">
-        <div class="bt-title">🔄 なぜ $y(t) = x(t)/e^{t^2/2}$ とおくのか</div>
-        <p>方程式 $x' = tx$ を変形すると $x' - tx = 0$。一次線形方程式として積分因子 $\mu = e^{-\int t\,dt} = e^{-t^2/2}$ を掛けると左辺が完全微分になる発想。$y = xe^{-t^2/2}$ とおくと $y' = (x' - tx)e^{-t^2/2} = 0$ → $y = $ 定数。よって $x = Ce^{t^2/2}$。</p>
+        <div class="bt-title">🔄 変数分離の手順</div>
+        <p>$x' = tx$ は「右辺が $t$ だけの関数と $x$ だけの関数の積」の形：$\dfrac{dx}{dt} = t \cdot x$。$x \ne 0$ のとき両辺を $x$ で割ると $\dfrac{dx}{x} = t\,dt$（左辺は $x$ のみ，右辺は $t$ のみ）。これで変数分離が完了。</p>
+        <p>両辺を積分：$\displaystyle\int \frac{dx}{x} = \int t\,dt$ → $\ln|x| = \dfrac{t^2}{2} + C_0$。指数化して $x = Ce^{t^2/2}$（$C = \pm e^{C_0}$，$x = 0$ は $C = 0$）。</p>
       </div>
-      <p>変数分離でも解ける：$x \ne 0$ のとき $\dfrac{dx}{x} = t\,dt$，積分して $\ln|x| = \dfrac{t^2}{2} + C_0$，よって $|x| = e^{C_0}e^{t^2/2}$，$C = \pm e^{C_0}$ とおけば $x = Ce^{t^2/2}$。$x = 0$ は $C = 0$ に対応。</p>
     </div>
 
     <h3>(2) ロジスティック方程式 $\dot{x} = x(1-x)$</h3>
@@ -154,7 +155,7 @@ MathJax = {
       <p>同次形の判定：方程式を $x' = (\text{右辺})$ の形に整理したとき，右辺が $x/t$ のみの関数で書けるかを確認する。この問題では $\tan$ が含まれているが，引数が $x/t$ のみなので同次形。</p>
     </div>
 
-    <h3>(4) 積分因子法 $x' + x\cos t = \sin t \cos t$</h3>
+    <h3>(4) 置換による変数分離 $x' + x\cos t = \sin t \cos t$</h3>
 
     <div class="problem-box">
       <h4>問題文</h4>
@@ -163,29 +164,24 @@ MathJax = {
 
     <div class="answer-box">
       <div class="answer-title">📝 模範解答</div>
-      <p>一次線形 $x' + p(t)x = q(t)$，$p(t) = \cos t$，$q(t) = \sin t\cos t$。積分因子 $\mu(t) = e^{\int \cos t\,dt} = e^{\sin t}$ を両辺に掛ける：</p>
-      $$\frac{d}{dt}(xe^{\sin t}) = e^{\sin t}\sin t\cos t$$
-      <p>右辺を積分：$u = \sin t$ と置換すると $\int e^u u\,du = (u-1)e^u + C$（部分積分）。よって</p>
-      $$xe^{\sin t} = (\sin t - 1)e^{\sin t} + C$$
+      <p>方程式を整理すると $x' = \cos t(\sin t - x)$。$u = \sin t - x$ と置換する。</p>
+      <p>$u = \sin t - x$ より $u' = \cos t - x'$。$x' = \cos t \cdot u$ を代入：</p>
+      $$u' = \cos t - \cos t \cdot u = \cos t(1 - u)$$
+      <p>変数分離形：$\dfrac{du}{1 - u} = \cos t\,dt$。積分：$-\ln|1-u| = \sin t + C_0$，よって $1-u = Ae^{-\sin t}$，$u = 1 - Ae^{-\sin t}$。</p>
+      <p>$x = \sin t - u$ を戻すと（$C = A$）</p>
       $$\boxed{x = \sin t - 1 + Ce^{-\sin t}} \quad (C \in \mathbb{R})$$
     </div>
 
     <div class="think-box">
       <div class="think-title">🧠 思考法・解説</div>
       <div class="backward-think">
-        <div class="bt-title">🔄 積分因子 $\mu(t) = e^{\int p(t)\,dt}$ はどこから来るか</div>
-        <p>目標は $x' + p(t)x = q(t)$ を「積の微分の形 $(\mu x)' = \mu q$ に変換すること」。$(\mu x)' = \mu' x + \mu x'$ なので，両辺に $\mu$ を掛けると</p>
-        $$\mu x' + \mu p(t) x = \mu q(t)$$
-        <p>これが $(\mu x)' = \mu x' + \mu' x$ と一致するためには $\mu' = \mu p(t)$，すなわち</p>
-        $$\frac{\mu'}{\mu} = p(t) \quad\Rightarrow\quad (\log \mu)' = p(t) \quad\Rightarrow\quad \mu = e^{\int p(t)\,dt}$$
-        <p>積分因子は「左辺を完全微分にする乗数」であり，$\mu'/\mu = p$ という関係から自然に決まる。</p>
+        <div class="bt-title">🔄 置換 $u = \sin t - x$ の着想</div>
+        <p>方程式 $x' = \cos t(\sin t - x)$ を見る。右辺に「$\sin t - x$」という $t$ と $x$ が混在する組み合わせが現れている。このままでは変数分離できない。しかし $u := \sin t - x$ を新しい変数とおくと，$u' = \cos t - x'$ より $x' = \cos t - u'$ となる。代入すると $\cos t - u' = \cos t \cdot u$，すなわち $u' = \cos t(1-u)$ という変数分離形が得られる。</p>
       </div>
       <div class="insight-box">
-        <div class="insight-title">💡 積分因子のアイデア</div>
-        <p>一次線形 $x' + p(t)x = q(t)$ の形。$p(t) = \cos t$ に対して積分因子 $\mu(t) = e^{\int \cos t\,dt} = e^{\sin t}$ を掛ける。なぜ？ 左辺が $\dfrac{d}{dt}(\mu x)$ の形になるから（積の微分の逆）：</p>
-        $$\frac{d}{dt}(xe^{\sin t}) = x'e^{\sin t} + xe^{\sin t}\cos t = e^{\sin t}(x' + x\cos t) = e^{\sin t}\sin t\cos t$$
+        <div class="insight-title">💡 置換の選び方</div>
+        <p>$x' = f(t) \cdot g(t, x)$ の形で，$g$ の中の「$t$ と $x$ の組み合わせ」が繰り返し現れるとき，その組み合わせを $u$ とおく置換が有効。今回は $\sin t - x$ が右辺に $\cos t(\sin t - x)$ の形で現れているので $u = \sin t - x$ が自然な選択。置換後に $u' = \cos t(1-u)$ という変数分離形 $\dfrac{du}{1-u} = \cos t\,dt$ が現れる。</p>
       </div>
-      <p>積分因子の公式：$\mu(t) = e^{\int p(t)\,dt}$。掛けると左辺は必ず $(\mu x)'$ に変換される。右辺の積分で部分積分が必要な場合は $\int ue^u\,du = (u-1)e^u + C$ を活用する。</p>
     </div>
 
   </div>
@@ -266,8 +262,8 @@ MathJax = {
     <div class="answer-box">
       <div class="answer-title">📝 模範解答</div>
       <p>補助変数 $w := x' - x$ とおく（問題の $y, z$ とは別物）。$w' - 2w = (x'' - x') - 2(x' - x) = x'' - 3x' + 2x = 0$（問題の方程式）。</p>
-      <p>$w' = 2w$ の一般解：$w = Ce^{2t}$（$C$ は定数）。</p>
-      <p>$x' - x = Ce^{2t}$（一次線形）。積分因子 $e^{-t}$：$(xe^{-t})' = Ce^t$，積分して $xe^{-t} = Ce^t + D$，よって</p>
+      <p>$w' = 2w$ の一般解：変数分離より $w = Ce^{2t}$（$C$ は定数）。</p>
+      <p>$x' - x = Ce^{2t}$：斉次方程式 $x' - x = 0$ の一般解は変数分離より $x_h = De^t$（$D$ は定数）。特殊解として $x_p = \alpha e^{2t}$ を代入すると $2\alpha e^{2t} - \alpha e^{2t} = Ce^{2t}$ より $\alpha = C$，すなわち $x_p = Ce^{2t}$。よって</p>
       $$\boxed{x(t) = Ce^{2t} + De^t} \quad (C, D \in \mathbb{R})$$
     </div>
 
@@ -281,11 +277,11 @@ MathJax = {
       <div class="backward-think" style="margin:0.5rem 0 0.75rem;">
         <div class="bt-title">🔄 なぜ $y = x' - x$ と定義するのか</div>
         <p>$(D-2)(D-1)x = 0$ は「まず $(D-1)$ を $x$ に作用させ，次に $(D-2)$ を作用させると $0$ になる」という構造。</p>
-        <p>だから $w := (D-1)x = x' - x$ と定義すると，方程式は $(D-2)w = 0$，すなわち $w' - 2w = 0$ という<strong>一階線形方程式</strong>に帰着する。これなら積分因子ですぐ解ける。</p>
+        <p>だから $w := (D-1)x = x' - x$ と定義すると，方程式は $(D-2)w = 0$，すなわち $w' - 2w = 0$ という<strong>一階変数分離形</strong>に帰着する。これなら変数分離ですぐ解ける。</p>
         <p>手順：</p>
         <ol>
-          <li>$w' - 2w = 0$ を解く → $w = Ce^{2t}$（$C$ は定数）</li>
-          <li>$x' - x = Ce^{2t}$ を解く（一次線形，積分因子 $e^{-t}$）</li>
+          <li>$w' - 2w = 0$ を解く（変数分離）→ $w = Ce^{2t}$（$C$ は定数）</li>
+          <li>$x' - x = Ce^{2t}$ を解く（斉次解 $De^t$ ＋ 特殊解 $Ce^{2t}$）</li>
         </ol>
         <p>答案では「$w := x' - x$ とおく」という宣言から始まるが，その着想は「二階演算子 $(D-2)(D-1)$ を1つずつ処理する」という因数分解の論理から来ている。</p>
       </div>
@@ -308,10 +304,10 @@ MathJax = {
       <div class="details-body">
         <p style="font-family:var(--font-sans); font-size:0.85rem; color:#6b7280; margin-bottom:0.5rem;">できると思ったら ✓，怪しいなら解説を再読する。</p>
         <ul class="checklist">
-          <li>$x' = tx$ を見て，変数分離か積分因子か迷わず積分因子で解けるか（または変数分離でも解けるか）</li>
-          <li>積分因子 $\mu = e^{\int p(t)\,dt}$ の式が，$\mu'/\mu = p$ という条件から導けるか</li>
+          <li>$x' = tx$ を変数分離して $\ln|x| = t^2/2 + C_0$，$x = Ce^{t^2/2}$ を導けるか</li>
           <li>ロジスティック方程式で平衡点（恒等定数解）を先に確認する習慣があるか</li>
           <li>同次形 $x' = f(x/t)$ を見たとき，$u = x/t$ の置換で変数分離形になることを示せるか</li>
+          <li>$x' = \cos t(\sin t - x)$ のような方程式で $u = \sin t - x$ と置いて変数分離形に帰着できるか</li>
           <li>自律系 $x' = F(x)$ の平衡点の「安定・不安定」を $F'$ の符号で判定できるか</li>
           <li>Riccati 型で $x = x_0 + u$（$x_0$ は平衡点）の変換後，$u$ の ODE が変数分離になることを確認できるか</li>
           <li>二階線形定係数 ODE の特性方程式 $\lambda^2 + b\lambda + c = 0$ を解いて一般解を書けるか</li>
@@ -329,8 +325,8 @@ MathJax = {
     <p>ODEの解法は方程式の構造を見て決まる。</p>
     <ul>
       <li><strong>変数分離：</strong>$x' = f(t)g(x)$ の形。両辺を $g(x)$ で割り，$t$ と $x$ を分けて積分</li>
-      <li><strong>積分因子：</strong>$x' + p(t)x = q(t)$ の形。$e^{\int p\,dt}$ を掛けると左辺が完全微分</li>
       <li><strong>同次形：</strong>$x' = f(x/t)$ の形。$u = x/t$ で変数分離形に</li>
+      <li><strong>置換：</strong>繰り返し現れる $t,x$ の組み合わせを $u$ とおいて変数分離形に帰着</li>
       <li><strong>平衡点変換：</strong>自律系 $x' = F(x)$ で $F(x_0) = 0$ なら $u = x - x_0$ で簡単化</li>
       <li><strong>因数分解：</strong>定係数線形 → 特性方程式の根が指数関数解</li>
     </ul>
