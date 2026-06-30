@@ -16,15 +16,6 @@ MathJax = {
 };
 </script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-<style>
-.logic-chain { background: #f0fff4; border-left: 3px solid #48bb78; padding: 0.75rem 1rem; margin: 0.75rem 0; border-radius: 0 6px 6px 0; font-family: 'Noto Sans JP', sans-serif; font-size: 0.9rem; }
-.backward-think { background: linear-gradient(135deg, #faf5ff, #ede9fe); border: 1.5px solid #c4b5fd; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
-.backward-think .bt-title { color: #5b21b6; font-weight: 700; font-size: 0.85rem; font-family: 'Noto Sans JP', sans-serif; margin-bottom: 0.5rem; }
-.answer-box { background: #fafafa; border: 2px solid #334155; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
-.answer-box .answer-title { font-weight: 700; font-size: 0.85rem; color: #334155; font-family: 'Noto Sans JP', sans-serif; margin-bottom: 0.75rem; letter-spacing: 0.05em; }
-.think-box { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 1.5px solid #86efac; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
-.think-box .think-title { color: #166534; font-weight: 700; font-size: 0.85rem; font-family: 'Noto Sans JP', sans-serif; margin-bottom: 0.5rem; }
-</style>
 </head>
 <body>
 
@@ -103,7 +94,7 @@ MathJax = {
       <p>核の条件より：$f(1,0,2)^T = a + 2c = 0$，$f(0,1,1)^T = b + c = 0$。</p>
       <p>$c = 1$ とおくと $a = -2$，$b = -1$。よって</p>
       $$f\begin{pmatrix}x\\y\\z\end{pmatrix} = -2x - y + z$$
-      <p>確認：$f(1,0,2)^T = -2+0+2 = 0$，$f(0,1,1)^T = 0-1+1 = 0$ ✓。$f \ne 0$（例えば $f(1,0,0)^T = -2 \ne 0$）なので次元定理より $\dim\mathrm{Ker}(f) = 3 - 1 = 2$。$\square$</p>
+      <p>確認：$f(1,0,2)^T = -2+0+2 = 0$，$f(0,1,1)^T = 0-1+1 = 0$ ✓。$f \ne 0$（例えば $f(1,0,0)^T = -2 \ne 0$）なので次元定理より $\dim\mathrm{Ker}(f) = 3 - 1 = 2$。$\blacksquare$</p>
     </div>
 
     <div class="think-box">
@@ -182,7 +173,7 @@ MathJax = {
       <p><strong>零元：</strong>零写像 $0: v \mapsto 0$ は線形写像であり，$(f + 0)(v) = f(v) + 0 = f(v)$ より加法の単位元。</p>
       <p><strong>加法の閉性：</strong>$f, g \in V^*$ とする。$(f+g)(av_1+bv_2) = f(av_1+bv_2)+g(av_1+bv_2) = af(v_1)+bf(v_2)+ag(v_1)+bg(v_2) = a(f+g)(v_1)+b(f+g)(v_2)$。よって $f+g \in V^*$。</p>
       <p><strong>スカラー倍の閉性：</strong>$(af)(cv_1+dv_2) = af(cv_1+dv_2) = a(cf(v_1)+df(v_2)) = c(af)(v_1)+d(af)(v_2)$。よって $af \in V^*$。</p>
-      <p>その他の公理（結合律，交換律，逆元など）は $\mathbb{R}$ での演算から自動的に成立する。よって $V^*$ は $\mathbb{R}$-ベクトル空間。$\square$</p>
+      <p>その他の公理（結合律，交換律，逆元など）は $\mathbb{R}$ での演算から自動的に成立する。よって $V^*$ は $\mathbb{R}$-ベクトル空間。$\blacksquare$</p>
     </div>
 
     <div class="think-box">
@@ -209,10 +200,10 @@ MathJax = {
         $\hat v = 0$ という仮定より，特に $f = e_j^*$ を代入すると $v_j = e_j^*(v) = \hat v(e_j^*) = 0$（各 $j = 1,\ldots,n$）。
         全成分 $v_j = 0$ なので $v = 0$。（無限次元の場合も $\varphi$ は単射だが，その証明には Hahn-Banach の定理が必要。）
       </p>
-      <p>よって $\ker\varphi = \{0\}$，$\varphi$ は単射。$\square$</p>
+      <p>よって $\ker\varphi = \{0\}$，$\varphi$ は単射。$\blacksquare$</p>
       <p><strong>(3) $V = \mathbb{R}^n$ における内積写像 $\Psi: v \mapsto (\cdot, v)$ の線形性：</strong>$\Psi(v)(w) := (w, v)$ とおく。</p>
       <p>線形性：$\Psi(av+bw)(u) = (u, av+bw) = a(u,v)+b(u,w) = (a\Psi(v)+b\Psi(w))(u)$。</p>
-      <p>単射性：$\Psi(v) = 0$ とすると全ての $u$ に対し $(u,v)=0$。$u=v$ とおくと $(v,v)=0$，正定値性より $v=0$。$\square$</p>
+      <p>単射性：$\Psi(v) = 0$ とすると全ての $u$ に対し $(u,v)=0$。$u=v$ とおくと $(v,v)=0$，正定値性より $v=0$。$\blacksquare$</p>
     </div>
 
     <div class="think-box">
@@ -260,7 +251,7 @@ MathJax = {
         $\dim\mathrm{Im}(\tilde\Phi) = \dim V - \dim\ker(\tilde\Phi) = n - 0 = n = \dim V^*$。
         $\mathrm{Im}(\tilde\Phi)$ は $V^*$ の部分空間で，その次元が $\dim V^*$ に等しいから $\mathrm{Im}(\tilde\Phi) = V^*$，すなわち $\tilde\Phi$ は全射。
       </p>
-      <p>よって $\tilde\Phi$ は線形同型。$\square$</p>
+      <p>よって $\tilde\Phi$ は線形同型。$\blacksquare$</p>
     </div>
 
     <div class="think-box">

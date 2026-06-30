@@ -106,8 +106,23 @@ a:hover { text-decoration: underline; }
   margin-bottom: 1.5rem;
   position: relative;
 }
-.proof-box::after { content: '□'; position: absolute; bottom: 0.75rem; right: 1rem; color: var(--text-muted); font-size: 1.1rem; }
+.proof-box::after { content: '■'; position: absolute; bottom: 0.75rem; right: 1rem; color: var(--text-muted); font-size: 1.1rem; }
 .proof-box .proof-title { color: var(--text-muted); font-weight: 600; font-size: 0.85rem; font-family: var(--font-sans); margin-bottom: 0.5rem; letter-spacing: 0.03em; }
+
+/* Answer Box */
+.answer-box { background: #fafafa; border: 2px solid #334155; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+.answer-box .answer-title { font-weight: 700; font-size: 0.85rem; color: #334155; font-family: var(--font-sans); margin-bottom: 0.75rem; letter-spacing: 0.05em; }
+
+/* Think Box */
+.think-box { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 1.5px solid #86efac; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+.think-box .think-title { color: #166534; font-weight: 700; font-size: 0.85rem; font-family: var(--font-sans); margin-bottom: 0.5rem; }
+
+/* Backward Think Box */
+.backward-think { background: linear-gradient(135deg, #fdf4ff, #fae8ff); border: 1.5px solid #c084fc; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+.backward-think .bt-title { color: #7e22ce; font-weight: 700; font-size: 0.85rem; font-family: var(--font-sans); margin-bottom: 0.5rem; }
+
+/* Logic Chain */
+.logic-chain { background: #f0fff4; border-left: 3px solid #48bb78; padding: 0.75rem 1rem; margin: 0.75rem 0; border-radius: 0 6px 6px 0; font-family: var(--font-sans); font-size: 0.9rem; }
 
 /* Self-study checklist */
 .checklist { list-style: none; }

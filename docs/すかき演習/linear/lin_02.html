@@ -16,15 +16,6 @@ MathJax = {
 };
 </script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-<style>
-.logic-chain { background: #f0fff4; border-left: 3px solid #48bb78; padding: 0.75rem 1rem; margin: 0.75rem 0; border-radius: 0 6px 6px 0; font-family: 'Noto Sans JP', sans-serif; font-size: 0.9rem; }
-.backward-think { background: linear-gradient(135deg, #fdf4ff, #ede9fe); border: 1.5px solid #c084fc; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
-.backward-think .bt-title { color: #6b21a8; font-weight: 700; font-size: 0.85rem; font-family: 'Noto Sans JP', sans-serif; margin-bottom: 0.5rem; }
-.answer-box { background: #fafafa; border: 2px solid #334155; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
-.answer-box .answer-title { font-weight: 700; font-size: 0.85rem; color: #334155; font-family: 'Noto Sans JP', sans-serif; margin-bottom: 0.75rem; letter-spacing: 0.05em; }
-.think-box { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 1.5px solid #86efac; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
-.think-box .think-title { color: #166534; font-weight: 700; font-size: 0.85rem; font-family: 'Noto Sans JP', sans-serif; margin-bottom: 0.5rem; }
-</style>
 </head>
 <body>
 
@@ -87,7 +78,7 @@ MathJax = {
       </ul>
       <p>線形写像はその行列表現として「基底の行き先を列に並べた行列」をもつ（第1回）。よって回転の行列は</p>
       $$R_\theta = \begin{pmatrix}\cos\theta & -\sin\theta\\\sin\theta & \cos\theta\end{pmatrix}$$
-      <p>任意の $v = (x,y)^T$ に対し $f_{R_\theta}(v) = R_\theta v$ が回転と一致することは，$v = xe_1 + ye_2$ と線形性から従う。$\square$</p>
+      <p>任意の $v = (x,y)^T$ に対し $f_{R_\theta}(v) = R_\theta v$ が回転と一致することは，$v = xe_1 + ye_2$ と線形性から従う。$\blacksquare$</p>
     </div>
 
     <div class="think-box">
@@ -136,7 +127,7 @@ MathJax = {
       <p>$T_\tau = R_\tau(AR_{-\tau}) = \begin{pmatrix}\cos\tau & -\sin\tau\\\sin\tau & \cos\tau\end{pmatrix}\begin{pmatrix}\cos\tau & \sin\tau\\\sin\tau & -\cos\tau\end{pmatrix}$</p>
       <p>三角関数の加法定理（$\cos^2\tau - \sin^2\tau = \cos 2\tau$，$2\sin\tau\cos\tau = \sin 2\tau$）を用いて</p>
       $$T_\tau = \begin{pmatrix}\cos 2\tau & \sin 2\tau\\\sin 2\tau & -\cos 2\tau\end{pmatrix}$$
-      $\square$
+      $\blacksquare$
     </div>
 
     <div class="think-box">
@@ -181,7 +172,7 @@ MathJax = {
       <p>直接行列積を計算する（三角関数の加法定理を使う）：</p>
       $$R_{\theta_1}R_{\theta_2} = \begin{pmatrix}\cos\theta_1 & -\sin\theta_1\\\sin\theta_1 & \cos\theta_1\end{pmatrix}\begin{pmatrix}\cos\theta_2 & -\sin\theta_2\\\sin\theta_2 & \cos\theta_2\end{pmatrix}$$
       $$= \begin{pmatrix}\cos\theta_1\cos\theta_2 - \sin\theta_1\sin\theta_2 & -\cos\theta_1\sin\theta_2 - \sin\theta_1\cos\theta_2 \\\sin\theta_1\cos\theta_2 + \cos\theta_1\sin\theta_2 & -\sin\theta_1\sin\theta_2 + \cos\theta_1\cos\theta_2\end{pmatrix} = \begin{pmatrix}\cos(\theta_1+\theta_2) & -\sin(\theta_1+\theta_2)\\\sin(\theta_1+\theta_2) & \cos(\theta_1+\theta_2)\end{pmatrix} = R_{\theta_1+\theta_2}$$
-      <p>$\square$</p>
+      <p>$\blacksquare$</p>
       <p><strong>（2）$T_{\tau_1} T_{\tau_2} = R_{2(\tau_1 - \tau_2)}$</strong>，<strong>（3）$R_\theta T_\tau = T_{\tau + \theta/2}$</strong>，<strong>（4）$T_\tau R_\theta = T_{\tau - \theta/2}$</strong></p>
       <p>$T_\tau = R_\tau A R_{-\tau}$（$A = \begin{pmatrix}1&0\\0&-1\end{pmatrix}$ は $x$ 軸への鏡映）と $R_{\alpha}R_{\beta} = R_{\alpha+\beta}$ を組み合わせる。</p>
       <p><strong>（3）の証明の詳細：</strong></p>
@@ -196,10 +187,10 @@ MathJax = {
         <div class="bt-title">🔄 補題：$R_\phi A R_\phi = A$ の証明</div>
         <p>直接計算する（$A = \begin{pmatrix}1&0\\0&-1\end{pmatrix}$）：</p>
         $$R_\phi A = \begin{pmatrix}\cos\phi & -\sin\phi\\\sin\phi & \cos\phi\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix} = \begin{pmatrix}\cos\phi & \sin\phi\\\sin\phi & -\cos\phi\end{pmatrix}$$
-        $$R_\phi A R_\phi = \begin{pmatrix}\cos\phi & \sin\phi\\\sin\phi & -\cos\phi\end{pmatrix}\begin{pmatrix}\cos\phi & -\sin\phi\\\sin\phi & \cos\phi\end{pmatrix} = \begin{pmatrix}\cos^2\phi+\sin^2\phi & 0 \\ 0 & -\sin^2\phi-\cos^2\phi\end{pmatrix} = \begin{pmatrix}1&0\\0&-1\end{pmatrix} = A \quad \square$$
+        $$R_\phi A R_\phi = \begin{pmatrix}\cos\phi & \sin\phi\\\sin\phi & -\cos\phi\end{pmatrix}\begin{pmatrix}\cos\phi & -\sin\phi\\\sin\phi & \cos\phi\end{pmatrix} = \begin{pmatrix}\cos^2\phi+\sin^2\phi & 0 \\ 0 & -\sin^2\phi-\cos^2\phi\end{pmatrix} = \begin{pmatrix}1&0\\0&-1\end{pmatrix} = A \quad \blacksquare$$
         <p>幾何学的な意味：$A$（$x$ 軸への鏡映）を $\phi$ 回転した座標系で見ると，$x$ 軸への鏡映はどの角度に向いた $x$ 軸への鏡映でも構造が同じ——という等価性。これが $R_\phi A R_\phi = A$ の本質。</p>
       </div>
-      <p>（2），（4）も同様の手順で示せる。$\square$</p>
+      <p>（2），（4）も同様の手順で示せる。$\blacksquare$</p>
     </div>
 
     <div class="think-box">
@@ -246,11 +237,11 @@ MathJax = {
       $${}^t R_\theta \cdot R_\theta = R_{-\theta} R_\theta = R_{-\theta+\theta} = R_0 = I, \quad R_\theta \cdot {}^t R_\theta = R_\theta R_{-\theta} = I$$
       <p>よって $R_\theta$ は直交行列。$T_\tau$ は対称行列（${}^t T_\tau = T_\tau$）なので，問題3の結果 $T_{\tau_1}T_{\tau_2} = R_{2(\tau_1-\tau_2)}$ を $\tau_1=\tau_2=\tau$ で使うと</p>
       $${}^t T_\tau \cdot T_\tau = T_\tau T_\tau = R_{2(\tau-\tau)} = R_0 = I$$
-      <p>よって $T_\tau$ も直交行列。$\square$</p>
+      <p>よって $T_\tau$ も直交行列。$\blacksquare$</p>
       <hr style="margin:0.75rem 0; border-color:#cbd5e1;">
       <p><strong>(2)</strong> $A$ の列ベクトルを $a_1, a_2$ とする。${}^t A A = I$ は</p>
       $$\begin{pmatrix}a_1 \cdot a_1 & a_1 \cdot a_2 \\ a_2 \cdot a_1 & a_2 \cdot a_2\end{pmatrix} = I$$
-      <p>つまり $|a_1| = |a_2| = 1$（単位ベクトル）かつ $a_1 \cdot a_2 = 0$（直交）。$\square$</p>
+      <p>つまり $|a_1| = |a_2| = 1$（単位ベクトル）かつ $a_1 \cdot a_2 = 0$（直交）。$\blacksquare$</p>
       <hr style="margin:0.75rem 0; border-color:#cbd5e1;">
       <p><strong>(3)</strong> (2) より $a_1 = (\cos\theta, \sin\theta)^T$ と書くと，$a_2$ は $a_1$ と直交する単位ベクトルなので，$a_2 = (-\sin\theta, \cos\theta)^T$ か $a_2 = (\sin\theta, -\cos\theta)^T$ の2通り。</p>
       <p>よって ${}^t A A = I$ の $2\times 2$ 解は：</p>
@@ -258,7 +249,7 @@ MathJax = {
         <li>$A = \begin{pmatrix}\cos\theta & -\sin\theta\\\sin\theta & \cos\theta\end{pmatrix} = R_\theta$（回転行列，$\det A = 1$）</li>
         <li>$A = \begin{pmatrix}\cos\theta & \sin\theta\\\sin\theta & -\cos\theta\end{pmatrix} = T_{\theta/2}$（鏡映行列，$\det A = -1$）</li>
       </ul>
-      <p>$A {}^t\!A = I$ も同様（$R_\theta {}^t R_\theta = I$，$T_\tau {}^t T_\tau = I$）。よって直交行列は $R_\theta$ か $T_{\theta/2}$ のいずれか。$\square$</p>
+      <p>$A {}^t\!A = I$ も同様（$R_\theta {}^t R_\theta = I$，$T_\tau {}^t T_\tau = I$）。よって直交行列は $R_\theta$ か $T_{\theta/2}$ のいずれか。$\blacksquare$</p>
     </div>
 
     <div class="think-box">

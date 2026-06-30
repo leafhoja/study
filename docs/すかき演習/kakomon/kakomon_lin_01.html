@@ -30,10 +30,6 @@ MathJax = {
 .exam-images-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 @media (max-width: 640px) { .exam-images-grid { grid-template-columns: 1fr; } }
 
-.answer-box { background: #fafafa; border: 2px solid #334155; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
-.answer-box .answer-title { font-weight: 700; font-size: 0.85rem; color: #334155; font-family: var(--font-sans); margin-bottom: 0.75rem; letter-spacing: 0.05em; }
-.think-box { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 1.5px solid #86efac; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
-.think-box .think-title { color: #166534; font-weight: 700; font-size: 0.85rem; font-family: var(--font-sans); margin-bottom: 0.5rem; }
 .meta-badge {
   display: inline-block;
   background: rgba(255,255,255,0.2);
@@ -180,7 +176,7 @@ MathJax = {
       <p>$A$ が直交行列なので $\det A = \pm 1$。$A^n = E$ の行列式をとると，</p>
       $$(\det A)^n = \det(A^n) = \det E = 1$$
       <p>$n$ が奇数のとき，実数 $d$ が $d^n = 1$ を満たすのは $d = 1$ のみ（奇数乗は単調）。よって $\det A = 1$。</p>
-      <p>直交行列かつ $\det A = 1$ の $2\times 2$ 行列は回転行列に限る。$\square$</p>
+      <p>直交行列かつ $\det A = 1$ の $2\times 2$ 行列は回転行列に限る。$\blacksquare$</p>
     </div>
 
     <div class="answer-box">
@@ -316,7 +312,7 @@ MathJax = {
       <p>$-f$ は線形（$(-f)$ は $(-1)f$ に同じ）かつ $(f+(-f))(v)=f(v)-f(v)=0=\mathbf{0}(v)$。</p>
       <p><strong>Step 4：残りの公理（加法の交換・結合，スカラー倍の規則）は $W$ での等式から直接従う。</strong></p>
       <p>例：$(f+g)(v) = f(v)+g(v) = g(v)+f(v) = (g+f)(v)$ （$W$ での加法の交換則を使用）。</p>
-      <p>以上より $\mathrm{Hom}(V,W)$ は $\mathbb{R}$-ベクトル空間である。$\square$</p>
+      <p>以上より $\mathrm{Hom}(V,W)$ は $\mathbb{R}$-ベクトル空間である。$\blacksquare$</p>
     </div>
 
     <div class="answer-box">
@@ -331,7 +327,7 @@ MathJax = {
       <p><strong>全射：</strong></p>
       <p>任意の $w\in W$ に対し，$f_w\colon \mathbb{R}\to W;\; x\mapsto xw$ を定める。</p>
       <p>$f_w$ は線形（$f_w(ax+by) = (ax+by)w = a(xw)+b(yw) = af_w(x)+bf_w(y)$）かつ $\varphi(f_w)=f_w(1)=w$。よって $\varphi$ は全射。</p>
-      <p>以上より $\varphi$ は同型な線形写像（$\mathbb{R}$-ベクトル空間の同型）である。$\square$</p>
+      <p>以上より $\varphi$ は同型な線形写像（$\mathbb{R}$-ベクトル空間の同型）である。$\blacksquare$</p>
       <p style="color:#166534;font-size:0.88rem;font-family:var(--font-sans);">※ この同型は $\mathrm{Hom}(\mathbb{R},W)\cong W$ を示す。直感的には「$\mathbb{R}\to W$ の線形写像は $f(1)\in W$ で完全に決まる」ということ。</p>
     </div>
 

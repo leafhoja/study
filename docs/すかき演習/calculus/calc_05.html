@@ -21,12 +21,6 @@ MathJax = {
 .lemma-box .lemma-title { font-weight: 700; color: #166534; font-size: 0.88rem; font-family: 'Noto Sans JP', sans-serif; margin-bottom: 0.5rem; letter-spacing: 0.03em; }
 .proof-block { background: #f8fafc; border-left: 3px solid #94a3b8; padding: 0.75rem 1.25rem; margin: 0.75rem 0; border-radius: 0 6px 6px 0; font-family: 'Noto Sans JP', sans-serif; font-size: 0.9rem; }
 .proof-block .proof-title { font-weight: 700; color: #334155; font-size: 0.82rem; margin-bottom: 0.4rem; letter-spacing: 0.03em; }
-.backward-think { background: linear-gradient(135deg, #fdf4ff, #fae8ff); border: 1.5px solid #c084fc; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
-.backward-think .bt-title { color: #7e22ce; font-weight: 700; font-size: 0.85rem; font-family: 'Noto Sans JP', sans-serif; margin-bottom: 0.5rem; }
-.answer-box { background: #fafafa; border: 2px solid #334155; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
-.answer-box .answer-title { font-weight: 700; font-size: 0.85rem; color: #334155; font-family: 'Noto Sans JP', sans-serif; margin-bottom: 0.75rem; letter-spacing: 0.05em; }
-.think-box { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 1.5px solid #86efac; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
-.think-box .think-title { color: #166534; font-weight: 700; font-size: 0.85rem; font-family: 'Noto Sans JP', sans-serif; margin-bottom: 0.5rem; }
 .mistake-box { background: #fff7ed; border: 1.5px solid #fb923c; border-radius: 8px; padding: 1rem 1.25rem; margin: 0.75rem 0; }
 .mistake-box .mistake-title { font-weight: 700; color: #c2410c; font-size: 0.82rem; font-family: 'Noto Sans JP', sans-serif; margin-bottom: 0.4rem; }
 .step-num { display: inline-block; background: #334155; color: white; border-radius: 50%; width: 1.4em; height: 1.4em; text-align: center; line-height: 1.4em; font-size: 0.8em; font-weight: 700; margin-right: 0.3em; font-family: 'Noto Sans JP', sans-serif; }
@@ -109,7 +103,7 @@ MathJax = {
         $$f(x) = f(y) + (x - y)f'(y) + \frac{1}{2}(x-y)^2 f''(z)$$
         <p>が成り立つ。仮定 $f''(z) > 0$ より $\dfrac{1}{2}(x-y)^2 f''(z) \geq 0$ であるから</p>
         $$f(x) \geq f(y) + (x - y)f'(y)$$
-        <p>が成立する。等号が成立する条件は $\dfrac{1}{2}(x-y)^2 f''(z) = 0$ であるが，$f''(z) > 0$ より $(x-y)^2 = 0$，すなわち $x = y$ と同値である。$\square$</p>
+        <p>が成立する。等号が成立する条件は $\dfrac{1}{2}(x-y)^2 f''(z) = 0$ であるが，$f''(z) > 0$ より $(x-y)^2 = 0$，すなわち $x = y$ と同値である。$\blacksquare$</p>
       </div>
 
       <p>問題に戻る。</p>
@@ -123,7 +117,7 @@ MathJax = {
       <p>両辺を $n$ で割ると</p>
       $$\boxed{\frac{f(x_1) + \cdots + f(x_n)}{n} \geq f\!\left(\frac{x_1 + \cdots + x_n}{n}\right)}$$
       <p>が得られる。</p>
-      <p><strong>等号成立条件：</strong>等号が成立するのは，上の $n$ 個の補題の不等式すべてで等号が成立するときである。各 $i$ について等号成立条件は $x_i = \bar{x}$ であるから，$x_1 = x_2 = \cdots = x_n = \bar{x}$，すなわち $x_1 = x_2 = \cdots = x_n$ であることが必要十分条件である。$\square$</p>
+      <p><strong>等号成立条件：</strong>等号が成立するのは，上の $n$ 個の補題の不等式すべてで等号が成立するときである。各 $i$ について等号成立条件は $x_i = \bar{x}$ であるから，$x_1 = x_2 = \cdots = x_n = \bar{x}$，すなわち $x_1 = x_2 = \cdots = x_n$ であることが必要十分条件である。$\blacksquare$</p>
     </div>
 
     <div class="think-box">
@@ -157,7 +151,7 @@ MathJax = {
       $$\frac{e^{\log x_1} + \cdots + e^{\log x_n}}{n} = \frac{x_1 + \cdots + x_n}{n}$$
       <p>よって</p>
       $$\boxed{\sqrt[n]{x_1 \cdots x_n} \leq \frac{x_1 + \cdots + x_n}{n}}$$
-      <p>等号成立条件は $y_1 = \cdots = y_n$，すなわち $x_1 = \cdots = x_n$。$\square$</p>
+      <p>等号成立条件は $y_1 = \cdots = y_n$，すなわち $x_1 = \cdots = x_n$。$\blacksquare$</p>
     </div>
 
     <div class="think-box">
@@ -212,7 +206,7 @@ MathJax = {
       <p><strong>Step 4：$f(L) = L$ の確認。</strong></p>
       <p>$f$ は連続（$C^1$ 級のため）であるから</p>
       $$f(L) = f\!\left(\lim_{n \to \infty} a_n\right) = \lim_{n \to \infty} f(a_n) = \lim_{n \to \infty} a_{n+1} = L$$
-      <p>よって $\{a_n\}$ は収束し，その極限 $L$ は $f(L) = L$ を満たす。$\square$</p>
+      <p>よって $\{a_n\}$ は収束し，その極限 $L$ は $f(L) = L$ を満たす。$\blacksquare$</p>
     </div>
 
     <div class="think-box">
@@ -268,7 +262,7 @@ MathJax = {
       <p>よって十分大きな $N$ をとれば $n \geq N$ ならば $f_n(1-\varepsilon) < 0$ が成立する。$f_n(a_n) = 0$ かつ $f_n$ は狭義単調増加であるから，$f_n(1-\varepsilon) < 0 = f_n(a_n)$ より</p>
       $$1 - \varepsilon < a_n \quad (n \geq N)$$
       <p>$a_n < 1$ も成立しているので，$n \geq N$ ならば $0 < 1 - a_n < \varepsilon$，すなわち $|1 - a_n| < \varepsilon$。</p>
-      <p>$\varepsilon > 0$ は任意であったから $L = \lim_{n \to \infty} a_n = 1$ が得られた。$\square$</p>
+      <p>$\varepsilon > 0$ は任意であったから $L = \lim_{n \to \infty} a_n = 1$ が得られた。$\blacksquare$</p>
     </div>
 
     <div class="think-box">

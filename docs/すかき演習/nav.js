@@ -134,6 +134,31 @@
 
     var visited = getVisited();
 
+    /* ================================================================
+       インデックスページ専用：訪問済みバッジ＋進捗バー（サイドナビ不要）
+    ================================================================ */
+    if (isIndex) {
+      document.querySelectorAll('.lecture-card a[href]').forEach(function (a) {
+        var href = a.getAttribute('href') || '';
+        var file = href.split('/').pop();
+        if (visited.indexOf(file) !== -1) {
+          var card = a.closest('.lecture-card');
+          if (card) card.classList.add('lc-visited');
+        }
+      });
+
+      var allFiles = CALC_PAGES.concat(LIN_PAGES).concat(KAKOMON_PAGES).map(function (p) { return p.file; });
+      var done = allFiles.filter(function (f) { return visited.indexOf(f) !== -1; }).length;
+      var total = allFiles.length;
+      var pct = total > 0 ? Math.round(done / total * 100) : 0;
+
+      var fill = document.getElementById('progress-fill');
+      var label = document.getElementById('progress-label');
+      if (fill) fill.style.width = pct + '%';
+      if (label) label.textContent = done + ' / ' + total + ' ページ訪問済み（' + pct + '%）';
+      return;
+    }
+
     /* ---- sidebar ---- */
     var nav = document.createElement('nav');
     nav.id = 'sidenav';
@@ -274,8 +299,7 @@
       a.addEventListener('click', function () { if (window.innerWidth < 900) closeNav(); });
     });
 
-    /* 広い画面では自動展開（インデックスページは除く） */
-    if (window.innerWidth >= 1100 && !isIndex) openNav();
+    /* サイドナビは手動で開く（他セクションと統一のため自動展開しない） */
 
     /* ================================================================
        スクロールスパイ
@@ -347,31 +371,6 @@
       }
     });
 
-    /* ================================================================
-       インデックスページ専用：訪問済みバッジ＋進捗バー
-    ================================================================ */
-    if (isIndex) {
-      /* 訪問済みカードに class を付与 */
-      document.querySelectorAll('.lecture-card a[href]').forEach(function (a) {
-        var href = a.getAttribute('href') || '';
-        var file = href.split('/').pop();
-        if (visited.indexOf(file) !== -1) {
-          var card = a.closest('.lecture-card');
-          if (card) card.classList.add('lc-visited');
-        }
-      });
-
-      /* 進捗バーを更新 */
-      var allFiles = CALC_PAGES.concat(LIN_PAGES).concat(KAKOMON_PAGES).map(function (p) { return p.file; });
-      var done = allFiles.filter(function (f) { return visited.indexOf(f) !== -1; }).length;
-      var total = allFiles.length;
-      var pct = total > 0 ? Math.round(done / total * 100) : 0;
-
-      var fill = document.getElementById('progress-fill');
-      var label = document.getElementById('progress-label');
-      if (fill) fill.style.width = pct + '%';
-      if (label) label.textContent = done + ' / ' + total + ' ページ訪問済み（' + pct + '%）';
-    }
   }
 
   if (document.readyState === 'loading') {

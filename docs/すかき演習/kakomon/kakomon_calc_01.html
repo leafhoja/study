@@ -17,12 +17,6 @@ MathJax = {
 </script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <style>
-.answer-box { background: #fafafa; border: 2px solid #1e4799; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
-.answer-box .answer-title { font-weight: 700; font-size: 0.85rem; color: #1e4799; font-family: var(--font-sans); margin-bottom: 0.75rem; letter-spacing: 0.05em; }
-.think-box { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1.5px solid #93c5fd; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
-.think-box .think-title { color: #1e40af; font-weight: 700; font-size: 0.85rem; font-family: var(--font-sans); margin-bottom: 0.5rem; }
-.backward-think { background: linear-gradient(135deg, #fdf4ff, #fae8ff); border: 1.5px solid #c084fc; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
-.backward-think .bt-title { color: #7e22ce; font-weight: 700; font-size: 0.85rem; font-family: var(--font-sans); margin-bottom: 0.5rem; }
 .meta-badge {
   display: inline-block;
   background: rgba(255,255,255,0.2);
@@ -101,7 +95,7 @@ MathJax = {
       $$e^{a_n} - e^a < e^{a+\varepsilon'} - e^a = e^a(e^{\varepsilon'} - 1) = e^a \cdot \frac{\varepsilon}{e^a} = \varepsilon.$$
       <p><strong>下からの評価：</strong></p>
       $$e^{a_n} - e^a > e^{a-\varepsilon'} - e^a = e^a(e^{-\varepsilon'} - 1) = -\frac{\varepsilon}{1 + \varepsilon/e^a} > -\varepsilon.$$
-      <p>よって $|e^{a_n} - e^a| < \varepsilon$。$\varepsilon > 0$ は任意だったから $e^{a_n} \to e^a$。$\square$</p>
+      <p>よって $|e^{a_n} - e^a| < \varepsilon$。$\varepsilon > 0$ は任意だったから $e^{a_n} \to e^a$。$\blacksquare$</p>
     </div>
 
     <div class="think-box">
@@ -157,7 +151,7 @@ MathJax = {
       $$\leq \frac{C}{n} + \frac{n - N_0}{n} \cdot \frac{\varepsilon}{2} < \frac{C}{n} + \frac{\varepsilon}{2}.$$
       <p>さらに $\dfrac{C}{n} < \dfrac{\varepsilon}{2}$ となる $N_1 = \left\lceil\dfrac{2C}{\varepsilon}\right\rceil + 1$ をとり，$N := \max(N_0, N_1)$ とおくと</p>
       $$n \geq N \implies |A_n - \alpha| < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon.$$
-      <p>以上より $\displaystyle\lim_{n\to\infty} A_n = \alpha$。$\square$</p>
+      <p>以上より $\displaystyle\lim_{n\to\infty} A_n = \alpha$。$\blacksquare$</p>
     </div>
 
     <div class="answer-box">
@@ -221,7 +215,7 @@ MathJax = {
       <div class="answer-title">📝 解答 (1)</div>
       <p>$(1+x^2)f''(x) + xf'(x)$ を計算する。</p>
       $$(1+x^2) \cdot \frac{-x}{(1+x^2)^{3/2}} + x \cdot \frac{1}{(1+x^2)^{1/2}}$$
-      $$= \frac{-x}{(1+x^2)^{1/2}} + \frac{x}{(1+x^2)^{1/2}} = 0. \quad \square$$
+      $$= \frac{-x}{(1+x^2)^{1/2}} + \frac{x}{(1+x^2)^{1/2}} = 0. \quad \blacksquare$$
     </div>
 
     <div class="think-box">
@@ -250,7 +244,7 @@ MathJax = {
       <p>$f^{(n+1)}$ の係数を整理：$(2n+1) + n^2 = n^2 + 2n + 1 = (n+1)^2$。</p>
       <p>よって</p>
       $$(1+x^2)f^{(n+3)} + (2(n+1)+1)\,x f^{(n+2)} + (n+1)^2 f^{(n+1)} = 0.$$
-      <p>これは $n+1$ の場合 $P(n+1)$ に他ならない。帰納法より全ての正整数 $n$ で成立。$\square$</p>
+      <p>これは $n+1$ の場合 $P(n+1)$ に他ならない。帰納法より全ての正整数 $n$ で成立。$\blacksquare$</p>
     </div>
 
     <div class="think-box">
@@ -414,7 +408,7 @@ MathJax = {
         </li>
         <li>$x \to \pm\infty$ で $g_{2n}(x) \to +\infty$（最高次 $x^{2n}/(2n)!$ が正）かつ最小値 $> 0$ だから $g_{2n}(x) > 0$（$\forall x$）。</li>
       </ol>
-      <p>以上で $n$ での成立 → $n+1$ での成立が示された（$g_{2n} > 0$ が次の $n$ の「仮定」になる）。$\square$</p>
+      <p>以上で $n$ での成立 → $n+1$ での成立が示された（$g_{2n} > 0$ が次の $n$ の「仮定」になる）。$\blacksquare$</p>
     </div>
 
     <div class="answer-box">
@@ -430,7 +424,7 @@ MathJax = {
       $$g_{2n-1}(-M) = \sum_{k=0}^{2n-1} \frac{(-M)^k}{k!} \to e^{-M} > 0.$$
       <p>（$e^x$ の Taylor 展開は任意の実数で収束するので，部分和は $e^{-M}$ に収束する。）</p>
       <p>よって十分大きい $n$（具体的には $g_{2n-1}(-M) > e^{-M}/2 > 0$ となる $n$）に対して $g_{2n-1}(-M) > 0$，すなわち $\alpha_n < -M$。</p>
-      <p>$M > 0$ は任意だったから $\displaystyle\lim_{n\to\infty} \alpha_n = -\infty$。$\square$</p>
+      <p>$M > 0$ は任意だったから $\displaystyle\lim_{n\to\infty} \alpha_n = -\infty$。$\blacksquare$</p>
     </div>
 
     <div class="think-box">
