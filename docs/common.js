@@ -65,4 +65,15 @@
       if (href === cur) a.classList.add('active');
     });
   });
+
+  /* ── キーボードショートカット ── */
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) return;
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    /* t → ページ先頭へ */
+    if (e.key === 't' || e.key === 'T') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      e.preventDefault();
+    }
+  });
 })();

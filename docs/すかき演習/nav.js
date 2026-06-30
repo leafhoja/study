@@ -1,6 +1,9 @@
 (function () {
   'use strict';
 
+  /* ================================================================
+     ページ定義
+  ================================================================ */
   var CALC_PAGES = [
     { file: 'calc_01.html', num: '第1回', title: 'ε-N論法と数列の収束',
       problems: [
@@ -36,24 +39,6 @@
       ]},
   ];
 
-  var KAKOMON_PAGES = [
-    { file: 'kakomon_calc_01.html', num: '微積 小テスト', title: 'ε-N・Cesàro・高階微分・gₙ',
-      problems: [
-        { id: 'problem1', title: 'ε-N論法：e^{aₙ}→eᵃ' },
-        { id: 'problem2', title: 'Cesàro 平均' },
-        { id: 'problem3', title: 'arcsinh の高階微分' },
-        { id: 'problem4', title: 'xⁿsin(1/x) の微分可能性' },
-        { id: 'problem5', title: '指数部分和 gₙ(x)' },
-      ]},
-    { file: 'kakomon_lin_01.html', num: '線形 小テスト', title: '固有値・直交行列・Hom',
-      problems: [
-        { id: 'problem1', title: '表現行列・核・像' },
-        { id: 'problem2', title: '直交行列と冪' },
-        { id: 'problem3', title: '固有値・対角化' },
-        { id: 'problem4', title: 'Hom空間と同型' },
-      ]},
-  ];
-
   var LIN_PAGES = [
     { file: 'lin_01.html', num: '第1回', title: '線形写像と行列表現',
       problems: [
@@ -84,22 +69,72 @@
       ]},
   ];
 
+  var KAKOMON_PAGES = [
+    { file: 'kakomon_calc_01.html', num: '微積 小テスト', title: 'ε-N・Cesàro・高階微分・gₙ',
+      problems: [
+        { id: 'problem1', title: 'ε-N論法：e^{aₙ}→eᵃ' },
+        { id: 'problem2', title: 'Cesàro 平均' },
+        { id: 'problem3', title: 'arcsinh の高階微分' },
+        { id: 'problem4', title: 'xⁿsin(1/x) の微分可能性' },
+        { id: 'problem5', title: '指数部分和 gₙ(x)' },
+      ]},
+    { file: 'kakomon_lin_01.html', num: '線形 小テスト', title: '固有値・直交行列・Hom',
+      problems: [
+        { id: 'problem1', title: '表現行列・核・像' },
+        { id: 'problem2', title: '直交行列と冪' },
+        { id: 'problem3', title: '固有値・対角化' },
+        { id: 'problem4', title: 'Hom空間と同型' },
+      ]},
+  ];
+
+  /* ================================================================
+     進捗管理（localStorage）
+  ================================================================ */
+  var STORAGE_KEY = 'sukami-visited';
+
+  function getVisited() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
+    catch (e) { return []; }
+  }
+
+  function saveVisited(arr) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); } catch (e) {}
+  }
+
+  function markVisited(filename) {
+    if (!filename || filename === 'index.html') return;
+    var v = getVisited();
+    if (v.indexOf(filename) === -1) { v.push(filename); saveVisited(v); }
+  }
+
+  /* ================================================================
+     ユーティリティ
+  ================================================================ */
   function mk(tag, cls, text) {
     var el = document.createElement(tag);
     if (cls) el.className = cls;
-    if (text) el.textContent = text;
+    if (text != null) el.textContent = text;
     return el;
   }
 
+  /* ================================================================
+     buildNav — サイドナビ構築
+  ================================================================ */
   function buildNav() {
     var pathname = location.pathname;
     var currentFile = pathname.split('/').pop() || '';
+    var isIndex = (currentFile === 'index.html' || currentFile === '');
     var inSubdir = /\/(calculus|linear|kakomon)\//.test(pathname);
-    var prefix = inSubdir ? '../' : '';
+    var prefix     = inSubdir ? '../' : '';
     var calcPrefix = prefix + 'calculus/';
-    var linPrefix = prefix + 'linear/';
+    var linPrefix  = prefix + 'linear/';
 
-    /* ---- sidebar element ---- */
+    /* 現在ページを訪問済みに記録 */
+    markVisited(currentFile);
+
+    var visited = getVisited();
+
+    /* ---- sidebar ---- */
     var nav = document.createElement('nav');
     nav.id = 'sidenav';
     nav.className = 'sidenav';
@@ -129,27 +164,32 @@
       for (var i = 0; i < pages.length; i++) {
         var page = pages[i];
         var isCurrent = currentFile === page.file;
+        var isVisited = visited.indexOf(page.file) !== -1;
 
-        /* Row: [expand-btn] [item-link →] */
         var item = mk('div', 'sidenav-item ' + itemCls + (isCurrent ? ' sidenav-current' : ''));
 
-        /* Left: chevron toggle */
+        /* 展開ボタン */
         var expandBtn = mk('button', 'sidenav-expand-btn' + (isCurrent ? ' sidenav-expand-open' : ''));
         expandBtn.setAttribute('type', 'button');
         expandBtn.setAttribute('aria-label', '問題一覧を展開');
         item.appendChild(expandBtn);
 
-        /* Right: page link */
+        /* ページリンク */
         var link = document.createElement('a');
         link.href = base + page.file;
         link.className = 'sidenav-item-link';
         link.appendChild(mk('span', 'sidenav-item-num', page.num));
-        link.appendChild(mk('span', 'sidenav-item-title', page.title));
+        var titleSpan = mk('span', 'sidenav-item-title', page.title);
+        link.appendChild(titleSpan);
+        /* 訪問済みバッジ */
+        if (isVisited) {
+          link.appendChild(mk('span', 'sidenav-visited-badge', '✓'));
+        }
         item.appendChild(link);
 
         group.appendChild(item);
 
-        /* Problem list — hidden for non-current pages by default */
+        /* 問題リスト */
         var probWrap = mk('div', 'sidenav-problems ' + probCls + (isCurrent ? '' : ' sidenav-problems-hidden'));
         for (var j = 0; j < page.problems.length; j++) {
           var p = page.problems[j];
@@ -164,7 +204,6 @@
         }
         group.appendChild(probWrap);
 
-        /* Wire expand button */
         (function (btn, wrap) {
           btn.addEventListener('click', function (evt) {
             evt.stopPropagation();
@@ -197,7 +236,7 @@
 
     document.body.appendChild(nav);
 
-    /* ---- toggle button injected into page header ---- */
+    /* ---- トグルボタン（navbar-inner に挿入） ---- */
     var toggleBtn = mk('button', 'sidenav-toggle-btn');
     toggleBtn.id = 'sidenav-toggle';
     toggleBtn.setAttribute('aria-label', '問題一覧');
@@ -206,9 +245,7 @@
     toggleBtn.textContent = '☰';
 
     var headerInner = document.querySelector('.header-inner, .navbar-inner');
-    if (headerInner) {
-      headerInner.insertBefore(toggleBtn, headerInner.firstChild);
-    }
+    if (headerInner) headerInner.insertBefore(toggleBtn, headerInner.firstChild);
 
     /* ---- open / close ---- */
     function openNav() {
@@ -225,39 +262,31 @@
       nav.classList.contains('sidenav-open') ? closeNav() : openNav();
     }
 
-    toggleBtn.addEventListener('click', function (evt) {
-      evt.stopPropagation();
-      toggleNav();
-    });
+    toggleBtn.addEventListener('click', function (evt) { evt.stopPropagation(); toggleNav(); });
     closeBtn.addEventListener('click', closeNav);
-
     document.addEventListener('click', function (evt) {
       if (nav.classList.contains('sidenav-open') &&
-          !nav.contains(evt.target) &&
-          evt.target !== toggleBtn) {
-        closeNav();
-      }
+          !nav.contains(evt.target) && evt.target !== toggleBtn) closeNav();
     });
 
-    /* Close on mobile after jumping to a problem */
+    /* モバイルで問題リンク押下時に閉じる */
+    nav.querySelectorAll('.sidenav-problem').forEach(function (a) {
+      a.addEventListener('click', function () { if (window.innerWidth < 900) closeNav(); });
+    });
+
+    /* 広い画面では自動展開（インデックスページは除く） */
+    if (window.innerWidth >= 1100 && !isIndex) openNav();
+
+    /* ================================================================
+       スクロールスパイ
+    ================================================================ */
     var probLinks = nav.querySelectorAll('.sidenav-problem');
-    probLinks.forEach(function (a) {
-      a.addEventListener('click', function () {
-        if (window.innerWidth < 900) closeNav();
-      });
-    });
-
-    /* Auto-open on wide screens */
-    if (window.innerWidth >= 1100) openNav();
-
-    /* ---- scroll spy ---- */
     if (probLinks.length > 0) {
       var sections = [];
       probLinks.forEach(function (a) {
         var sec = document.getElementById(a.dataset.target);
         if (sec) sections.push({ el: sec, link: a });
       });
-
       function updateSpy() {
         var scrollY = window.scrollY + 120;
         var active = null;
@@ -267,9 +296,81 @@
         probLinks.forEach(function (a) { a.classList.remove('sidenav-problem-active'); });
         if (active) active.classList.add('sidenav-problem-active');
       }
-
       window.addEventListener('scroll', updateSpy, { passive: true });
       updateSpy();
+    }
+
+    /* ================================================================
+       キーボードナビゲーション
+       Escape : サイドナビを閉じる
+       [ / ]  : 前後のページへ移動
+    ================================================================ */
+    var ALL_SEQUENCES = [
+      { pages: CALC_PAGES,   base: calcPrefix },
+      { pages: LIN_PAGES,    base: linPrefix  },
+      { pages: KAKOMON_PAGES, base: prefix + 'kakomon/' },
+    ];
+
+    function findNeighbors() {
+      for (var s = 0; s < ALL_SEQUENCES.length; s++) {
+        var seq = ALL_SEQUENCES[s];
+        for (var i = 0; i < seq.pages.length; i++) {
+          if (seq.pages[i].file === currentFile) {
+            return {
+              prev: i > 0 ? seq.base + seq.pages[i - 1].file : null,
+              next: i < seq.pages.length - 1 ? seq.base + seq.pages[i + 1].file : null,
+            };
+          }
+        }
+      }
+      return { prev: null, next: null };
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) return;
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+      switch (e.key) {
+        case 'Escape':
+          if (nav.classList.contains('sidenav-open')) { closeNav(); e.preventDefault(); }
+          break;
+        case '[': {
+          var nb = findNeighbors();
+          if (nb.prev) { location.href = nb.prev; e.preventDefault(); }
+          break;
+        }
+        case ']': {
+          var nb2 = findNeighbors();
+          if (nb2.next) { location.href = nb2.next; e.preventDefault(); }
+          break;
+        }
+      }
+    });
+
+    /* ================================================================
+       インデックスページ専用：訪問済みバッジ＋進捗バー
+    ================================================================ */
+    if (isIndex) {
+      /* 訪問済みカードに class を付与 */
+      document.querySelectorAll('.lecture-card a[href]').forEach(function (a) {
+        var href = a.getAttribute('href') || '';
+        var file = href.split('/').pop();
+        if (visited.indexOf(file) !== -1) {
+          var card = a.closest('.lecture-card');
+          if (card) card.classList.add('lc-visited');
+        }
+      });
+
+      /* 進捗バーを更新 */
+      var allFiles = CALC_PAGES.concat(LIN_PAGES).concat(KAKOMON_PAGES).map(function (p) { return p.file; });
+      var done = allFiles.filter(function (f) { return visited.indexOf(f) !== -1; }).length;
+      var total = allFiles.length;
+      var pct = total > 0 ? Math.round(done / total * 100) : 0;
+
+      var fill = document.getElementById('progress-fill');
+      var label = document.getElementById('progress-label');
+      if (fill) fill.style.width = pct + '%';
+      if (label) label.textContent = done + ' / ' + total + ' ページ訪問済み（' + pct + '%）';
     }
   }
 
