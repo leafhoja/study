@@ -79,11 +79,11 @@ MathJax = {
 
     <div class="problem-box">
       <h3>問題文</h3>
-      <p>次の集合の上限と下限を求め，それが上限（下限）であることを証明せよ。</p>
+      <p>次の $\mathbb{R}$ の部分集合に対し，その上限や下限が存在すればそれを求めよ．</p>
       <ol>
-        <li>$[0,1]$：上限は 1，下限は 0</li>
-        <li>$(0,1)$：上限は 1，下限は 0</li>
-        <li>$\{a \in \mathbb{Q} \mid a \le \sqrt{2}\}$：上限は $\sqrt{2}$，下限は存在しない</li>
+        <li>$[0,1] := \{a \in \mathbb{R} \mid 0 \leq a \leq 1\}$</li>
+        <li>$(0,1) := \{a \in \mathbb{R} \mid 0 < a < 1\}$</li>
+        <li>$\{a \in \mathbb{Q} \mid a \leq \sqrt{2}\}$</li>
       </ol>
     </div>
 
@@ -140,13 +140,13 @@ MathJax = {
 <!-- 問題2 -->
 <section class="section-card" id="problem2">
   <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
-    <span class="problem-num">2</span> 収束する数列は上に有界
+    <span class="problem-num">2</span> 収束する数列は有界
   </div>
   <div class="section-card-body">
 
     <div class="problem-box">
       <h3>問題文</h3>
-      <p>$\{a_n\}_{n=1,2,\ldots}$ が上に有界であることを示す（下に有界も同様）。</p>
+      <p>収束する数列 $\{a_n\}_n$ は有界であることを示せ．</p>
     </div>
 
     <div class="answer-box">
@@ -184,7 +184,7 @@ MathJax = {
 
     <div class="problem-box">
       <h3>問題文</h3>
-      <p>$\{a_n\}_{n=1,2,\ldots}$ は<strong>単調増加</strong>かつ上に有界であるとする。Weierstrass の定理より上限 $\alpha = \sup\{a_n \mid n = 1,2,\ldots\}$ が存在する。このとき $\{a_n\}_{n=1,2,\ldots}$ が $\alpha$ に収束することを示せ。</p>
+      <p>数列 $\{a_n\}_n$ は上に有界であり，任意の $n$ に対し $a_n \leq a_{n+1}$ を満たすとする．このとき，$\{a_n\}_n$ は収束することを示せ．</p>
     </div>
 
     <div class="answer-box">
@@ -338,9 +338,9 @@ MathJax = {
 
 </div>
 
-<div class="page-footer">
+<footer class="site-footer">
   すかき演習 解説集 &mdash; 微分積分学 第2回 &nbsp;|&nbsp; <a href="../index.html" style="color:rgba(255,255,255,0.6)">目次に戻る</a>
-</div>
+</footer>
 <script src="../nav.js"></script>
 <script src="../../common.js"></script>
 </body>

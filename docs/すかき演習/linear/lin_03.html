@@ -205,11 +205,11 @@ MathJax = {
     <!-- 問題文 -->
     <div class="problem-box">
       <h3>問題文</h3>
-      <p>$A = \begin{pmatrix}0&1\\2&1\end{pmatrix}$ に対し，次を求めよ。</p>
-      <p>(1) 固有値を全て求めよ。</p>
-      <p>(2) 各固有値に対する固有ベクトルを求めよ。</p>
-      <p>(3) $P^{-1}AP$ が対角行列になるような正則行列 $P$ を求め，実際に計算して確認せよ。</p>
-      <p>(4) $A^n$ を求めよ（$n$ は正の整数）。</p>
+      <p>行列 $A = \begin{pmatrix}0&1\\2&1\end{pmatrix}$ に対し，次の問いに答えよ．</p>
+      <p>(1) $\lambda$ に関する 2 次式 $\det(A - \lambda E) = 0$ の解 $\lambda_1, \lambda_2$ を求めよ．</p>
+      <p>(2) (1) で求めた $\lambda_i$ に対し，$Av_i = \lambda_i v_i$ を満たす $\mathbf{0}$ でないベクトル $v_i$ をそれぞれ一つずつ求めよ．</p>
+      <p>(3) (2) で求めたベクトルを横に並べた $2 \times 2$ 行列 $P := (v_1, v_2)$ を考える。このとき，$P^{-1}AP = \begin{pmatrix}\lambda_1 & 0 \\ 0 & \lambda_2\end{pmatrix}$ を示せ（行列 $A$ の<strong>対角化</strong>）．</p>
+      <p>(4) 自然数 $n$ に対し，$A^n$ を求めよ．</p>
     </div>
 
     <!-- 模範解答 3(1) -->
@@ -349,9 +349,9 @@ MathJax = {
 </section>
 
 </div>
-<div class="page-footer">
+<footer class="site-footer">
   すかき演習 解説集 &mdash; 線形代数学 第3回 &nbsp;|&nbsp; <a href="../index.html" style="color:rgba(255,255,255,0.6)">目次に戻る</a>
-</div>
+</footer>
 <script src="../nav.js"></script>
 <script src="../../common.js"></script>
 </body>

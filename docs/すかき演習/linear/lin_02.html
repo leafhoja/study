@@ -172,7 +172,7 @@ MathJax = {
   <div class="section-card-body">
     <div class="problem-box">
       <h3>問題文</h3>
-      <p>次を示せ：$R_{\theta_1} R_{\theta_2} = R_{\theta_1+\theta_2}$，$T_{\tau_1} T_{\tau_2} = R_{2(\tau_1 - \tau_2)}$，$R_\theta T_\tau = T_{\tau + \theta/2}$，$T_\tau R_\theta = T_{\tau - \theta/2}$。</p>
+      <p>行列の積 $R_{\theta_1} R_{\theta_2}$，$T_{\tau_1} T_{\tau_2}$，$R_\theta T_\tau$，$T_\tau R_\theta$ を回転行列や鏡映行列を用いて表せ．</p>
     </div>
 
     <div class="answer-box">
@@ -232,21 +232,33 @@ MathJax = {
   <div class="section-card-body">
     <div class="problem-box">
       <h3>問題文</h3>
-      <p>$2\times 2$ の直交行列（${}^t A A = I$ を満たす行列）を全て求めよ。それらは回転行列または鏡映行列であることを示せ。</p>
+      <p>$2 \times 2$ 行列 $A$ は，その転置行列 ${}^t\!A$ が $A\,{}^t\!A = {}^t\!A\,A = I$ を満たすとき，<strong>直交行列</strong>であるという．</p>
+      <ol>
+        <li>回転行列や鏡映行列は直交行列であることを示せ．</li>
+        <li>直交行列 $A$ を $A = (a_1, a_2)$（$a_1, a_2 \in \mathbb{R}^2$ を横に並べたもの）と見たとき，$a_1, a_2$ は長さが $1$ で互いに直交することを示せ．</li>
+        <li>直交行列は回転行列か鏡映行列であることを示せ．</li>
+      </ol>
     </div>
 
     <div class="answer-box">
       <div class="answer-title">📝 模範解答</div>
-      <p>$A$ の列ベクトルを $a_1, a_2$ とする。${}^t A A = I$ は</p>
+      <p><strong>(1)</strong> ${}^t R_\theta = R_{-\theta}$（転置すると角度が反転）より</p>
+      $${}^t R_\theta \cdot R_\theta = R_{-\theta} R_\theta = R_{-\theta+\theta} = R_0 = I, \quad R_\theta \cdot {}^t R_\theta = R_\theta R_{-\theta} = I$$
+      <p>よって $R_\theta$ は直交行列。$T_\tau$ は対称行列（${}^t T_\tau = T_\tau$）なので，問題3の結果 $T_{\tau_1}T_{\tau_2} = R_{2(\tau_1-\tau_2)}$ を $\tau_1=\tau_2=\tau$ で使うと</p>
+      $${}^t T_\tau \cdot T_\tau = T_\tau T_\tau = R_{2(\tau-\tau)} = R_0 = I$$
+      <p>よって $T_\tau$ も直交行列。$\square$</p>
+      <hr style="margin:0.75rem 0; border-color:#cbd5e1;">
+      <p><strong>(2)</strong> $A$ の列ベクトルを $a_1, a_2$ とする。${}^t A A = I$ は</p>
       $$\begin{pmatrix}a_1 \cdot a_1 & a_1 \cdot a_2 \\ a_2 \cdot a_1 & a_2 \cdot a_2\end{pmatrix} = I$$
-      <p>つまり $|a_1| = |a_2| = 1$（単位ベクトル）かつ $a_1 \cdot a_2 = 0$（直交）。</p>
-      <p>$a_1 = (\cos\theta, \sin\theta)^T$ と書くと（単位ベクトルは偏角で決まる），$a_2$ は $a_1$ と直交する単位ベクトルなので，$a_2 = (-\sin\theta, \cos\theta)^T$（反時計回り方向）か $a_2 = (\sin\theta, -\cos\theta)^T$（時計回り）の2通り。</p>
+      <p>つまり $|a_1| = |a_2| = 1$（単位ベクトル）かつ $a_1 \cdot a_2 = 0$（直交）。$\square$</p>
+      <hr style="margin:0.75rem 0; border-color:#cbd5e1;">
+      <p><strong>(3)</strong> (2) より $a_1 = (\cos\theta, \sin\theta)^T$ と書くと，$a_2$ は $a_1$ と直交する単位ベクトルなので，$a_2 = (-\sin\theta, \cos\theta)^T$ か $a_2 = (\sin\theta, -\cos\theta)^T$ の2通り。</p>
       <p>よって ${}^t A A = I$ の $2\times 2$ 解は：</p>
       <ul>
         <li>$A = \begin{pmatrix}\cos\theta & -\sin\theta\\\sin\theta & \cos\theta\end{pmatrix} = R_\theta$（回転行列，$\det A = 1$）</li>
         <li>$A = \begin{pmatrix}\cos\theta & \sin\theta\\\sin\theta & -\cos\theta\end{pmatrix} = T_{\theta/2}$（鏡映行列，$\det A = -1$）</li>
       </ul>
-      <p>$A A^t = I$ も同様（$R_\theta^t = R_{-\theta} = R_\theta^{-1}$，$T_\tau^t = T_\tau = T_\tau^{-1}$ から確認可能）。$\square$</p>
+      <p>$A {}^t\!A = I$ も同様（$R_\theta {}^t R_\theta = I$，$T_\tau {}^t T_\tau = I$）。よって直交行列は $R_\theta$ か $T_{\theta/2}$ のいずれか。$\square$</p>
     </div>
 
     <div class="think-box">
@@ -362,9 +374,9 @@ MathJax = {
 </section>
 
 </div>
-<div class="page-footer">
+<footer class="site-footer">
   すかき演習 解説集 &mdash; 線形代数学 第2回 &nbsp;|&nbsp; <a href="../index.html" style="color:rgba(255,255,255,0.6)">目次に戻る</a>
-</div>
+</footer>
 <script src="../nav.js"></script>
 <script src="../../common.js"></script>
 </body>
