@@ -251,7 +251,7 @@ MathJax = {
           <strong>なぜ上限が小さくなるか：</strong>集合 $S \subset T$ のとき $\sup S \le \sup T$。理由：$T$ の上界はすべて $S$ の上界でもある（$S \subset T$ なので）。よって $S$ の上界全体は $T$ の上界全体を含む。最小の上界（上限）を比べると $\sup S \le \sup T$。今回は $S = \{a_m \mid m \ge n+1\}$，$T = \{a_m \mid m \ge n\}$ で $S \subset T$ だから $b_{n+1} = \sup S \le \sup T = b_n$。
         </p>
         <p><strong>$\{b_n\}$ は下に有界：</strong>$\{a_n\}$ が有界だから下界 $m$ が存在し，$b_n = \sup\{a_m \mid m \ge n\} \ge a_n \ge m$。</p>
-        <p>よって $\{b_n\}$ は単調減少かつ下に有界だから，問題3の系（Weierstrass の定理）より収束する。$\{c_n\}$ については逆向きの議論（単調増加かつ上に有界）で同様。$\square$</p>
+        <p>よって $\{b_n\}$ は単調減少かつ下に有界だから，問題3の系（Weierstrass の定理）より収束する。$\{c_n\}$ については逆向きの議論（単調増加かつ上に有界）で同様。</p>
       </div>
 
       <div class="proof-box" style="background:#f8fafc; border-left:3px solid #94a3b8; padding:0.75rem 1.25rem; margin:0.75rem 0; border-radius:0 6px 6px 0;">
@@ -264,7 +264,7 @@ MathJax = {
         <p>したがって $b_n = \sup\{a_m \mid m \ge n\} \le \alpha+\varepsilon$，$c_n = \inf\{a_m \mid m \ge n\} \ge \alpha-\varepsilon$。
         よって $|b_n - \alpha| \le \varepsilon$，$|c_n - \alpha| \le \varepsilon$。$\limsup a_n = \liminf a_n = \alpha$。</p>
         <p><strong>（$\Leftarrow$）$\limsup a_n = \liminf a_n = \alpha$ ならば $\lim a_n = \alpha$：</strong></p>
-        <p>任意の $\varepsilon > 0$ をとる。$\lim b_n = \lim c_n = \alpha$ より，ある $N$ があって $n \ge N \Rightarrow |b_n - \alpha| < \varepsilon$ かつ $|c_n - \alpha| < \varepsilon$，すなわち $\alpha - \varepsilon < c_n \le a_n \le b_n < \alpha + \varepsilon$。よって $|a_n - \alpha| < \varepsilon$。$\lim a_n = \alpha$。$\square$</p>
+        <p>任意の $\varepsilon > 0$ をとる。$\lim b_n = \lim c_n = \alpha$ より，ある $N$ があって $n \ge N \Rightarrow |b_n - \alpha| < \varepsilon$ かつ $|c_n - \alpha| < \varepsilon$，すなわち $\alpha - \varepsilon < c_n \le a_n \le b_n < \alpha + \varepsilon$。よって $|a_n - \alpha| < \varepsilon$。$\lim a_n = \alpha$。</p>
       </div>
     </div>
 

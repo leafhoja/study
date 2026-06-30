@@ -16,14 +16,10 @@
   --text-muted:   #4a5568;
   --border:       #e2e8f0;
   --font-sans:    "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
-  --radius:       8px;
   --radius-lg:    12px;
 }
 
 /* ---- Base ---- */
-/* line-height のみ上書き（数式コンテンツに適した行間） */
-body { line-height: 1.9; }
-
 a { color: var(--calc-accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 

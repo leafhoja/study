@@ -89,6 +89,16 @@ MathJax = {
       <p>$\sin(1/h_n) = \sin(2n\pi) = 0$，$\cos(1/h_n) = \cos(2n\pi) = 1$ より：</p>
       $$\frac{f'(h_n) - f'(0)}{h_n} = 2\sin\frac{1}{h_n} - \frac{1}{h_n}\cos\frac{1}{h_n} = 0 - 2n\pi = -2n\pi \to -\infty$$
       <p>よって極限 $\lim_{x\to 0} \dfrac{f'(x) - f'(0)}{x}$ は存在しない。$f$ は $x = 0$ で2回微分可能でない。$\blacksquare$</p>
+
+      <p><strong>（$C^1$ 級でないことの確認）</strong></p>
+      <p>$f$ が $C^1$ 級（1回<em>連続</em>微分可能）であるためには，$f$ が微分可能なだけでなく，<strong>導関数 $f'$ が連続</strong>でなければならない。$x \ne 0$ での $f'(x) = 2x\sin\dfrac{1}{x} - \cos\dfrac{1}{x}$ において，</p>
+      $$\lim_{x \to 0} f'(x) = \lim_{x \to 0} \left(2x\sin\frac{1}{x} - \cos\frac{1}{x}\right)$$
+      <p>第1項 $2x\sin(1/x) \to 0$ だが，第2項 $\cos(1/x)$ は $x\to 0$ のとき $[-1,1]$ の間を振動し続け極限が存在しない。したがって $\lim_{x\to 0}f'(x)$ は存在せず，$f'$ は $x = 0$ で不連続。$f$ は $x = 0$ で<strong>1回微分可能だが $C^1$ 級でない</strong>。</p>
+    </div>
+
+    <div class="warn-box">
+      <div class="warn-title">⚠ 「1回微分可能」と「$C^1$ 級」は別物</div>
+      <p>$C^k$ 級（$k$ 回連続微分可能）とは，「$k$ 回微分可能」<strong>かつ</strong>「第 $k$ 次導関数 $f^{(k)}$ が連続」の両方を要求する。$f(x) = x^2\sin(1/x)$ はその違いを示す典型例で，$f'(0) = 0$ は存在する（1回微分可能）が $\lim_{x\to 0}f'(x)$ が存在しないため $f' $ が不連続，すなわち $f \notin C^1$ である。</p>
     </div>
 
     <div class="warn-box">
@@ -120,7 +130,7 @@ MathJax = {
       <div class="insight-box">
         <div class="insight-title">💡 このような関数が存在する理由</div>
         <p>$x^2 \sin(1/x)$ の $x^2$ は $x \to 0$ のとき非常に速く $0$ に収束し，$\sin(1/x)$ の激しい振動を「抑制」する。これが1回微分可能性を保証する。しかし微分すると $x\sin(1/x)$ という項が出てきて「抑制力」が弱まり，$\cos(1/x)/x$ の振動に打ち負けてしまう。</p>
-        <p>一般に「$k$ 回微分可能だが $k+1$ 回は不可能」という関数は $x^{k+1} \sin(1/x)$ のような形で構成できる。</p>
+        <p>一般に「$k$ 回微分可能だが $k+1$ 回は不可能」という関数は $x^{2k}\sin(1/x)$（または $x^{2k+1}\sin(1/x)$，$k \ge 1$）のような形で構成できる。$x^n\sin(1/x)$ はちょうど $\lfloor n/2 \rfloor$ 回微分可能で，$C^k$ 級の例としては $x^{2k+1}\sin(1/x)$ がちょうど $C^k$ 級かつ $(k+1)$ 回微分不可能の例になる。なお $x^{k+1}\sin(1/x)$ が $k$ 回微分可能になるのは $k=1$ のみで，$k \ge 2$ では $\lfloor(k+1)/2\rfloor$ 回しか微分できない。</p>
       </div>
     </div>
 
