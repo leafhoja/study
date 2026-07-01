@@ -561,6 +561,17 @@ a.lec-row .lec-row-status { color: #2b6cb0; font-size: 1.05rem; }
 .exam-qa-exp { font-size: .80rem; color: #4a5568; line-height: 1.8; }
 .exam-no-data { font-size: .83rem; color: #718096; font-style: italic; padding: 6px 2px; }
 
+/* ── Lecture back-link on exam pages ── */
+.lec-ref-link {
+  display: inline-block;
+  background: #e9d8fd; color: #553c9a;
+  font-size: .72rem; font-weight: 700;
+  padding: 1px 8px; border-radius: 10px;
+  text-decoration: none; white-space: nowrap;
+  margin-left: 6px;
+}
+.lec-ref-link:hover { background: #b794f4; color: #fff; }
+
 /* ── Lecture navigation ── */
 .lecture-nav {
   display: flex; justify-content: space-between; align-items: center;
