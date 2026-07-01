@@ -80,35 +80,24 @@
 
 /* ── MathJax コピー修正: コピー時に LaTeX ソースへ置換 ── */
 (function () {
-  /* MathJax が完了したら各 mjx-container に元の TeX を data 属性として付与 */
-  function tagMath() {
-    if (!window.MathJax || !MathJax.startup || !MathJax.startup.document) return;
-    try {
-      Array.from(MathJax.startup.document.math).forEach(function (item) {
-        if (item.typesetRoot && item.math !== undefined) {
-          item.typesetRoot.setAttribute('data-tex', item.math);
-          item.typesetRoot.setAttribute('data-tex-d', item.display ? '1' : '0');
-        }
-      });
-    } catch (_) {}
-  }
-
-  function tryTag() {
-    if (window.MathJax && MathJax.startup && MathJax.startup.promise) {
-      MathJax.startup.promise.then(tagMath);
+  /* mjx-container から TeX ソースを取得
+     MathJax は mjx-assistive-mml > math > semantics > annotation[encoding="application/x-tex"]
+     に元の TeX を格納する（MathList API に依存しない） */
+  function getTeX(container) {
+    /* cloneContents() で複製されたノードにも annotation は含まれる */
+    var ann = container.querySelector('annotation[encoding="application/x-tex"]');
+    if (ann) {
+      return { tex: ann.textContent, display: container.getAttribute('display') === 'true' };
     }
+    return null;
   }
-
-  /* MathJax は async 読み込みなので複数タイミングで試みる */
-  document.addEventListener('DOMContentLoaded', tryTag);
-  window.addEventListener('load', function () { setTimeout(tryTag, 0); });
 
   /* コピーイベント: 数式を含む選択範囲なら LaTeX に変換してクリップボードへ */
   document.addEventListener('copy', function (e) {
     var sel = window.getSelection();
     if (!sel || sel.isCollapsed) return;
     var frag = sel.getRangeAt(0).cloneContents();
-    if (!frag.querySelector('mjx-container[data-tex]')) return; /* 数式なし → ブラウザ既定 */
+    if (!frag.querySelector('mjx-container')) return; /* 数式なし → ブラウザ既定 */
     e.preventDefault();
     e.clipboardData.setData('text/plain', toText(frag));
   });
@@ -117,15 +106,13 @@
     if (node.nodeType === 3) return node.textContent; /* テキストノード */
     if (node.nodeType !== 1) return '';
     var t = node.tagName.toLowerCase();
-    if (t === 'mjx-assistive-mml') return ''; /* スクリーンリーダー用 MathML はスキップ */
+    if (t === 'mjx-assistive-mml') return ''; /* スクリーンリーダー用 MathML はスキップ（toText 再帰分） */
     if (t === 'mjx-container') {
-      var tex = node.getAttribute('data-tex');
-      if (tex !== null) {
-        return node.getAttribute('data-tex-d') === '1'
-          ? '\n$$' + tex + '$$\n'
-          : '$' + tex + '$';
+      var info = getTeX(node);
+      if (info) {
+        return info.display ? '\n$$' + info.tex + '$$\n' : '$' + info.tex + '$';
       }
-      return node.textContent; /* タグ付け前のフォールバック */
+      return ''; /* TeX 取得不能: ガベージを出さず空文字 */
     }
     var s = Array.from(node.childNodes).map(toText).join('');
     var block = /^(p|div|h[1-6]|li|section|article|blockquote|pre|tr)$/.test(t);
