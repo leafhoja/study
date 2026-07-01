@@ -80,14 +80,43 @@
 
 /* ── MathJax コピー修正: コピー時に LaTeX ソースへ置換 ── */
 (function () {
-  /* mjx-container から TeX ソースを取得
-     MathJax は mjx-assistive-mml > math > semantics > annotation[encoding="application/x-tex"]
-     に元の TeX を格納する（MathList API に依存しない） */
+  /* MathJax MathList を巡回して mjx-container に data-tex を付与 */
+  function tagAll() {
+    if (!window.MathJax || !MathJax.startup || !MathJax.startup.document) return;
+    try {
+      Array.from(MathJax.startup.document.math).forEach(function (item) {
+        if (item && item.typesetRoot && item.math !== undefined) {
+          item.typesetRoot.setAttribute('data-tex', item.math);
+          item.typesetRoot.setAttribute('data-tex-d', item.display ? '1' : '0');
+        }
+      });
+    } catch (_) {}
+  }
+
+  /* MathJax 読み込み完了を待ってタグ付け（async 読み込みのためポーリング） */
+  function waitAndTag() {
+    if (window.MathJax && MathJax.startup && MathJax.startup.promise) {
+      MathJax.startup.promise.then(tagAll);
+    } else {
+      setTimeout(waitAndTag, 200);
+    }
+  }
+  waitAndTag();
+
+  /* mjx-container から TeX を取得: data-tex 属性→ assistive MML annotation の順に試みる */
   function getTeX(container) {
-    /* cloneContents() で複製されたノードにも annotation は含まれる */
-    var ann = container.querySelector('annotation[encoding="application/x-tex"]');
-    if (ann) {
-      return { tex: ann.textContent, display: container.getAttribute('display') === 'true' };
+    /* 方法1: data-tex 属性（tagAll() で付与済み） */
+    var tex = container.getAttribute('data-tex');
+    if (tex !== null) {
+      return { tex: tex, display: container.getAttribute('data-tex-d') === '1' };
+    }
+    /* 方法2: getElementsByTagName（querySelector より MathML 名前空間に確実） */
+    var anns = container.getElementsByTagName('annotation');
+    for (var i = 0; i < anns.length; i++) {
+      if (anns[i].getAttribute('encoding') === 'application/x-tex') {
+        var t = anns[i].textContent.trim();
+        if (t) return { tex: t, display: container.getAttribute('display') === 'true' };
+      }
     }
     return null;
   }
@@ -96,8 +125,15 @@
   document.addEventListener('copy', function (e) {
     var sel = window.getSelection();
     if (!sel || sel.isCollapsed) return;
-    var frag = sel.getRangeAt(0).cloneContents();
-    if (!frag.querySelector('mjx-container')) return; /* 数式なし → ブラウザ既定 */
+    var range = sel.getRangeAt(0);
+
+    /* 数式があるか確認 */
+    if (!range.cloneContents().querySelector('mjx-container')) return;
+
+    /* コピー時点では MathJax は確実に読み込み済みなので、未タグの要素にここで付与 */
+    tagAll();
+
+    var frag = range.cloneContents();
     e.preventDefault();
     e.clipboardData.setData('text/plain', toText(frag));
   });
@@ -106,7 +142,7 @@
     if (node.nodeType === 3) return node.textContent; /* テキストノード */
     if (node.nodeType !== 1) return '';
     var t = node.tagName.toLowerCase();
-    if (t === 'mjx-assistive-mml') return ''; /* スクリーンリーダー用 MathML はスキップ（toText 再帰分） */
+    if (t === 'mjx-assistive-mml') return ''; /* スクリーンリーダー用 MathML はスキップ */
     if (t === 'mjx-container') {
       var info = getTeX(node);
       if (info) {
