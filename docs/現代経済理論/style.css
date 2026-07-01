@@ -245,41 +245,59 @@ body {
 }
 .q-table th { background: #ebf8ff; color: #2b6cb0; font-weight: 700; }
 
-/* ===== LECTURE LIST PAGE ===== */
-.lec-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 18px;
-  margin: 28px 0 40px;
-}
-.lec-card {
+/* ===== LECTURE LIST ===== */
+.lec-list {
   background: #fff;
-  border-radius: 14px;
-  padding: 22px 20px 18px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.06);
+  overflow: hidden;
+  margin: 20px 0 36px;
+}
+.lec-row {
+  display: grid;
+  grid-template-columns: 46px 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 20px;
+  border-bottom: 1px solid #edf2f7;
   text-decoration: none;
   color: inherit;
-  box-shadow: 0 2px 14px rgba(0,0,0,.08);
-  border-left: 5px solid #2b6cb0;
-  transition: transform .22s, box-shadow .22s;
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
+  border-left: 4px solid transparent;
+  transition: background .15s, border-color .15s;
 }
-.lec-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(0,0,0,.13); }
-.lec-card.upcoming { border-left-color: #a0aec0; opacity: .65; pointer-events: none; }
-.lec-num { font-size: .72rem; font-weight: 700; color: #2b6cb0; letter-spacing: .06em; text-transform: uppercase; }
-.lec-title { font-size: 1rem; font-weight: 700; color: #1a365d; line-height: 1.45; }
-.lec-teacher { font-size: .82rem; color: #718096; }
-.lec-tag {
-  display: inline-block;
+.lec-row:last-child { border-bottom: none; }
+.lec-row.disabled { opacity: .45; pointer-events: none; }
+a.lec-row:hover { background: #f7fafc; border-left-color: #2b6cb0; }
+.rn-badge {
+  width: 34px; height: 34px;
+  border-radius: 50%;
   background: #ebf8ff;
   color: #2b6cb0;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: .72rem;
-  font-weight: 700;
-  margin-top: 2px;
+  font-weight: 800;
+  font-size: .82rem;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
 }
+.lec-row.disabled .rn-badge { background: #f0f0f0; color: #b0b0b0; }
+.lec-row-body { min-width: 0; }
+.lec-row-title {
+  font-size: .93rem; font-weight: 700; color: #1a365d;
+  margin-bottom: 4px; line-height: 1.45;
+}
+.lec-row-meta {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 6px;
+  font-size: .77rem; color: #718096;
+}
+.lec-row-meta .tag-sm {
+  background: #ebf8ff; color: #2b6cb0;
+  padding: 1px 9px; border-radius: 20px;
+  font-size: .68rem; font-weight: 700;
+}
+.lec-row-status {
+  font-size: .78rem; font-weight: 700; color: #a0aec0;
+  white-space: nowrap; flex-shrink: 0;
+}
+a.lec-row .lec-row-status { color: #2b6cb0; font-size: 1.05rem; }
 
 /* ===== LECTURE INDIVIDUAL PAGE ===== */
 .hero { background: linear-gradient(135deg, #1a365d 0%, #2c5282 60%, #2b6cb0 100%); color: #fff; padding: 38px 20px 32px; text-align: center; }
@@ -379,7 +397,9 @@ body {
   .q-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .page-nav { flex-direction: column; }
   .page-nav a { text-align: center; }
-  .lec-grid { grid-template-columns: 1fr; }
+  .lec-row { grid-template-columns: 38px 1fr auto; gap: 10px; padding: 12px 14px; }
+  .rn-badge { width: 30px; height: 30px; font-size: .78rem; }
+  .lec-row-title { font-size: .88rem; }
   .section-card { padding: 18px 16px; }
   .teacher-profile { flex-direction: column; }
   .lecture-nav { flex-direction: column; }
