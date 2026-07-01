@@ -523,6 +523,44 @@ a.lec-row .lec-row-status { color: #2b6cb0; font-size: 1.05rem; }
 .exam-points ul { padding-left: 18px; font-size: .85rem; color: #4a5568; line-height: 1.85; }
 .exam-points ul li { margin-bottom: 4px; }
 
+/* ── Exam year blocks (multi-year Q&A) ── */
+.exam-year-block { margin-bottom: 16px; }
+.exam-year-block:last-child { margin-bottom: 0; }
+.exam-year-head {
+  display: flex; justify-content: space-between; align-items: center;
+  background: linear-gradient(90deg, #1a365d, #2b6cb0);
+  color: #fff; padding: 7px 16px;
+  border-radius: 8px 8px 0 0;
+  font-size: .82rem; font-weight: 800; letter-spacing: .03em;
+}
+.exam-year-head a { color: #bee3f8; font-size: .76rem; font-weight: 600; }
+.exam-year-body {
+  border: 1px solid #bee3f8; border-top: none;
+  border-radius: 0 0 8px 8px;
+  padding: 14px 16px; background: #fffdf0;
+}
+.exam-qa-item {
+  margin-bottom: 13px; padding-bottom: 13px;
+  border-bottom: 1px dashed #e2e8f0;
+}
+.exam-qa-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+.exam-qa-header { display: flex; gap: 8px; align-items: center; margin-bottom: 5px; flex-wrap: wrap; }
+.eq-num {
+  display: inline-block; background: #1a365d; color: #fff;
+  font-size: .72rem; font-weight: 800; padding: 1px 8px;
+  border-radius: 10px; white-space: nowrap;
+}
+.eq-topic { font-size: .78rem; font-weight: 700; color: #2c5282; }
+.exam-qa-q { font-size: .84rem; color: #2d3748; line-height: 1.65; margin-bottom: 5px; }
+.exam-qa-ans {
+  font-size: .83rem; font-weight: 700; color: #22543d;
+  background: #f0fff4; border-left: 3px solid #48bb78;
+  padding: 4px 10px; margin-bottom: 5px;
+  border-radius: 0 4px 4px 0;
+}
+.exam-qa-exp { font-size: .80rem; color: #4a5568; line-height: 1.8; }
+.exam-no-data { font-size: .83rem; color: #718096; font-style: italic; padding: 6px 2px; }
+
 /* ── Lecture navigation ── */
 .lecture-nav {
   display: flex; justify-content: space-between; align-items: center;
@@ -543,6 +581,65 @@ a.lec-row .lec-row-status { color: #2b6cb0; font-size: 1.05rem; }
   border-color: #bee3f8;
 }
 .lecture-nav .center { flex: 1; text-align: center; }
+
+/* ── Keyword detail accordion ── */
+.kw-detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 16px;
+  border-top: 1px solid #e8f0fb;
+  padding-top: 14px;
+}
+.kw-detail-label {
+  font-size: .72rem;
+  font-weight: 700;
+  color: #a0aec0;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.kw-item {
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  background: #fff;
+}
+.kw-item[open] { border-color: #bee3f8; }
+.kw-summary {
+  cursor: pointer;
+  padding: 8px 14px;
+  font-size: .84rem;
+  font-weight: 700;
+  color: #2d3748;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+  transition: background .15s;
+  user-select: none;
+}
+.kw-summary::-webkit-details-marker { display: none; }
+.kw-summary::marker { display: none; }
+.kw-item[open] .kw-summary { background: #ebf8ff; color: #2b6cb0; }
+.kw-summary::after {
+  content: '▾';
+  margin-left: auto;
+  font-size: .75rem;
+  color: #a0aec0;
+  transition: transform .2s;
+}
+.kw-item[open] .kw-summary::after { transform: rotate(180deg); color: #2b6cb0; }
+.kw-body {
+  padding: 10px 16px 12px;
+  font-size: .86rem;
+  color: #4a5568;
+  line-height: 1.85;
+  border-top: 1px solid #e8f0fb;
+  background: #f7fafc;
+}
+.kw-body strong { color: #1a365d; }
+.kw-body em { font-style: normal; color: #276749; font-weight: 600; }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 640px) {
