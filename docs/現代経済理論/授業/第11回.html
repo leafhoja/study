@@ -23,8 +23,9 @@
 </nav>
 
 <div class="hero">
+  <span class="hero-badge">第11回</span>
   <h1>マクロモデルを使った政策分析</h1>
-  <p class="subtitle">第11回（2026年6月26日）｜仲田 泰祐</p>
+  <p class="subtitle">2026年6月26日｜仲田 泰祐</p>
   <p class="meta">東京大学 経済学部・金融政策の理論的分析</p>
 </div>
 
@@ -36,10 +37,12 @@
       <div class="teacher-icon">📈</div>
       <div class="teacher-info">
         <h3>仲田 泰祐</h3>
-        <div class="affil">東京大学（2020年4月〜）<br>シカゴ大学卒業→カンザスシティ連邦準備銀行→ニューヨーク大学Ph.D.→連邦準備制度理事会（FRB）エコノミスト→東京大学</div>
+        <div class="affil">東京大学（2020年4月〜）<br>シカゴ大学卒業 → カンザスシティ連邦準備銀行 → ニューヨーク大学Ph.D. → 連邦準備制度理事会（FRB）エコノミスト → 東京大学</div>
         <div class="specialty">
           専門：金融政策の理論的分析・マクロ経済モデル<br>
-          2021年以降はコロナ感染対策と経済活動の両立に関するモデル分析も。内閣府感染症危機管理統括庁のメンバーとして政策助言。
+          2021年以降はコロナ感染対策と経済活動の両立に関するモデル分析も。<br>
+          内閣府感染症危機管理統括庁メンバー、税制調査会特別委員として政策助言。<br>
+          著書：「金融政策の理論と実践 動学マクロ経済学アプローチ」（日本評論社）
         </div>
       </div>
     </div>
@@ -49,75 +52,284 @@
     <h2>講義概要</h2>
     <p style="font-size:.92rem;color:#4a5568;line-height:1.85;">
       マクロ経済政策（金融政策・財政政策）の意思決定には「モデル」が不可欠だ。
-      本講義では、①中央銀行での数理モデルの使われ方（定量的役割・定性的役割）と、②新型コロナパンデミック時の感染抑制と経済活動の両立に関するモデル分析を通じて、マクロ政策分析の実際を学ぶ。
+      本講義では2つのパートで構成される：①中央銀行での数理モデルの使われ方（定量的・定性的役割）と、
+      ②新型コロナパンデミック時の感染抑制と経済活動の両立に関するモデル分析——「疫学マクロモデル」を用いて、
+      緊急事態宣言解除基準・ワクチン後の世界・命の価値まで、現実の政策決定の現場を垣間見る。
     </p>
   </div>
 
   <div class="section-card">
     <h2>主なトピック</h2>
     <ul class="topic-list">
+
       <li>
-        <span class="tn">1</span>
-        <span><strong>中央銀行でのモデル分析の役割</strong>　①<em>定量的役割</em>：将来のインフレ率・失業率の予測数値、過去の経済ショックの要因分解（例：2008年金融危機の原因が輸出か消費か投資抑制か）。②<em>定性的役割</em>：複雑すぎる国の経済を「頭の体操」で整理する。モデルで関係性を考えることで戦略立案の場での共通言語を作る。</span>
+        <div class="tn-col"><span class="tn">1</span></div>
+        <div class="topic-content">
+          <span class="topic-title">中央銀行でのモデル活用：5つの分野</span>
+          <p class="topic-desc">
+            FRBをはじめとする中央銀行では、数理モデルが以下の5分野で実務的に活用されている：
+          </p>
+          <div class="def-box">
+            <strong>①経済見通し</strong>：消費・投資・物価の各モデルを使って将来の経済指標を予測。GDP成長率・インフレ率・失業率の見通しが政策決定の基礎となる。<br><br>
+            <strong>②リスクの定量化</strong>：景気後退確率の予測・Tail Riskモデル（テールリスク：極端な悪シナリオの発生確率の定量化）。2011年の予測信頼区間（CI）の可視化が典型例。<br><br>
+            <strong>③金融市場の理解</strong>：期間構造モデル（長短金利の関係）・資産価格モデル。FEDSノートで一部を垣間見ることができる。<br><br>
+            <strong>④金融システムの安定度</strong>：時系列モデルを用いた銀行システムのリスク評価・ストレステスト。<br><br>
+            <strong>⑤政策の戦略</strong>：政策の選択肢の比較（2013年のPolicy Rule Simulations）・政策枠組みの分析（AIT：平均インフレ目標 2019〜2020/2025年レビュー）。
+          </div>
+        </div>
       </li>
+
       <li>
-        <span class="tn">2</span>
-        <span><strong>中央銀行でのモデル活用例</strong>　経済見通し（消費・投資・物価の各モデル）、将来リスク分析（景気後退予測・Tail Riskモデル）、金融市場の理解（期間構造モデル）、金融システムの安定度定量化（時系列・資産価格モデル）。FEDSノートで垣間見れる。</span>
+        <div class="tn-col"><span class="tn">2</span></div>
+        <div class="topic-content">
+          <span class="topic-title">モデルの定量的役割と定性的役割</span>
+          <p class="topic-desc">
+            中央銀行でのモデルの役割は「定量的」と「定性的」の2種類に大別される。どちらも重要だが、見落とされがちなのが定性的役割。
+          </p>
+          <div class="def-box">
+            <strong>定量的役割</strong>：<br>
+            ①予測（将来のインフレ率・失業率の数値）<br>
+            ②リスクの定量化（景気後退確率・テールリスクの確率値）<br>
+            ③過去の経済ショックの要因分解（2008年金融危機の原因は輸出か消費か投資抑制かをモデルで帰属）<br><br>
+            <strong>定性的役割（「頭の体操」・「寓話」）</strong>：<br>
+            ①複雑すぎる経済を「ファーストオーダーの枠組み」で整理する<br>
+            ②中央銀行年8回の会合での意思決定に向けた共通言語の形成<br>
+            ③「どのような問いを立てるべきか」を見極めるためのフレームワーク提供<br><br>
+            Joseph Califano（豚インフルエンザ危機の政策担当者）の言葉：「そもそもどのような問いを立てるべきかを見極めることさえ難しかった」——モデルはまず「何を考えるべきか」を教えてくれる。
+          </div>
+          <div class="insight">
+            「モデルと現実の乖離をどう解釈するか、どう政策含意を導くか」——これが実際の政策分析で最も重要かつ難しい作業。数値を出すことより、解釈のセンスが問われる。
+          </div>
+        </div>
       </li>
+
       <li>
-        <span class="tn">3</span>
-        <span><strong>インフレ目標2%とFRBの政策議論</strong>　2019年にFRBが政策の枠組みを見直した際の資料：目標①2%に近づけよう、目標②過去3%が続いたなら今後は1.5%を目標にして平均2%を実現。モデルなしには「もうちょっと高く」「もうちょっと低く」という議論で終わってしまう。</span>
+        <div class="tn-col"><span class="tn">3</span></div>
+        <div class="topic-content">
+          <span class="topic-title">FRBの実例：AIT（平均インフレ目標）</span>
+          <p class="topic-desc">
+            FRBが2019〜2020年にかけて政策の枠組みを見直した際の議論を、モデルがどう支援したかを示す事例。
+          </p>
+          <div class="def-box">
+            <strong>従来の政策（IT：インフレ目標）</strong>：インフレ率を常に2%に近づけることを目標。<br><br>
+            <strong>AIT（平均インフレ目標）</strong>：過去にインフレ率が低かった期間があれば、将来はそれを上回るインフレを許容して「平均2%」を実現する。<br>
+            例：過去に3%が続いたなら今後は平均回帰のため一時的に1%台を目標にする。<br><br>
+            <strong>モデルの役割</strong>：「もうちょっと高く」「もうちょっと低く」という曖昧な議論をやめ、具体的な数値シミュレーションで政策選択肢を比較できる。<br>
+            2013年のPolicy Rule Simulations：異なる政策ルール（テイラールールなど）の下での経済軌道を比較提示。
+          </div>
+        </div>
       </li>
+
       <li>
-        <span class="tn">4</span>
-        <span><strong>マクロ政策の特殊性</strong>　ミクロ政策はRCTで因果推論可能。しかしマクロでは「日本が何千個もある」実験は不可能。複雑すぎる経済を理解するためのファーストオーダーの枠組みがモデル。中央銀行の年8回の会合で意思決定するためには、スピーディーに共通認識を作る必要がある。</span>
+        <div class="tn-col"><span class="tn">4</span></div>
+        <div class="topic-content">
+          <span class="topic-title">マクロ政策の特殊性：なぜRCTができないか</span>
+          <p class="topic-desc">
+            ミクロ経済政策（教育・医療・福祉）ではRCT（ランダム化比較試験）による因果推論が可能。しかしマクロ経済政策では「日本という国が何千個もある」実験が不可能。
+            このため、マクロ政策分析では数理モデル（calibrated model）が主要ツールとなる。
+          </p>
+          <div class="def-box">
+            <strong>マクロモデルの特徴</strong>：<br>
+            ①構造モデル（structural model）：経済の根本的なパラメータ（選好・技術・制度）を推定し、政策変更の効果をシミュレート<br>
+            ②反実仮想実験（counterfactual analysis）：「もし政策Aの代わりに政策Bを実施していたら」の仮想シナリオを計算<br>
+            ③Lucas批判への対応：政策変更によって人々の行動自体が変わることをモデルに取り込む（合理的期待）<br><br>
+            中央銀行の意思決定は年8回の会合で行われる。スピーディーに共通認識を作るための「寓話」としてのモデルが不可欠。
+          </div>
+        </div>
       </li>
+
       <li>
-        <span class="tn">5</span>
-        <span><strong>パンデミック政策とモデル分析</strong>　2020年：初めてのモダンな感染症パンデミック。感染者数・死者数・病床の分析と経済損失の分析は各々あったが、両者のトレードオフを統合した分析が不足→内閣府の新型コロナ感染症分科会へのモデル分析提供。学術研究と政策分析の違い：スピード感（2週間で結果）。</span>
+        <div class="tn-col"><span class="tn">5</span></div>
+        <div class="topic-content">
+          <span class="topic-title">パンデミック対応：問題意識と背景</span>
+          <p class="topic-desc">
+            2020年：初めてのモダンな感染症パンデミック（COVID-19）の発生。
+            多くの人が「感染症対策と社会経済活動の両立」を模索したが、両者を統合した分析が決定的に不足していた。
+            感染者数・死者数・病床の分析（感染症の専門家）と経済損失の分析（経済学者）は各々あったが、トレードオフを定量化した統合分析がなかった。
+          </p>
+          <div class="def-box">
+            <strong>仲田・藤井（2021）の貢献</strong>：「疫学マクロモデル」を活用した統合分析。<br>
+            ①毎週分析を更新してリアルタイムで発信（covid19outputjapan.github.io）<br>
+            ②Zoom説明会での政策担当者・専門家向け解説<br>
+            ③超過自殺・婚姻・出生・オリンピック影響など多様な分析<br><br>
+            <strong>政策現場への関与（2021〜2022年）</strong>：<br>
+            新型コロナ感染症分科会（2021年2月〜）、西村コロナ対策担当大臣（3月）、厚生労働省アドバイザリーボード（複数回）、小池東京都知事（2回）、菅総理（2回）、閣僚会議（6月）、内閣府AI・シミュレーションプロジェクト参画（7月〜）
+          </div>
+          <div class="insight">
+            学術研究と政策分析の違い：学術研究は数年かけて精緻化するが、政策分析は「2週間で結果」を求められる。スピード感・説明能力・不確実性下での判断が政策アドバイザーには必要。
+          </div>
+        </div>
       </li>
+
       <li>
-        <span class="tn">6</span>
-        <span><strong>感染抑制と経済活動のトレードオフ</strong>　人流データとGDPの関係を数理モデルに組み込む。緊急事態宣言の解除基準（1日あたり感染者数が100人 vs 500人）でシミュレーション。ワクチン接種の開始時期を考慮すると、解除を遅らせた方が中長期的に経済損失・累計死者数ともに良い青いシナリオが存在する（モデルなしでは気づきにくい発見）。</span>
+        <div class="tn-col"><span class="tn">6</span></div>
+        <div class="topic-content">
+          <span class="topic-title">疫学マクロモデル：SIRモデル＋経済活動</span>
+          <p class="topic-desc">
+            仲田・藤井（2021）が開発した「疫学マクロモデル」は、標準的な感染症モデルと経済モデルを統合したもの。
+          </p>
+          <div class="def-box">
+            <strong>モデルの構造</strong>：<br>
+            標準的な疫学モデル（SIR：Susceptible-Infected-Recovered）<br>
+            ＋ 人流データ（Mobility：Googleモビリティデータ）→ GDP推計<br>
+            → 感染者数の推移と経済活動（GDP）の関係を同一モデルで分析可能に。<br><br>
+            <strong>モデルの検証</strong>：人流データとGDPデータは高い相関を示す（2020〜2022年の週次データで確認）。<br>
+            2020年4月の緊急事態宣言時：人流が急減（約0.55）し、GDP推計も約85に急落。<br><br>
+            参照論文：Fujii and Nakata (2021) "Covid-19 and Output in Japan" Japanese Economics Review（Springer）
+          </div>
+        </div>
       </li>
+
       <li>
-        <span class="tn">7</span>
-        <span><strong>命の価値分析（VSL：Value of Statistical Life）</strong>　感染対策による経済損失と死者数削減のトレードオフを定量化。トレードオフ曲線の傾き＝死者数1人減らすのに許容できる経済的損失額。日本全体では1人あたり約20億円。島根・鳥取は約500億円（経済活動が少なく、一人の命を守るコストが相対的に大きい）。国・都道府県ごとに大きく異なる。</span>
+        <div class="tn-col"><span class="tn">7</span></div>
+        <div class="topic-content">
+          <span class="topic-title">2021年前半の分析：緊急事態宣言解除基準</span>
+          <p class="topic-desc">
+            2021年前半の核心的政策問題：「緊急事態宣言をいつ解除すべきか」。
+            当初の直感的予想：「経済モデルを加えれば、感染症モデルより早めの解除が望ましいという結果になるだろう」。しかし実際の分析結果は反対だった。
+          </p>
+          <div class="def-box">
+            <strong>シミュレーション設計</strong>：解除基準を「新規感染者数 100人/日」〜「1,000人/日」で変化させ、各シナリオのGDP損失と累計死者数を比較。<br><br>
+            <strong>発見（counter-intuitive）</strong>：感染者数をある程度下げてから解除する（遅らせる）ことは、感染症対策としてだけでなく、経済活動の視点からも良い（パレート改善）。<br><br>
+            <strong>理由</strong>：ワクチン接種が「もうすぐ始まる」状況下では、現在の感染抑制に「ワクチン開始までの時間稼ぎ」の価値がある。今すぐ解除すると感染が急拡大して再度の緊急事態宣言が必要になり、結果的に死者数も経済損失も両方大きくなる。
+          </div>
+          <div class="insight">
+            「感染症対策こそ最善の経済対策」——短期には感染対策と経済は「トレードオフ」だが、中・長期的には必ずしもそうではない。ワクチンという「将来の選択肢」を考慮するとパレート改善が生まれる。モデルなしでは気づきにくい発見。
+          </div>
+        </div>
       </li>
+
       <li>
-        <span class="tn">8</span>
-        <span><strong>豚インフルエンザ（1970年代）の教訓</strong>　大量ワクチン生産を推進したが、想定ほどの脅威ではなかった。ワクチンの副作用管理が疎かになりクリニックで死者が出るなど逆効果に。政策決定者は「何を問うべきかもわからない」状況に直面することがある。モデルは何を考えるべきかの枠組みを与える。</span>
+        <div class="tn-col"><span class="tn">8</span></div>
+        <div class="topic-content">
+          <span class="topic-title">2021年後半：ワクチン接種後の世界</span>
+          <p class="topic-desc">
+            ワクチン接種が本格化した2021年後半：医療体制の拡充（ICUベッド増加）と感染拡大許容の組み合わせを分析。
+            前半と異なる状況：ワクチンによる集団免疫到達が近い → 感染拡大抑制＝「集団免疫到達の先送り」という側面がある。
+          </p>
+          <div class="def-box">
+            <strong>シミュレーション（2021年8月31日発表）</strong>：<br>
+            医療体制 × 3シナリオ（現状維持・現状の2倍・現状の3倍）× 基本再生産数4・5の組み合わせ。<br><br>
+            <strong>代表的結果（基本シナリオ：人口75%がワクチン接種・感染予防効果81.5%）</strong>：<br>
+            医療体制現状維持・R₀=5：緊急事態宣言4回、経済損失約10兆円、累計死者数約9,000人<br>
+            医療体制2倍・R₀=4：緊急事態宣言0回、経済損失約3兆円、累計死者数約7,700人<br>
+            → 医療体制を拡充して感染拡大を許容することで、経済損失も死者数も減らせる「パレート改善」が存在する。
+          </div>
+          <div class="insight">
+            2021年後半のメッセージ：「医療体制拡充はパレート改善」——経済にとっても、命にとっても良い。この発見は2021年前半（感染抑制が最善の経済対策）と一見逆のようだが、ワクチンというゲームチェンジャーの存在により論理が変わった。
+          </div>
+        </div>
       </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">9</span></div>
+        <div class="topic-content">
+          <span class="topic-title">命の価値（VSL）の定量化</span>
+          <p class="topic-desc">
+            感染対策による経済損失と死者数削減のトレードオフを定量化するために「命の価値（VSL: Value of Statistical Life）」分析が用いられる。
+            これは倫理的に敏感な問いだが、公共政策では不可避の計算。
+          </p>
+          <div class="def-box">
+            <strong>VSLの定義</strong>：死者数1人減らすのに社会として許容できる経済的損失の上限額（トレードオフ曲線の傾き）。<br>
+            社会的価値判断ではなく、実際の政策決定者・市民の選好から統計的に推定する。<br><br>
+            <strong>試算結果（仲田・藤井 2021）</strong>：<br>
+            日本全体：命1人あたり約20億円<br>
+            島根・鳥取：約500億円（経済活動が相対的に少なく、1人の命を守るための経済コストが大きい）<br>
+            → 都道府県ごとに大きく異なる。「全国一律の政策」は必ずしも各地域の最適ではない可能性。
+          </div>
+          <div class="insight">
+            VSL分析の重要性：「命は無限に価値がある」では政策評価できない。有限のリソースをどこに配分するか、という現実の意思決定には「命の価値」の定量化が必要。これはコストベネフィット分析の核心的なツール。
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">10</span></div>
+        <div class="topic-content">
+          <span class="topic-title">コロナが経済・社会に与えた影響</span>
+          <p class="topic-desc">
+            COVID-19の経済的・社会的影響は多岐にわたる。マクロモデルはこれらの影響を統合的に把握し、政策評価に活用する。
+          </p>
+          <div class="def-box">
+            <strong>経済指標</strong>：<br>
+            東京都実質GDP：▲0.5兆円（2020年5月。緊急事態宣言発令期）<br>
+            飲食・宿泊業：大幅落ち込み（他セクターに比べて顕著）<br>
+            失業率：2.2% → 3.2%へ上昇<br><br>
+            <strong>社会指標</strong>（Batista-Fujii-Nakata ほか）：<br>
+            子供の超過自殺：コロナ禍で急増（経済的困窮・学校閉鎖・孤立の影響）<br>
+            婚姻数：2020年に52万件へ急減（2010〜2019年のトレンドラインを大きく下回る）<br>
+            出生数：同様に急減（将来不安と接触機会の減少）<br><br>
+            「感染症対策の副作用」にもEBPM（証拠に基づく政策立案）が必要。
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">11</span></div>
+        <div class="topic-content">
+          <span class="topic-title">政策分析のまとめ：行動制限 vs 感染拡大許容</span>
+          <p class="topic-desc">
+            仲田・藤井（2021）の分析を通じて浮かび上がる政策A（行動制限）と政策C（感染拡大許容）の比較。
+            ワクチン接種前後で最適な政策が逆転するというカウンターインテュイティブな発見。
+          </p>
+          <div class="def-box">
+            <strong>ワクチン接種前（2021年前半）</strong>：<br>
+            政策A（行動制限）：短期的に経済への負の影響大→中長期的には必ずしも大きくない・死者数中長期的に小さい<br>
+            政策C（感染拡大許容）：短期経済への負の影響小→中長期的には必ずしも小さくない・死者数中長期的に大きい<br>
+            → 行動制限（感染抑制）が感染症対策としても経済活動の視点からもパレート改善<br><br>
+            <strong>ワクチン接種後（2021年後半）</strong>：<br>
+            医療体制を拡充して感染拡大をある程度許容する政策が、経済損失も死者数も長期的に削減するパレート改善になりうる<br><br>
+            <strong>共通するメッセージ</strong>：短期と中長期でトレードオフが逆転しうる。モデルなしには直感が逆の答えを示すことがある。
+          </div>
+          <div class="insight">
+            「感染症対策と経済活動は短期的にはトレードオフだが、中・長期的には必ずしもそうではない」——これが仲田・藤井（2021）の中核的な発見。マクロモデルが政策に与えた最大の貢献。
+          </div>
+        </div>
+      </li>
+
     </ul>
   </div>
 
   <div class="section-card">
     <h2>重要キーワード</h2>
     <div class="concept-tags">
-      <span class="concept-tag">マクロ経済モデル</span>
-      <span class="concept-tag">金融政策</span>
-      <span class="concept-tag">インフレ目標2%</span>
-      <span class="concept-tag">定量的分析</span>
-      <span class="concept-tag">定性的分析</span>
-      <span class="concept-tag">中央銀行</span>
-      <span class="concept-tag">FRB</span>
-      <span class="concept-tag">疫学マクロモデル</span>
-      <span class="concept-tag">感染抑制と経済の両立</span>
-      <span class="concept-tag">緊急事態宣言</span>
-      <span class="concept-tag">命の価値（VSL）</span>
-      <span class="concept-tag">反実仮想実験</span>
-      <span class="concept-tag">EBPM</span>
+      <span class="concept-tag t-blue">マクロ経済モデル</span>
+      <span class="concept-tag t-blue">金融政策</span>
+      <span class="concept-tag t-blue">AIT（平均インフレ目標）</span>
+      <span class="concept-tag t-orange">SIRモデル</span>
+      <span class="concept-tag t-orange">疫学マクロモデル</span>
+      <span class="concept-tag t-orange">人流データ</span>
+      <span class="concept-tag t-purple">パレート改善</span>
+      <span class="concept-tag t-purple">VSL（命の価値）</span>
+      <span class="concept-tag t-red">緊急事態宣言</span>
+      <span class="concept-tag t-red">感染抑制と経済の両立</span>
+      <span class="concept-tag t-gray">FRB</span>
+      <span class="concept-tag t-gray">定量的分析</span>
+      <span class="concept-tag t-gray">定性的分析</span>
+      <span class="concept-tag t-gray">EBPM</span>
     </div>
   </div>
 
   <div class="section-card">
     <h2>過去問との対応</h2>
     <div class="exam-ref-box">
-      <div class="qlabel">2025年度 期末試験 対応問題</div>
-      <div class="qdesc">
-        <strong>Q3・Q4：疫学マクロモデル・コロナ経済</strong><br>
-        感染抑制と経済活動のトレードオフ、緊急事態宣言のシミュレーション（ワクチン接種時期を考慮した最適解除基準）、命の価値（VSL）の定量化方法、マクロモデルがミクロのRCTと異なる理由などが問われる傾向がある。
-        「なぜ緊急事態宣言を遅く解除した方が良いシナリオが生まれるのか」というカウンターインテュイティブな結果の論理を理解すること。
+      <div class="exam-ref-head">
+        <span class="qlabel">2025年度 期末試験 対応問題：Q3・Q4</span>
+      </div>
+      <div class="exam-ref-body">
+        <div class="qdesc">
+          疫学マクロモデル・コロナ経済・命の価値に関する問題。
+          「なぜ緊急事態宣言を遅く解除した方が良いシナリオが生まれるのか」というカウンターインテュイティブな結果の論理を理解すること。
+        </div>
+        <div class="exam-points">
+          <ul>
+            <li>疫学マクロモデルの構造（SIRモデル＋人流→GDP）と、感染者数と経済活動をひとつのモデルで分析できることの意義を説明できること</li>
+            <li>2021年前半：感染者数を下げてから解除する方が経済的にも死者数的にも良い（パレート改善）理由——「ワクチンまでの時間稼ぎ」の価値——を論じられること</li>
+            <li>2021年後半：ワクチン後は医療体制拡充がパレート改善になる理由を説明できること（集団免疫の先送りという論理の逆転）</li>
+            <li>VSL（命の価値）の定義と、なぜ都道府県ごとに大きく異なるかを説明できること</li>
+            <li>マクロモデルの定量的役割（予測・リスク定量化）と定性的役割（頭の体操・共通言語・問いの設定）の違いを説明できること</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
